@@ -37,7 +37,7 @@ if(BUILD_DOCUMENTATION)
         GENERATE_TAGFILE TRUE
         DOXYFILE ${CMAKE_SOURCE_DIR}/Doxyfile.in
         INPUTS
-            ${CMAKE_CURRENT_SOURCE_DIR}/src/raytracing
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/
     )
 endif()
 
@@ -46,4 +46,4 @@ add_subdirectory(thirdparty)
 add_subdirectory(src)
 
 # Install exported targets.
-export_project(${CMAKE_SOURCE_DIR}/cmake/Config.cmake.in)
+#export_project(${CMAKE_SOURCE_DIR}/cmake/Config.cmake.in)
