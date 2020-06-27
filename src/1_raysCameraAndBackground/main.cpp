@@ -1,5 +1,8 @@
 //
-// Example program for writing a PPM image onto disk.
+// Example raytracing program with:
+// - Simple camera model
+// - Ray casting into the scene.
+// - Color computation based on ray direction.
 //
 
 #include <cxxopts.hpp>
@@ -33,7 +36,7 @@ int main( int i_argc, char** i_argv )
     gm::Bounds2i             imageExtent = image.Extent();
 
     //
-    // Camera & projection plane parameters.
+    // Camera & viewport plane.
     //
 
     float     aspectRatio    = ( float ) imageWidth / imageHeight; // The ratio of the width to the height of the image.
