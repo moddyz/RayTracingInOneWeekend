@@ -38,6 +38,9 @@ if(BUILD_DOCUMENTATION)
         DOXYFILE ${CMAKE_SOURCE_DIR}/Doxyfile.in
         INPUTS
             ${CMAKE_CURRENT_SOURCE_DIR}/src/
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/raytrace
+        TAGFILES
+            ${CMAKE_CURRENT_SOURCE_DIR}/docs/gm.tag=https://moddyz.github.io/GraphicsMath/
     )
 endif()
 
