@@ -2,11 +2,14 @@ cmake_minimum_required(VERSION 3.17)
 
 # Project Name
 project(
-  CMakeTemplate
-  VERSION 0.0
-  DESCRIPTION "Basic template for starting out a new CMake-based project."
-  LANGUAGES CXX
+    RayTracingInOneWeekend
+    VERSION 0.0
+    DESCRIPTION "Implementation of the Ray Tracing in One Weekend book."
+    LANGUAGES CXX
 )
+
+# Options
+option(BUILD_DOCUMENTATION "Build doxygen documentation." ON)
 
 # Cross-platform compatibility.
 if(UNIX AND NOT APPLE)
@@ -23,9 +26,24 @@ if(BUILD_TESTING)
     list(APPEND CMAKE_CTEST_ARGUMENTS "--output-on-failure")
 endif()
 
+if(BUILD_DOCUMENTATION)
+    file(
+        COPY ${CMAKE_SOURCE_DIR}/README.md
+        DESTINATION ${CMAKE_BINARY_DIR}
+    )
+
+    doxygen_documentation(
+        doxygen_docs
+        GENERATE_TAGFILE TRUE
+        DOXYFILE ${CMAKE_SOURCE_DIR}/Doxyfile.in
+        INPUTS
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/raytracing
+    )
+endif()
+
 # Build targets.
 add_subdirectory(thirdparty)
-add_subdirectory(examples)
+add_subdirectory(src)
 
 # Install exported targets.
 export_project(${CMAKE_SOURCE_DIR}/cmake/Config.cmake.in)
