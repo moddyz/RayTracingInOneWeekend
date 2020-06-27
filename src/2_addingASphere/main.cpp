@@ -1,8 +1,5 @@
-//
 // Example raytracing program with:
-// - Simple camera model
-// - Ray casting into the scene.
-// - Color computation based on ray direction.
+// - ray sphere intersection.
 //
 
 #include <cxxopts.hpp>
@@ -12,22 +9,22 @@
 
 #include <gm/functions/lerp.h>
 #include <gm/functions/normalize.h>
+#include <gm/functions/raySphereIntersection.h>
 
 #include <raytrace/imageBuffer.h>
 #include <raytrace/intRange.h>
 #include <raytrace/ppmImageWriter.h>
-#include <raytrace/raySphereIntersection.h>
 
 static gm::Vec3f ComputeRayColor( const gm::Vec3f& i_rayOrigin, const gm::Vec3f& i_rayDirection )
 {
     // Test for sphere intersection (hard-coded value)
-    gm::Vec3f firstIntersection, secondIntersection;
-    if ( raytrace::RaySphereIntersection( gm::Vec3f( 0, 0, -1.0 ),
-                                          0.5,
-                                          i_rayOrigin,
-                                          i_rayDirection,
-                                          firstIntersection,
-                                          secondIntersection ) > 0 )
+    float firstIntersection, secondIntersection;
+    if ( gm::RaySphereIntersection( gm::Vec3f( 0, 0, -1.0 ),
+                                    0.5,
+                                    i_rayOrigin,
+                                    i_rayDirection,
+                                    firstIntersection,
+                                    secondIntersection ) > 0 )
     {
         return gm::Vec3f( 1, 0, 0 );
     }
@@ -103,7 +100,7 @@ int main( int i_argc, char** i_argv )
 
     for ( gm::Vec2i pixelCoord : gm::Vec2iRange( imageExtent.Min(), imageExtent.Max() ) )
     {
-        const gm::Vec3f& rayDirection = rayDirections[ pixelCoord.X() + pixelCoord.Y() * imageWidth ];
+        const gm::Vec3f& rayDirection           = rayDirections[ pixelCoord.X() + pixelCoord.Y() * imageWidth ];
         image( pixelCoord.X(), pixelCoord.Y() ) = ComputeRayColor( cameraOrigin, rayDirection );
     }
 
