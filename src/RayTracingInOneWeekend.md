@@ -20,7 +20,9 @@ To build documentation for RayTracingInOneWeekend, set the cmake option `BUILD_D
 
 \subsection RayTracingInOneWeekend_DeveloperNotes_SourceTree Source Tree
 
-The C++ source code are organized under \p src/.
+The source tree under \p src/ is composed of:
+- \p src/raytrace a common library of raytrace utility functions used throughout the various programs.
+- ... and program(s) which serve as checkpoints with respect to the chapters of the book.
 
 \subsection RayTracingInOneWeekend_DeveloperNotes_Motivation Motivation
 
