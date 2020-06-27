@@ -25,7 +25,7 @@ public:
     ///
     /// \param i_begin the beginning of the integer range.
     /// \param i_end the end of the integer range.
-    IntRange( int i_begin, int i_end )
+    inline IntRange( int i_begin, int i_end )
         : m_begin( i_begin )
         , m_end( i_end )
     {
@@ -74,13 +74,13 @@ public:
     };
 
     /// \return The iterator referring to the \em beginning of the integer range.
-    iterator begin() const
+    inline iterator begin() const
     {
         return iterator( m_begin, m_increment );
     }
 
     /// \return The iterator referring to the \em end of the integer range.
-    iterator end() const
+    inline iterator end() const
     {
         return iterator( m_end, m_increment );
     }

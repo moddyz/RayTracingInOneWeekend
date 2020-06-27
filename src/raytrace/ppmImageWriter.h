@@ -19,7 +19,7 @@ RAYTRACE_NS_OPEN
 /// \param i_filePath file location to save the PPM image.
 ///
 /// \return success of writing the image.
-bool WritePPMImage( const RGBImageBuffer& i_image, const std::string& i_filePath )
+inline bool WritePPMImage( const RGBImageBuffer& i_image, const std::string& i_filePath )
 {
     std::ofstream fileOutput( i_filePath.c_str(), std::ios::out | std::ios::trunc );
     if ( !fileOutput.is_open() )

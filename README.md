@@ -6,6 +6,7 @@ Separate programs are authored for select chapters of the book:
 
 0. [Output an Image](./src/0_outputAnImage/main.cpp) - [Chapter 2](https://raytracing.github.io/books/RayTracingInOneWeekend.html#outputanimage)
 1. [Rays, a Simple Camera, and Background](./src/1_raysCameraAndBackground/main.cpp) - [Chapter 4](https://raytracing.github.io/books/RayTracingInOneWeekend.html#rays,asimplecamera,andbackground)
+2. [Adding a Sphere](./src/2_addingASphere/main.cpp) - [Chapter 5](https://raytracing.github.io/books/RayTracingInOneWeekend.html#addingasphere)
 
 Common functions and classes are refactored into the [raytrace library](./src/raytrace).
 

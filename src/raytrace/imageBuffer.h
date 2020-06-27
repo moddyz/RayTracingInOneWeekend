@@ -32,7 +32,7 @@ public:
     ///
     /// \param i_width width dimension.
     /// \param i_height height dimension.
-    explicit ImageBuffer( int i_width, int i_height )
+    explicit inline ImageBuffer( int i_width, int i_height )
     {
         Resize( i_width, i_height );
     }
@@ -40,7 +40,7 @@ public:
     /// Get the width dimension of the image.
     ///
     /// \return the width.
-    int Width() const
+    inline int Width() const
     {
         return m_width;
     }
@@ -48,7 +48,7 @@ public:
     /// Get the height dimension of the image.
     ///
     /// \return the height.
-    int Height() const
+    inline int Height() const
     {
         return m_height;
     }
@@ -84,7 +84,7 @@ public:
     /// \param i_height new height dimension.
     ///
     /// \return whether the image was resized.
-    bool Resize( int i_width, int i_height )
+    inline bool Resize( int i_width, int i_height )
     {
         if ( i_width != m_width || i_height != m_height )
         {
@@ -100,7 +100,7 @@ public:
     }
 
     /// Clear the image buffer, by zero'ing out all the color channels.
-    void Clear()
+    inline void Clear()
     {
         m_buffer.clear();
         m_buffer.resize( m_width * m_height, ValueT() );
