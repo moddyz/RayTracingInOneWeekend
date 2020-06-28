@@ -9,7 +9,8 @@
 #include <gm/types/vec2iRange.h>
 #include <gm/types/vec3f.h>
 
-#include <gm/functions/lerp.h>
+#include <gm/functions/linearInterpolation.h>
+#include <gm/functions/linearMap.h>
 #include <gm/functions/normalize.h>
 #include <gm/functions/rayPosition.h>
 #include <gm/functions/raySphereIntersection.h>
@@ -17,20 +18,6 @@
 #include <raytrace/imageBuffer.h>
 #include <raytrace/intRange.h>
 #include <raytrace/ppmImageWriter.h>
-
-/// Linearly maps a value within the range of \p i_sourceRange into the corresponding value in the \p i_targetRange.
-///
-/// \param i_sourceRange source value range to map from.
-/// \param i_targetRange target value range to map to.
-/// \param i_value value to map from the source range.
-///
-/// \return mapped value in the target range.
-float LinearScale( const gm::Vec2f& i_sourceRange, const gm::Vec2f& i_targetRange, float i_value )
-{
-    GM_ASSERT( i_sourceRange[ 0 ] != i_sourceRange[ 1 ] );
-    float ratio = ( i_targetRange[ 1 ] - i_targetRange[ 0 ] ) / ( i_sourceRange[ 1 ] - i_sourceRange[ 0 ] );
-    return i_targetRange[ 0 ] + ( ratio * ( i_value - i_sourceRange[ 0 ] ) );
-}
 
 /// Compute the ray color based on origin & direction.
 ///
@@ -52,16 +39,13 @@ static gm::Vec3f ComputeRayColor( const gm::Vec3f& i_rayOrigin, const gm::Vec3f&
 
         const gm::Vec2f normalRange( -1.0, 1.0 );
         const gm::Vec2f colorRange( 0, 1.0 );
-        surfaceNormal[ 0 ] = LinearScale( normalRange, colorRange, surfaceNormal[ 0 ] );
-        surfaceNormal[ 1 ] = LinearScale( normalRange, colorRange, surfaceNormal[ 1 ] );
-        surfaceNormal[ 2 ] = LinearScale( normalRange, colorRange, surfaceNormal[ 2 ] );
-        return surfaceNormal;
+        return gm::LinearMap( surfaceNormal, normalRange, colorRange );
     }
 
     // Compute background color, by interpolating between two colors with the weight as the function of the ray
     // direction.
     float weight = 0.5f * i_rayDirection.Y() + 1.0;
-    return gm::Lerp( gm::Vec3f( 1.0, 1.0, 1.0 ), gm::Vec3f( 0.5, 0.7, 1.0 ), weight );
+    return gm::LinearInterpolation( gm::Vec3f( 1.0, 1.0, 1.0 ), gm::Vec3f( 0.5, 0.7, 1.0 ), weight );
 }
 
 int main( int i_argc, char** i_argv )

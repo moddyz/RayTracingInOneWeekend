@@ -23,40 +23,28 @@ GM_NS_OPEN
 class Vec2i final
 {
 public:
-    /// Type of \ref Vec2i's elements.
+    /// \typedef ElementType
+    ///
+    /// Convenience type definition of \ref Vec2i's elements.
     using ElementType = int;
 
-    /// Default constructor.
-    Vec2i() = default;
-
-    /// Destructor.
-    ~Vec2i() = default;
+    /// Default constructor, initializing all of the element values to 0.
+    GM_HOST_DEVICE constexpr inline Vec2i() = default;
 
     /// Element-wise constructor.
-    explicit Vec2i( const int& i_element0, const int& i_element1 )
+    GM_HOST_DEVICE explicit constexpr inline Vec2i( const int& i_element0, const int& i_element1 )
         : m_elements{i_element0, i_element1}
     {
         GM_ASSERT( !HasNans() );
     }
 
-#ifdef GM_DEBUG
-    /// Copy constructor.
-    Vec2i( const Vec2i& i_vector )
-    {
-        std::memcpy( ( void* ) m_elements, ( const void* ) i_vector.m_elements, sizeof( int ) * 2 );
-        GM_ASSERT( !HasNans() );
-    }
-
-    /// Copy assignment operator.
-    Vec2i& operator=( const Vec2i& i_vector )
-    {
-        std::memcpy( ( void* ) m_elements, ( const void* ) i_vector.m_elements, sizeof( int ) * 2 );
-        GM_ASSERT( !HasNans() );
-        return *this;
-    }
-#endif
-
-    /// Element-wise index read accessor.
+    /// Indexed element write access.
+    ///
+    /// \param i_index index of the element.
+    ///
+    /// \pre \p i_index must be less than 2.
+    ///
+    /// \return mutable element value.
     GM_HOST_DEVICE inline int& operator[]( size_t i_index )
     {
         GM_ASSERT( !HasNans() );
@@ -64,7 +52,13 @@ public:
         return m_elements[ i_index ];
     }
 
-    /// Element-wise index write accessor.
+    /// Indexed element read access.
+    ///
+    /// \param i_index index of the element.
+    ///
+    /// \pre \p i_index must be less than 2.
+    ///
+    /// \return immutable element value.
     GM_HOST_DEVICE inline const int& operator[]( size_t i_index ) const
     {
         GM_ASSERT( !HasNans() );
@@ -76,14 +70,18 @@ public:
     // Arithmetic Operator Overloading.
     //
 
-    /// Vector addition.
+    /// Element-wise vector addition.
+    ///
+    /// Corresponding elements of the current vector and \p i_vector are added to form a new vector.
+    ///
+    /// \return the new vector.
     GM_HOST_DEVICE inline Vec2i operator+( const Vec2i& i_vector ) const
     {
         GM_ASSERT( !HasNans() );
         return Vec2i( m_elements[ 0 ] + i_vector.m_elements[ 0 ], m_elements[ 1 ] + i_vector.m_elements[ 1 ] );
     }
 
-    /// Vector addition assignment.
+    /// Element-wise vector addition assignment.
     GM_HOST_DEVICE inline Vec2i& operator+=( const Vec2i& i_vector )
     {
         GM_ASSERT( !HasNans() );

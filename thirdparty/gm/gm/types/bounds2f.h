@@ -25,13 +25,10 @@ class Bounds2f final
 {
 public:
     /// Default constructor.
-    Bounds2f() = default;
-
-    /// Destructor.
-    ~Bounds2f() = default;
+    GM_HOST_DEVICE constexpr inline Bounds2f() = default;
 
     /// Element-wise constructor.
-    explicit Bounds2f( const Vec2f& i_min, const Vec2f& i_max )
+    GM_HOST_DEVICE explicit constexpr inline Bounds2f( const Vec2f& i_min, const Vec2f& i_max )
         : m_min( i_min )
         , m_max( i_max )
     {

@@ -25,13 +25,10 @@ class Bounds3f final
 {
 public:
     /// Default constructor.
-    Bounds3f() = default;
-
-    /// Destructor.
-    ~Bounds3f() = default;
+    GM_HOST_DEVICE constexpr inline Bounds3f() = default;
 
     /// Element-wise constructor.
-    explicit Bounds3f( const Vec3f& i_min, const Vec3f& i_max )
+    GM_HOST_DEVICE explicit constexpr inline Bounds3f( const Vec3f& i_min, const Vec3f& i_max )
         : m_min( i_min )
         , m_max( i_max )
     {

@@ -23,40 +23,31 @@ GM_NS_OPEN
 class Vec4i final
 {
 public:
-    /// Type of \ref Vec4i's elements.
+    /// \typedef ElementType
+    ///
+    /// Convenience type definition of \ref Vec4i's elements.
     using ElementType = int;
 
-    /// Default constructor.
-    Vec4i() = default;
-
-    /// Destructor.
-    ~Vec4i() = default;
+    /// Default constructor, initializing all of the element values to 0.
+    GM_HOST_DEVICE constexpr inline Vec4i() = default;
 
     /// Element-wise constructor.
-    explicit Vec4i( const int& i_element0, const int& i_element1, const int& i_element2, const int& i_element3 )
+    GM_HOST_DEVICE explicit constexpr inline Vec4i( const int& i_element0,
+                                                    const int& i_element1,
+                                                    const int& i_element2,
+                                                    const int& i_element3 )
         : m_elements{i_element0, i_element1, i_element2, i_element3}
     {
         GM_ASSERT( !HasNans() );
     }
 
-#ifdef GM_DEBUG
-    /// Copy constructor.
-    Vec4i( const Vec4i& i_vector )
-    {
-        std::memcpy( ( void* ) m_elements, ( const void* ) i_vector.m_elements, sizeof( int ) * 4 );
-        GM_ASSERT( !HasNans() );
-    }
-
-    /// Copy assignment operator.
-    Vec4i& operator=( const Vec4i& i_vector )
-    {
-        std::memcpy( ( void* ) m_elements, ( const void* ) i_vector.m_elements, sizeof( int ) * 4 );
-        GM_ASSERT( !HasNans() );
-        return *this;
-    }
-#endif
-
-    /// Element-wise index read accessor.
+    /// Indexed element write access.
+    ///
+    /// \param i_index index of the element.
+    ///
+    /// \pre \p i_index must be less than 4.
+    ///
+    /// \return mutable element value.
     GM_HOST_DEVICE inline int& operator[]( size_t i_index )
     {
         GM_ASSERT( !HasNans() );
@@ -64,7 +55,13 @@ public:
         return m_elements[ i_index ];
     }
 
-    /// Element-wise index write accessor.
+    /// Indexed element read access.
+    ///
+    /// \param i_index index of the element.
+    ///
+    /// \pre \p i_index must be less than 4.
+    ///
+    /// \return immutable element value.
     GM_HOST_DEVICE inline const int& operator[]( size_t i_index ) const
     {
         GM_ASSERT( !HasNans() );
@@ -76,7 +73,11 @@ public:
     // Arithmetic Operator Overloading.
     //
 
-    /// Vector addition.
+    /// Element-wise vector addition.
+    ///
+    /// Corresponding elements of the current vector and \p i_vector are added to form a new vector.
+    ///
+    /// \return the new vector.
     GM_HOST_DEVICE inline Vec4i operator+( const Vec4i& i_vector ) const
     {
         GM_ASSERT( !HasNans() );
@@ -86,7 +87,7 @@ public:
                       m_elements[ 3 ] + i_vector.m_elements[ 3 ] );
     }
 
-    /// Vector addition assignment.
+    /// Element-wise vector addition assignment.
     GM_HOST_DEVICE inline Vec4i& operator+=( const Vec4i& i_vector )
     {
         GM_ASSERT( !HasNans() );

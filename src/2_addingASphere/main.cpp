@@ -7,7 +7,7 @@
 #include <gm/types/vec2iRange.h>
 #include <gm/types/vec3f.h>
 
-#include <gm/functions/lerp.h>
+#include <gm/functions/linearInterpolation.h>
 #include <gm/functions/normalize.h>
 #include <gm/functions/raySphereIntersection.h>
 
@@ -33,7 +33,7 @@ static gm::Vec3f ComputeRayColor( const gm::Vec3f& i_rayOrigin, const gm::Vec3f&
     // Compute background color, by interpolating between two colors with the weight as the function of the ray
     // direction.
     float weight = 0.5f * i_rayDirection.Y() + 1.0;
-    return gm::Lerp( gm::Vec3f( 1.0, 1.0, 1.0 ), gm::Vec3f( 0.5, 0.7, 1.0 ), weight );
+    return gm::LinearInterpolation( gm::Vec3f( 1.0, 1.0, 1.0 ), gm::Vec3f( 0.5, 0.7, 1.0 ), weight );
 }
 
 int main( int i_argc, char** i_argv )

@@ -24,25 +24,24 @@ GM_NS_OPEN
 class Mat3f final
 {
 public:
-    /// Type of \ref Mat3f's elements.
+    /// \typedef ElementType
+    ///
+    /// Convenience type definition of \ref Mat3f's elements.
     using ElementType = float;
 
-    /// Default constructor.
-    Mat3f() = default;
-
-    /// Destructor.
-    ~Mat3f() = default;
+    /// Default constructor, initializing all of the element values to 0.
+    GM_HOST_DEVICE constexpr inline Mat3f() = default;
 
     /// Element-wise constructor.
-    explicit Mat3f( const float& i_element0,
-                    const float& i_element1,
-                    const float& i_element2,
-                    const float& i_element3,
-                    const float& i_element4,
-                    const float& i_element5,
-                    const float& i_element6,
-                    const float& i_element7,
-                    const float& i_element8 )
+    GM_HOST_DEVICE explicit constexpr inline Mat3f( const float& i_element0,
+                                                    const float& i_element1,
+                                                    const float& i_element2,
+                                                    const float& i_element3,
+                                                    const float& i_element4,
+                                                    const float& i_element5,
+                                                    const float& i_element6,
+                                                    const float& i_element7,
+                                                    const float& i_element8 )
         : m_elements{i_element0,
                      i_element1,
                      i_element2,
@@ -56,24 +55,13 @@ public:
         GM_ASSERT( !HasNans() );
     }
 
-#ifdef GM_DEBUG
-    /// Copy constructor.
-    Mat3f( const Mat3f& i_vector )
-    {
-        std::memcpy( ( void* ) m_elements, ( const void* ) i_vector.m_elements, sizeof( float ) * 9 );
-        GM_ASSERT( !HasNans() );
-    }
-
-    /// Copy assignment operator.
-    Mat3f& operator=( const Mat3f& i_vector )
-    {
-        std::memcpy( ( void* ) m_elements, ( const void* ) i_vector.m_elements, sizeof( float ) * 9 );
-        GM_ASSERT( !HasNans() );
-        return *this;
-    }
-#endif
-
-    /// Element-wise index read accessor.
+    /// Indexed element write access.
+    ///
+    /// \param i_index index of the element.
+    ///
+    /// \pre \p i_index must be less than 9.
+    ///
+    /// \return mutable element value.
     GM_HOST_DEVICE inline float& operator[]( size_t i_index )
     {
         GM_ASSERT( !HasNans() );
@@ -81,7 +69,13 @@ public:
         return m_elements[ i_index ];
     }
 
-    /// Element-wise index write accessor.
+    /// Indexed element read access.
+    ///
+    /// \param i_index index of the element.
+    ///
+    /// \pre \p i_index must be less than 9.
+    ///
+    /// \return immutable element value.
     GM_HOST_DEVICE inline const float& operator[]( size_t i_index ) const
     {
         GM_ASSERT( !HasNans() );
@@ -93,7 +87,11 @@ public:
     // Arithmetic Operator Overloading.
     //
 
-    /// Vector addition.
+    /// Element-wise vector addition.
+    ///
+    /// Corresponding elements of the current vector and \p i_vector are added to form a new vector.
+    ///
+    /// \return the new vector.
     GM_HOST_DEVICE inline Mat3f operator+( const Mat3f& i_vector ) const
     {
         GM_ASSERT( !HasNans() );
@@ -108,7 +106,7 @@ public:
                       m_elements[ 8 ] + i_vector.m_elements[ 8 ] );
     }
 
-    /// Vector addition assignment.
+    /// Element-wise vector addition assignment.
     GM_HOST_DEVICE inline Mat3f& operator+=( const Mat3f& i_vector )
     {
         GM_ASSERT( !HasNans() );
