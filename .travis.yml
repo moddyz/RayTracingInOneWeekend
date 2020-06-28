@@ -9,6 +9,7 @@ jobs:
         homebrew:
           packages:
             - cmake
+            - doxygen
     - os: linux
       dist: bionic
       compiler: gcc
@@ -16,6 +17,7 @@ jobs:
         apt:
           packages:
             - cmake
+            - doxygen
 
 install:
   - echo ${PATH}
