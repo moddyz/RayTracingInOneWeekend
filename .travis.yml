@@ -9,6 +9,7 @@ jobs:
         homebrew:
           packages:
             - cmake
+            - graphviz
             - doxygen
     - os: linux
       dist: bionic
@@ -17,6 +18,7 @@ jobs:
         apt:
           packages:
             - cmake
+            - graphviz
             - doxygen
 
 install:
