@@ -17,7 +17,7 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
 
 [Code](./src/0_outputAnImage/main.cpp)
 
-[Chapter 2](https://raytracing.github.io/books/RayTracingInOneWeekend.html#outputanimage)
+[ROTW Chapter 2](https://raytracing.github.io/books/RayTracingInOneWeekend.html#outputanimage)
 
 ### 1. Rays, a Simple Camera, and Background
 
@@ -33,7 +33,7 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
 
 [Code](./src/2_addingASphere/main.cpp)
 
-[ROTWChapter 5](https://raytracing.github.io/books/RayTracingInOneWeekend.html#addingasphere)
+[ROTW Chapter 5](https://raytracing.github.io/books/RayTracingInOneWeekend.html#addingasphere)
 
 ## Library
 
