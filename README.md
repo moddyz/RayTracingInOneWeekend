@@ -1,6 +1,6 @@
 # RayTracingInOneWeekend
 
-An implementation of the book [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html).  **RTOW** will be used for brevity for the remainder of this document.
+An implementation of the book [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html).  
 
 ## Table of Contents
 
@@ -15,29 +15,29 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
 
 ![Image](./src/0_outputAnImage/output.png)
 
-[Code](./src/0_outputAnImage/main.cpp)
+[Source code](./src/0_outputAnImage/main.cpp)
 
-[ROTW Chapter 2](https://raytracing.github.io/books/RayTracingInOneWeekend.html#outputanimage)
+[Link to Chapter 2](https://raytracing.github.io/books/RayTracingInOneWeekend.html#outputanimage)
 
 ### 1. Rays, a Simple Camera, and Background
 
 ![Image](./src/1_raysCameraAndBackground/output.png)
 
-[Code](./src/1_raysCameraAndBackground/main.cpp)
+[Source code](./src/1_raysCameraAndBackground/main.cpp)
 
-[RTOW Chapter 4](https://raytracing.github.io/books/RayTracingInOneWeekend.html#rays,asimplecamera,andbackground)
+[Link to Chapter 4](https://raytracing.github.io/books/RayTracingInOneWeekend.html#rays,asimplecamera,andbackground)
 
 ### 2. Adding a Sphere
 
 ![Image](./src/2_addingASphere/output.png)
 
-[Code](./src/2_addingASphere/main.cpp)
+[Source code](./src/2_addingASphere/main.cpp)
 
-[ROTW Chapter 5](https://raytracing.github.io/books/RayTracingInOneWeekend.html#addingasphere)
+[Link to Chapter 5](https://raytracing.github.io/books/RayTracingInOneWeekend.html#addingasphere)
 
 ## Library
 
-Common functions and classes are refactored into the [raytrace library](./src/raytrace).
+Common functions and classes are refactored into the [raytrace library](./src/raytrace) and the [GraphicsMath](https://github.com/moddyz/GraphicsMath) project.
 
 ## Documentation
 
