@@ -54,3 +54,10 @@ A convenience build script is also provided, for building all targets, and optio
 ```
 ./build.sh <OPTIONAL_INSTALL_LOCATION>
 ```
+
+## Build Status
+
+|       | master | 
+| ----- | ------ | 
+|Ubuntu-18.04 / macOS-10.14 | [![Build Status](https://travis-ci.com/moddyz/RayTracingInOneWeekend.svg?branch=master)](https://travis-ci.com/moddyz/RayTracingInOneWeekend) |
+
