@@ -2,10 +2,12 @@
 
 An implementation of the book [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html).  **RTOW** will be used for brevity for the remainder of this document.
 
-Separate programs are authored for select chapters of the book:
-0. [Output an Image](#0-output-an-image)
-1. [Rays, a Simple Camera, and Background](#1-rays-a-simple-camera-and-background)
-2. [Adding a Sphere](#2-adding-a-sphere)
+## Table of Contents
+
+- [Programs](#programs)
+  0. [Output an Image](#0-output-an-image)
+  1. [Rays, a Simple Camera, and Background](#1-rays-a-simple-camera-and-background)
+  2. [Adding a Sphere](#2-adding-a-sphere)
 
 ## Programs
 
