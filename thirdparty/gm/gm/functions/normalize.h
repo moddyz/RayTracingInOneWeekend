@@ -5,6 +5,7 @@
 #pragma once
 
 /// \file functions/normalize.h
+/// \ingroup GM_group_functions_linearAlgebra
 ///
 /// Vector normalization.
 ///
@@ -24,6 +25,7 @@
 GM_NS_OPEN
 
 /// Compute the normalised vector from the input vector \p i_vector.
+/// \ingroup GM_group_functions_linearAlgebra
 ///
 /// \return the normalised vector.
 GM_HOST_DEVICE inline Vec2f Normalize( const Vec2f& i_vector )
@@ -34,6 +36,7 @@ GM_HOST_DEVICE inline Vec2f Normalize( const Vec2f& i_vector )
 }
 
 /// Compute the normalised vector from the input vector \p i_vector.
+/// \ingroup GM_group_functions_linearAlgebra
 ///
 /// \return the normalised vector.
 GM_HOST_DEVICE inline Vec3f Normalize( const Vec3f& i_vector )
@@ -44,6 +47,7 @@ GM_HOST_DEVICE inline Vec3f Normalize( const Vec3f& i_vector )
 }
 
 /// Compute the normalised vector from the input vector \p i_vector.
+/// \ingroup GM_group_functions_linearAlgebra
 ///
 /// \return the normalised vector.
 GM_HOST_DEVICE inline Vec4f Normalize( const Vec4f& i_vector )

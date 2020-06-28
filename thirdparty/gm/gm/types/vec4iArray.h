@@ -5,6 +5,7 @@
 #pragma once
 
 /// \file vec4iArray.h
+/// \ingroup GM_group_arrayTypes
 
 #include <vector>
 
@@ -12,7 +13,10 @@
 
 GM_NS_OPEN
 
-/// An array of \ref Vec4i.
+/// \typedef Vec4iArray
+/// \ingroup GM_group_arrayTypes
+///
+/// Type definition of an array of \ref Vec4i.
 using Vec4iArray = std::vector< Vec4i >;
 
 GM_NS_CLOSE

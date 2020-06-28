@@ -1,6 +1,6 @@
-// Example raytracing program with:
-// - ray sphere intersection.
-//
+/// \file 2_addingASphere/main.cpp
+///
+/// Example program which uses ray sphere intersection to draw a red sphere, with a background.
 
 #include <cxxopts.hpp>
 
@@ -15,16 +15,17 @@
 #include <raytrace/intRange.h>
 #include <raytrace/ppmImageWriter.h>
 
+/// Compute the ray color based on origin & direction.
+///
+/// A hard-coded sphere is placed at the worldspace position \p (0, 0, -1.0).
+///
+/// When rays intersect the sphere, it will produce a red pixel.
+/// Otherwise, the background color of a blue/white gradient is returned.
 static gm::Vec3f ComputeRayColor( const gm::Vec3f& i_rayOrigin, const gm::Vec3f& i_rayDirection )
 {
-    // Test for sphere intersection (hard-coded value)
-    float firstIntersection, secondIntersection;
-    if ( gm::RaySphereIntersection( gm::Vec3f( 0, 0, -1.0 ),
-                                    0.5,
-                                    i_rayOrigin,
-                                    i_rayDirection,
-                                    firstIntersection,
-                                    secondIntersection ) > 0 )
+    // Test for sphere intersection (hard-coded placement of the sphere)
+    gm::Vec2f intersections;
+    if ( gm::RaySphereIntersection( gm::Vec3f( 0, 0, -1.0 ), 0.5, i_rayOrigin, i_rayDirection, intersections ) > 0 )
     {
         return gm::Vec3f( 1, 0, 0 );
     }
@@ -66,8 +67,10 @@ int main( int i_argc, char** i_argv )
     gm::Vec3f vertical   = gm::Vec3f( 0, viewportHeight, 0 ); // The 3D vector representation of the viewport height.
 
     // The 3D coordinate of the bottom left corner of the viewport plane.
-    gm::Vec3f viewportBottomLeft =
-        cameraOrigin - ( horizontal * 0.5f ) - ( vertical * 0.5f ) - gm::Vec3f( 0, 0, focalLength );
+    gm::Vec3f viewportBottomLeft = cameraOrigin                      // From the camera origin...
+                                   - ( horizontal * 0.5f )           // Horizontal translate of half the viewport plane.
+                                   - ( vertical * 0.5f )             // Vertical translate of half the viewport plane.
+                                   - gm::Vec3f( 0, 0, focalLength ); // Translate forwards focal length units.
 
     //
     // Ray direction computation.

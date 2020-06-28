@@ -5,6 +5,7 @@
 #pragma once
 
 /// \file vec2fArray.h
+/// \ingroup GM_group_arrayTypes
 
 #include <vector>
 
@@ -12,7 +13,10 @@
 
 GM_NS_OPEN
 
-/// An array of \ref Vec2f.
+/// \typedef Vec2fArray
+/// \ingroup GM_group_arrayTypes
+///
+/// Type definition of an array of \ref Vec2f.
 using Vec2fArray = std::vector< Vec2f >;
 
 GM_NS_CLOSE

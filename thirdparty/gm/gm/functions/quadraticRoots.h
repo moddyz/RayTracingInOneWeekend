@@ -4,7 +4,8 @@
 
 #pragma once
 
-/// \file functions/solveQuadraticRoots.h
+/// \file functions/quadraticRoots.h
+/// \ingroup GM_group_functions_basic
 ///
 /// Solve for the roots of a quadratic equation of the form \f$ax^2+bx+c=0\f$
 ///
@@ -20,23 +21,25 @@
 
 #include <gm/base/assert.h>
 
+#include <gm/types/vec2f.h>
+
 GM_NS_OPEN
 
 /// Solve for the roots of a quadratic equation.
+/// \ingroup GM_group_functions_basic
 ///
 /// \param i_a The \f$a\f$ co-efficient.
 /// \param i_b The \f$b\f$ co-efficient.
 /// \param i_c The \f$c\f$ co-efficient.
-/// \param o_firstRoot the first root. This value is only defined if the number of roots is \p 1 or \p 2.
-/// \param o_secondRoot the second root. This value is only defined if the number of roots is \p 2.
+/// \param o_roots the roots, or solutions.  The first element is only defined if the number of roots is \p 1 or \p 2.
+/// The second element is only defined if the number of roots is \p 2.
 ///
 /// \return The number of roots for the quadratic equation.
 ///
 /// \retval 0 No roots.
 /// \retval 1 A single intersection by the vertex of the parabola.
 /// \retval 2 Two symmetrical intersections with respect to the vertex.
-GM_HOST_DEVICE inline int
-SolveQuadraticRoots( const float& i_a, const float& i_b, const float& i_c, float& o_firstRoot, float& o_secondRoot )
+GM_HOST_DEVICE inline int QuadraticRoots( const float& i_a, const float& i_b, const float& i_c, Vec2f& o_roots )
 {
     GM_ASSERT( i_a != 0.0f );
 
@@ -50,12 +53,12 @@ SolveQuadraticRoots( const float& i_a, const float& i_b, const float& i_c, float
     {
         // Two roots.
         float reciprocal = 1.0f / ( 2.0f * i_a );
-        o_firstRoot      = ( -i_b + sqrt( discriminant ) ) * reciprocal;
-        o_secondRoot     = ( -i_b - sqrt( discriminant ) ) * reciprocal;
+        o_roots[ 0 ]     = ( -i_b + sqrt( discriminant ) ) * reciprocal;
+        o_roots[ 1 ]     = ( -i_b - sqrt( discriminant ) ) * reciprocal;
         // Make the smaller root appear first.
-        if ( o_firstRoot > o_secondRoot )
+        if ( o_roots[ 0 ] > o_roots[ 1 ] )
         {
-            std::swap( o_firstRoot, o_secondRoot );
+            std::swap( o_roots[ 0 ], o_roots[ 1 ] );
         }
 
         return 2;
@@ -63,7 +66,7 @@ SolveQuadraticRoots( const float& i_a, const float& i_b, const float& i_c, float
     else
     {
         // A single root.
-        o_firstRoot = -i_b / ( 2.0f * i_a );
+        o_roots[ 0 ] = -i_b / ( 2.0f * i_a );
         return 1;
     }
 }

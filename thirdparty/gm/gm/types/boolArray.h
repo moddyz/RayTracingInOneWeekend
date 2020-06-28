@@ -5,12 +5,16 @@
 #pragma once
 
 /// \file boolArray.h
+/// \ingroup GM_group_arrayTypes
 
 #include <vector>
 
 GM_NS_OPEN
 
-/// An array of \p bool.
+/// \typedef BoolArray
+/// \ingroup GM_group_arrayTypes
+///
+/// Type definition of an array of \ref bool.
 using BoolArray = std::vector< bool >;
 
 GM_NS_CLOSE

@@ -5,6 +5,7 @@
 #pragma once
 
 /// \file functions/setIdentity.h
+/// \ingroup GM_group_functions_linearAlgebra
 ///
 /// Set the identity matrix, defined as the neutral element with respect to matrix multiplication.
 
@@ -16,12 +17,14 @@
 GM_NS_OPEN
 
 /// Set the identity matrix onto \p o_matrix.
+/// \ingroup GM_group_functions_linearAlgebra
 GM_HOST_DEVICE inline void SetIdentity( Mat3f& o_matrix )
 {
     o_matrix = Mat3f( 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f );
 }
 
 /// Set the identity matrix onto \p o_matrix.
+/// \ingroup GM_group_functions_linearAlgebra
 GM_HOST_DEVICE inline void SetIdentity( Mat4f& o_matrix )
 {
     o_matrix = Mat4f( 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f );

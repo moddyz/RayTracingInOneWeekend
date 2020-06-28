@@ -5,6 +5,7 @@
 #pragma once
 
 /// \file bounds2i.h
+/// \ingroup GM_group_compositeTypes
 
 #include <limits>
 #include <sstream>
@@ -15,6 +16,11 @@
 GM_NS_OPEN
 
 /// \class Bounds2i
+/// \ingroup GM_group_compositeTypes
+///
+/// Class definition of a composite type with named elements:
+/// - min (\ref Vec2i)
+/// - max (\ref Vec2i)
 class Bounds2i final
 {
 public:

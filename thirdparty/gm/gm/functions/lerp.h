@@ -5,6 +5,7 @@
 #pragma once
 
 /// \file functions/lerp.h
+/// \ingroup GM_group_functions_interpolation
 ///
 /// Linear interpolation.
 ///
@@ -21,6 +22,7 @@
 GM_NS_OPEN
 
 /// Linearly interpolate between \p i_valueA and \p i_valueB, with weight \p i_weight.
+/// \ingroup GM_group_functions_interpolation
 ///
 /// \param i_valueA the source value to interpolate from.
 /// \param i_valueB the target value to interpolate to.
@@ -36,6 +38,7 @@ GM_HOST_DEVICE inline float Lerp( const float& i_valueA, const float& i_valueB, 
 }
 
 /// Linearly interpolate between \p i_valueA and \p i_valueB, with weight \p i_weight.
+/// \ingroup GM_group_functions_interpolation
 ///
 /// \param i_valueA the source value to interpolate from.
 /// \param i_valueB the target value to interpolate to.
@@ -51,6 +54,7 @@ GM_HOST_DEVICE inline Mat3f Lerp( const Mat3f& i_valueA, const Mat3f& i_valueB, 
 }
 
 /// Linearly interpolate between \p i_valueA and \p i_valueB, with weight \p i_weight.
+/// \ingroup GM_group_functions_interpolation
 ///
 /// \param i_valueA the source value to interpolate from.
 /// \param i_valueB the target value to interpolate to.
@@ -66,6 +70,7 @@ GM_HOST_DEVICE inline Mat4f Lerp( const Mat4f& i_valueA, const Mat4f& i_valueB, 
 }
 
 /// Linearly interpolate between \p i_valueA and \p i_valueB, with weight \p i_weight.
+/// \ingroup GM_group_functions_interpolation
 ///
 /// \param i_valueA the source value to interpolate from.
 /// \param i_valueB the target value to interpolate to.
@@ -81,6 +86,7 @@ GM_HOST_DEVICE inline Vec2f Lerp( const Vec2f& i_valueA, const Vec2f& i_valueB, 
 }
 
 /// Linearly interpolate between \p i_valueA and \p i_valueB, with weight \p i_weight.
+/// \ingroup GM_group_functions_interpolation
 ///
 /// \param i_valueA the source value to interpolate from.
 /// \param i_valueB the target value to interpolate to.
@@ -96,6 +102,7 @@ GM_HOST_DEVICE inline Vec3f Lerp( const Vec3f& i_valueA, const Vec3f& i_valueB, 
 }
 
 /// Linearly interpolate between \p i_valueA and \p i_valueB, with weight \p i_weight.
+/// \ingroup GM_group_functions_interpolation
 ///
 /// \param i_valueA the source value to interpolate from.
 /// \param i_valueB the target value to interpolate to.

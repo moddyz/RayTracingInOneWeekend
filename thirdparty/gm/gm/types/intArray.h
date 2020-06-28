@@ -5,12 +5,16 @@
 #pragma once
 
 /// \file intArray.h
+/// \ingroup GM_group_arrayTypes
 
 #include <vector>
 
 GM_NS_OPEN
 
-/// An array of \p int.
+/// \typedef IntArray
+/// \ingroup GM_group_arrayTypes
+///
+/// Type definition of an array of \ref int.
 using IntArray = std::vector< int >;
 
 GM_NS_CLOSE

@@ -5,6 +5,7 @@
 #pragma once
 
 /// \file vec2i.h
+/// \ingroup GM_group_vectorTypes
 
 #include <cmath>
 #include <cstring>
@@ -16,6 +17,9 @@
 GM_NS_OPEN
 
 /// \class Vec2i
+/// \ingroup GM_group_vectorTypes
+///
+/// Class definition of a vector with 2 elements.
 class Vec2i final
 {
 public:

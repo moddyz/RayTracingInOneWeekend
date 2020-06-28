@@ -5,6 +5,7 @@
 #pragma once
 
 /// \file functions/setScale.h
+/// \ingroup GM_group_functions_linearAlgebra
 ///
 /// Set scale on a transformation matrix.
 
@@ -18,6 +19,7 @@
 GM_NS_OPEN
 
 /// Set the scale \p i_vector onto the transformation matrix \p o_matrix.
+/// \ingroup GM_group_functions_linearAlgebra
 GM_HOST_DEVICE inline void SetScale( const Vec2f& i_vector, Mat3f& o_matrix )
 {
     o_matrix( 0, 0 ) = i_vector[ 0 ];
@@ -25,6 +27,7 @@ GM_HOST_DEVICE inline void SetScale( const Vec2f& i_vector, Mat3f& o_matrix )
 }
 
 /// Set the scale \p i_vector onto the transformation matrix \p o_matrix.
+/// \ingroup GM_group_functions_linearAlgebra
 GM_HOST_DEVICE inline void SetScale( const Vec3f& i_vector, Mat4f& o_matrix )
 {
     o_matrix( 0, 0 ) = i_vector[ 0 ];

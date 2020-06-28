@@ -5,6 +5,7 @@
 #pragma once
 
 /// \file functions/min.h
+/// \ingroup GM_group_functions_basic
 ///
 /// Find the minimum of two input values.
 /// If the value type is a vector, the minimum will be performed element-wise.
@@ -25,6 +26,7 @@
 GM_NS_OPEN
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
+/// \ingroup GM_group_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline float Min( const float& i_valueA, const float& i_valueB )
@@ -33,6 +35,7 @@ GM_HOST_DEVICE inline float Min( const float& i_valueA, const float& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
+/// \ingroup GM_group_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline int Min( const int& i_valueA, const int& i_valueB )
@@ -41,6 +44,7 @@ GM_HOST_DEVICE inline int Min( const int& i_valueA, const int& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
+/// \ingroup GM_group_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline bool Min( const bool& i_valueA, const bool& i_valueB )
@@ -49,6 +53,7 @@ GM_HOST_DEVICE inline bool Min( const bool& i_valueA, const bool& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
+/// \ingroup GM_group_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Mat3f Min( const Mat3f& i_valueA, const Mat3f& i_valueB )
@@ -65,6 +70,7 @@ GM_HOST_DEVICE inline Mat3f Min( const Mat3f& i_valueA, const Mat3f& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
+/// \ingroup GM_group_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Mat4f Min( const Mat4f& i_valueA, const Mat4f& i_valueB )
@@ -88,6 +94,7 @@ GM_HOST_DEVICE inline Mat4f Min( const Mat4f& i_valueA, const Mat4f& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
+/// \ingroup GM_group_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Vec2f Min( const Vec2f& i_valueA, const Vec2f& i_valueB )
@@ -96,6 +103,7 @@ GM_HOST_DEVICE inline Vec2f Min( const Vec2f& i_valueA, const Vec2f& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
+/// \ingroup GM_group_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Vec3f Min( const Vec3f& i_valueA, const Vec3f& i_valueB )
@@ -106,6 +114,7 @@ GM_HOST_DEVICE inline Vec3f Min( const Vec3f& i_valueA, const Vec3f& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
+/// \ingroup GM_group_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Vec4f Min( const Vec4f& i_valueA, const Vec4f& i_valueB )
@@ -117,6 +126,7 @@ GM_HOST_DEVICE inline Vec4f Min( const Vec4f& i_valueA, const Vec4f& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
+/// \ingroup GM_group_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Vec2i Min( const Vec2i& i_valueA, const Vec2i& i_valueB )
@@ -125,6 +135,7 @@ GM_HOST_DEVICE inline Vec2i Min( const Vec2i& i_valueA, const Vec2i& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
+/// \ingroup GM_group_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Vec3i Min( const Vec3i& i_valueA, const Vec3i& i_valueB )
@@ -135,6 +146,7 @@ GM_HOST_DEVICE inline Vec3i Min( const Vec3i& i_valueA, const Vec3i& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
+/// \ingroup GM_group_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Vec4i Min( const Vec4i& i_valueA, const Vec4i& i_valueB )

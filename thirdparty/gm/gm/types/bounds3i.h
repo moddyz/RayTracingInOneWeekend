@@ -5,6 +5,7 @@
 #pragma once
 
 /// \file bounds3i.h
+/// \ingroup GM_group_compositeTypes
 
 #include <limits>
 #include <sstream>
@@ -15,6 +16,11 @@
 GM_NS_OPEN
 
 /// \class Bounds3i
+/// \ingroup GM_group_compositeTypes
+///
+/// Class definition of a composite type with named elements:
+/// - min (\ref Vec3i)
+/// - max (\ref Vec3i)
 class Bounds3i final
 {
 public:

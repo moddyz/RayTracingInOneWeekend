@@ -5,6 +5,7 @@
 #pragma once
 
 /// \file mat4fArray.h
+/// \ingroup GM_group_arrayTypes
 
 #include <vector>
 
@@ -12,7 +13,10 @@
 
 GM_NS_OPEN
 
-/// An array of \ref Mat4f.
+/// \typedef Mat4fArray
+/// \ingroup GM_group_arrayTypes
+///
+/// Type definition of an array of \ref Mat4f.
 using Mat4fArray = std::vector< Mat4f >;
 
 GM_NS_CLOSE

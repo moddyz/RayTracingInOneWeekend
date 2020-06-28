@@ -5,8 +5,10 @@
 #pragma once
 
 /// \file functions/abs.h
+/// \ingroup GM_group_functions_basic
 ///
 /// Find the absolute value of two input values, defined as the magnitude of a real number without its sign.
+///
 /// If the value type is a vector, the absolute value will be performed on each element.
 
 #include <gm/gm.h>
@@ -22,6 +24,7 @@
 GM_NS_OPEN
 
 /// Find the absolute value of the input \p i_value.
+/// \ingroup GM_group_functions_basic
 ///
 /// \return the absolute value of the input.
 GM_HOST_DEVICE inline float Abs( const float& i_value )
@@ -30,6 +33,7 @@ GM_HOST_DEVICE inline float Abs( const float& i_value )
 }
 
 /// Find the absolute value of the input \p i_value.
+/// \ingroup GM_group_functions_basic
 ///
 /// \return the absolute value of the input.
 GM_HOST_DEVICE inline Vec2f Abs( const Vec2f& i_value )
@@ -38,6 +42,7 @@ GM_HOST_DEVICE inline Vec2f Abs( const Vec2f& i_value )
 }
 
 /// Find the absolute value of the input \p i_value.
+/// \ingroup GM_group_functions_basic
 ///
 /// \return the absolute value of the input.
 GM_HOST_DEVICE inline Vec3f Abs( const Vec3f& i_value )
@@ -46,6 +51,7 @@ GM_HOST_DEVICE inline Vec3f Abs( const Vec3f& i_value )
 }
 
 /// Find the absolute value of the input \p i_value.
+/// \ingroup GM_group_functions_basic
 ///
 /// \return the absolute value of the input.
 GM_HOST_DEVICE inline Vec4f Abs( const Vec4f& i_value )
@@ -57,6 +63,7 @@ GM_HOST_DEVICE inline Vec4f Abs( const Vec4f& i_value )
 }
 
 /// Find the absolute value of the input \p i_value.
+/// \ingroup GM_group_functions_basic
 ///
 /// \return the absolute value of the input.
 GM_HOST_DEVICE inline Mat3f Abs( const Mat3f& i_value )
@@ -73,6 +80,7 @@ GM_HOST_DEVICE inline Mat3f Abs( const Mat3f& i_value )
 }
 
 /// Find the absolute value of the input \p i_value.
+/// \ingroup GM_group_functions_basic
 ///
 /// \return the absolute value of the input.
 GM_HOST_DEVICE inline Mat4f Abs( const Mat4f& i_value )

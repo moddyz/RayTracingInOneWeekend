@@ -5,6 +5,7 @@
 #pragma once
 
 /// \file bounds2f.h
+/// \ingroup GM_group_compositeTypes
 
 #include <limits>
 #include <sstream>
@@ -15,6 +16,11 @@
 GM_NS_OPEN
 
 /// \class Bounds2f
+/// \ingroup GM_group_compositeTypes
+///
+/// Class definition of a composite type with named elements:
+/// - min (\ref Vec2f)
+/// - max (\ref Vec2f)
 class Bounds2f final
 {
 public:
