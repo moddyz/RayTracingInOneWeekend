@@ -55,8 +55,6 @@ static gm::Vec3f ComputeRayColor( const gm::Vec3f& i_rayOrigin, const gm::Vec3f&
         surfaceNormal[ 0 ] = LinearScale( normalRange, colorRange, surfaceNormal[ 0 ] );
         surfaceNormal[ 1 ] = LinearScale( normalRange, colorRange, surfaceNormal[ 1 ] );
         surfaceNormal[ 2 ] = LinearScale( normalRange, colorRange, surfaceNormal[ 2 ] );
-        std::cout << surfaceNormal << std::endl;
-
         return surfaceNormal;
     }
 
