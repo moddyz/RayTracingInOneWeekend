@@ -1,0 +1,147 @@
+/// \page 3_surfaceNormalsAndMultipleObjects Surface Normals and Multiple Objects
+///
+/// Example program extending from \ref 2_addingASphere which adds:
+/// - shading to the sphere based on the sphere's surface normals
+/// - multiple, ray-tracable objects into the scene.
+
+#include <cxxopts.hpp>
+
+#include <gm/types/vec2iRange.h>
+#include <gm/types/vec3f.h>
+
+#include <gm/functions/lerp.h>
+#include <gm/functions/normalize.h>
+#include <gm/functions/rayPosition.h>
+#include <gm/functions/raySphereIntersection.h>
+
+#include <raytrace/imageBuffer.h>
+#include <raytrace/intRange.h>
+#include <raytrace/ppmImageWriter.h>
+
+/// Linearly maps a value within the range of \p i_sourceRange into the corresponding value in the \p i_targetRange.
+///
+/// \param i_sourceRange source value range to map from.
+/// \param i_targetRange target value range to map to.
+/// \param i_value value to map from the source range.
+///
+/// \return mapped value in the target range.
+float LinearScale( const gm::Vec2f& i_sourceRange, const gm::Vec2f& i_targetRange, float i_value )
+{
+    GM_ASSERT( i_sourceRange[ 0 ] != i_sourceRange[ 1 ] );
+    float ratio = ( i_targetRange[ 1 ] - i_targetRange[ 0 ] ) / ( i_sourceRange[ 1 ] - i_sourceRange[ 0 ] );
+    return i_targetRange[ 0 ] + ( ratio * ( i_value - i_sourceRange[ 0 ] ) );
+}
+
+/// Compute the ray color based on origin & direction.
+///
+/// A hard-coded sphere is placed at the worldspace position \p (0, 0, -1.0).
+///
+/// When rays intersect the sphere, it will produce a red pixel.
+/// Otherwise, the background color of a blue/white gradient is returned.
+static gm::Vec3f ComputeRayColor( const gm::Vec3f& i_rayOrigin, const gm::Vec3f& i_rayDirection )
+{
+    // Test for sphere intersection (hard-coded placement of the sphere)
+    const gm::Vec3f sphereOrigin = gm::Vec3f( 0, 0, -1.0 );
+    const float     sphereRadius = 0.5;
+    gm::Vec2f       intersections;
+    if ( gm::RaySphereIntersection( sphereOrigin, sphereRadius, i_rayOrigin, i_rayDirection, intersections ) > 0 )
+    {
+        // Get the nearest intersection of the ray and the sphere, relative to the camera origin.
+        gm::Vec3f nearestIntersection = gm::RayPosition( i_rayOrigin, i_rayDirection, intersections[ 0 ] );
+        gm::Vec3f surfaceNormal       = gm::Normalize( nearestIntersection - sphereOrigin );
+
+        const gm::Vec2f normalRange( -1.0, 1.0 );
+        const gm::Vec2f colorRange( 0, 1.0 );
+        surfaceNormal[ 0 ] = LinearScale( normalRange, colorRange, surfaceNormal[ 0 ] );
+        surfaceNormal[ 1 ] = LinearScale( normalRange, colorRange, surfaceNormal[ 1 ] );
+        surfaceNormal[ 2 ] = LinearScale( normalRange, colorRange, surfaceNormal[ 2 ] );
+        std::cout << surfaceNormal << std::endl;
+
+        return surfaceNormal;
+    }
+
+    // Compute background color, by interpolating between two colors with the weight as the function of the ray
+    // direction.
+    float weight = 0.5f * i_rayDirection.Y() + 1.0;
+    return gm::Lerp( gm::Vec3f( 1.0, 1.0, 1.0 ), gm::Vec3f( 0.5, 0.7, 1.0 ), weight );
+}
+
+int main( int i_argc, char** i_argv )
+{
+    // Parse command line arguments.
+    cxxopts::Options options( "1_sendingRays", "Sending rays into the scene to produce colors." );
+    options.add_options()                                                                       // Command line options.
+        ( "w,width", "Width of the image.", cxxopts::value< int >()->default_value( "256" ) )   // Width
+        ( "h,height", "Height of the image.", cxxopts::value< int >()->default_value( "256" ) ) // Height;
+        ( "o,output", "Output file", cxxopts::value< std::string >()->default_value( "out.ppm" ) ); // Output file.
+
+    auto        args        = options.parse( i_argc, i_argv );
+    int         imageWidth  = args[ "width" ].as< int >();
+    int         imageHeight = args[ "height" ].as< int >();
+    std::string filePath    = args[ "output" ].as< std::string >();
+
+    // Allocate the image to write into.
+    raytrace::RGBImageBuffer image( imageWidth, imageHeight );
+    gm::Bounds2i             imageExtent = image.Extent();
+
+    //
+    // Camera & viewport plane.
+    //
+
+    float     aspectRatio    = ( float ) imageWidth / imageHeight; // The ratio of the width to the height of the image.
+    float     viewportHeight = 2.0f;                               // The fixed height of the virtual viewport.
+    float     viewportWidth  = aspectRatio * viewportHeight;       // The width of the virtual viewport.
+    float     focalLength    = 1.0f;   //  The distance between the camera origin and the viewport plane.
+    gm::Vec3f cameraOrigin( 0, 0, 0 ); // The origin of the camera.
+    gm::Vec3f horizontal = gm::Vec3f( viewportWidth, 0, 0 );  // The 3D vector representation of the viewport width.
+    gm::Vec3f vertical   = gm::Vec3f( 0, viewportHeight, 0 ); // The 3D vector representation of the viewport height.
+
+    // The 3D coordinate of the bottom left corner of the viewport plane.
+    gm::Vec3f viewportBottomLeft = cameraOrigin                      // From the camera origin...
+                                   - ( horizontal * 0.5f )           // Horizontal translate of half the viewport plane.
+                                   - ( vertical * 0.5f )             // Vertical translate of half the viewport plane.
+                                   - gm::Vec3f( 0, 0, focalLength ); // Translate forwards focal length units.
+
+    //
+    // Ray direction computation.
+    //
+
+    std::vector< gm::Vec3f > rayDirections( imageWidth * imageHeight );
+    for ( gm::Vec2i pixelCoord : gm::Vec2iRange( imageExtent.Min(), imageExtent.Max() ) )
+    {
+        // Compute normalised viewport coordinates (values between 0 and 1).
+        float u = float( pixelCoord.X() ) / imageWidth;
+        float v = float( pixelCoord.Y() ) / imageHeight;
+
+        // Get the direction of the respective ray.
+        gm::Vec3f& rayDirection = rayDirections[ pixelCoord.X() + pixelCoord.Y() * imageWidth ];
+
+        // Compute the direction of the ray, by translation from the bottom-left viewport coordinate
+        // to the coordinate in the viewport plane with respect to the image pixel coordinate.
+        rayDirection = viewportBottomLeft   // Starting from the viewport bottom left...
+                       + ( u * horizontal ) // Horizontal offset.
+                       + ( v * vertical )   // Vertical offset.
+                       - cameraOrigin;      // Get difference vector from camera origin.
+
+        // Normalize the direction of the ray.
+        rayDirection = gm::Normalize( rayDirection );
+    }
+
+    //
+    // Convert rays into colors.
+    //
+
+    for ( gm::Vec2i pixelCoord : gm::Vec2iRange( imageExtent.Min(), imageExtent.Max() ) )
+    {
+        const gm::Vec3f& rayDirection           = rayDirections[ pixelCoord.X() + pixelCoord.Y() * imageWidth ];
+        image( pixelCoord.X(), pixelCoord.Y() ) = ComputeRayColor( cameraOrigin, rayDirection );
+    }
+
+    // Write to disk.
+    if ( !raytrace::WritePPMImage( image, filePath ) )
+    {
+        return -1;
+    }
+
+    return 0;
+}
