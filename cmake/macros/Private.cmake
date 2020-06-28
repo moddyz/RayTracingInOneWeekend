@@ -53,7 +53,7 @@ function(
     _set_link_properties
     TARGET_NAME
 )
-    if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         target_link_options(
             ${TARGET_NAME}
             PRIVATE
