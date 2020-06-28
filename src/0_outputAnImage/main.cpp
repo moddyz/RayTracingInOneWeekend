@@ -4,6 +4,7 @@
 
 #include <cxxopts.hpp>
 
+#define GM_DEBUG
 #include <gm/types/vec3f.h>
 
 #include <raytrace/imageBuffer.h>
@@ -15,7 +16,7 @@ int main( int i_argc, char** i_argv )
     // Parse command line arguments.
     cxxopts::Options options( "ppmExample", "Example program of writing out an PPM image." );
     options.add_options()                                                                       // Command line options.
-        ( "w,width", "Width of the image.", cxxopts::value< int >()->default_value( "256" ) )   // Width
+        ( "w,width", "Width of the image.", cxxopts::value< int >()->default_value( "384" ) )   // Width
         ( "h,height", "Height of the image.", cxxopts::value< int >()->default_value( "256" ) ) // Height;
         ( "o,output", "Output file", cxxopts::value< std::string >()->default_value( "out.ppm" ) ); // Output file.
 
@@ -26,9 +27,9 @@ int main( int i_argc, char** i_argv )
 
     // Author a gradient image.
     raytrace::RGBImageBuffer image( width, height );
-    for ( int xCoord : raytrace::IntRange( 0, image.Height() ) )
+    for ( int xCoord : raytrace::IntRange( 0, image.Width() ) )
     {
-        for ( int yCoord : raytrace::IntRange( 0, image.Width() ) )
+        for ( int yCoord : raytrace::IntRange( 0, image.Height() ) )
         {
             image( xCoord, yCoord ) =
                 gm::Vec3f( double( xCoord ) / ( image.Width() - 1 ), double( yCoord ) / ( image.Height() - 1 ), 0.25f );
