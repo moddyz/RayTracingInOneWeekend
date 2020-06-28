@@ -5,9 +5,9 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
 ## Table of Contents
 
 - [Programs](#programs)
-  0. [Output an Image](#0-output-an-image)
-  1. [Rays, a Simple Camera, and Background](#1-rays-a-simple-camera-and-background)
-  2. [Adding a Sphere](#2-adding-a-sphere)
+  * [0. Output an Image](#0-output-an-image)
+  * [1. Rays, a Simple Camera, and Background](#1-rays-a-simple-camera-and-background)
+  * [2. Adding a Sphere](#2-adding-a-sphere)
 
 ## Programs
 
