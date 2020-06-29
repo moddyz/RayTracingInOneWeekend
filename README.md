@@ -59,5 +59,5 @@ A convenience build script is also provided, for building all targets, and optio
 
 |       | master | 
 | ----- | ------ | 
-|Ubuntu-18.04 / macOS-10.14 | [![Build Status](https://travis-ci.com/moddyz/RayTracingInOneWeekend.svg?branch=master)](https://travis-ci.com/moddyz/RayTracingInOneWeekend) |
+| macOS-10.14 | [![Build Status](https://travis-ci.com/moddyz/RayTracingInOneWeekend.svg?branch=master)](https://travis-ci.com/moddyz/RayTracingInOneWeekend) |
 

@@ -11,15 +11,15 @@ jobs:
             - cmake
             - graphviz
             - doxygen
-    - os: linux
-      dist: bionic
-      compiler: gcc
-      addons:
-        apt:
-          packages:
-            - cmake
-            - graphviz
-            - doxygen
+#   - os: linux
+#     dist: bionic
+#     compiler: gcc
+#     addons:
+#       apt:
+#         packages:
+#           - cmake
+#           - graphviz
+#           - doxygen
 
 install:
   - echo ${PATH}
