@@ -8,6 +8,9 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
   * [0. Output an Image](#0-output-an-image)
   * [1. Rays, a Simple Camera, and Background](#1-rays-a-simple-camera-and-background)
   * [2. Adding a Sphere](#2-adding-a-sphere)
+- [Library](#library)
+- [Building](#building)
+- [Build Status](#build-status)
 
 ## Programs
 
@@ -60,4 +63,3 @@ A convenience build script is also provided, for building all targets, and optio
 |       | master | 
 | ----- | ------ | 
 | macOS-10.14 | [![Build Status](https://travis-ci.com/moddyz/RayTracingInOneWeekend.svg?branch=master)](https://travis-ci.com/moddyz/RayTracingInOneWeekend) |
-
