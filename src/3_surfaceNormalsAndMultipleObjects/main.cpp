@@ -92,6 +92,7 @@ int main( int i_argc, char** i_argv )
     // Allocate scene objects.
     SceneObjectPtrs sceneObjectPtrs;
     sceneObjectPtrs.push_back( std::make_unique< raytrace::Sphere >( gm::Vec3f( 0.0f, 0.0f, -1.0f ), 0.5 ) );
+    sceneObjectPtrs.push_back( std::make_unique< raytrace::Sphere >( gm::Vec3f( 0.0f, -100.5, -1.0f ), 100 ) );
 
     // Compute ray directions.
     std::vector< gm::Vec3f > rayDirections( imageWidth * imageHeight );
