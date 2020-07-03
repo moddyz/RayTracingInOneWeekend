@@ -12,13 +12,18 @@
 #include <gm/functions/linearInterpolation.h>
 #include <gm/functions/linearMap.h>
 #include <gm/functions/normalize.h>
-#include <gm/functions/rayPosition.h>
-#include <gm/functions/raySphereIntersection.h>
 
 #include <raytrace/camera.h>
+#include <raytrace/hitRecord.h>
 #include <raytrace/imageBuffer.h>
 #include <raytrace/intRange.h>
 #include <raytrace/ppmImageWriter.h>
+#include <raytrace/sphere.h>
+
+/// \typedef SceneObjectPtrs
+///
+/// A collection of scene objects.
+using SceneObjectPtrs = std::vector< raytrace::SceneObjectPtr >;
 
 /// Compute the ray color based on origin & direction.
 ///
@@ -26,21 +31,29 @@
 ///
 /// When rays intersect the sphere, it will produce a red pixel.
 /// Otherwise, the background color of a blue/white gradient is returned.
-static gm::Vec3f ComputeRayColor( const gm::Vec3f& i_rayOrigin, const gm::Vec3f& i_rayDirection )
+static gm::Vec3f ComputeRayColor( const gm::Vec3f&       i_rayOrigin,
+                                  const gm::Vec3f&       i_rayDirection,
+                                  const SceneObjectPtrs& i_sceneObjectPtrs )
 {
-    // Test for sphere intersection (hard-coded placement of the sphere)
-    const gm::Vec3f sphereOrigin = gm::Vec3f( 0, 0, -1.0 );
-    const float     sphereRadius = 0.5;
-    gm::Vec2f       intersections;
-    if ( gm::RaySphereIntersection( sphereOrigin, sphereRadius, i_rayOrigin, i_rayDirection, intersections ) > 0 )
+    // Iterate over all scene objects and test for ray hit(s).
+    // We'd like to track the nearest hit and prune out farther objects.
+    raytrace::HitRecord record;
+    bool                objectHit           = false;
+    float               nearestHitMagnitude = std::numeric_limits< float >::max();
+    for ( const raytrace::SceneObjectPtr& sceneObjectPtr : i_sceneObjectPtrs )
     {
-        // Get the nearest intersection of the ray and the sphere, relative to the camera origin.
-        gm::Vec3f nearestIntersection = gm::RayPosition( i_rayOrigin, i_rayDirection, intersections[ 0 ] );
-        gm::Vec3f surfaceNormal       = gm::Normalize( nearestIntersection - sphereOrigin );
+        if ( sceneObjectPtr->Hit( i_rayOrigin, i_rayDirection, gm::Vec2f( 0, nearestHitMagnitude ), record ) )
+        {
+            objectHit           = true;
+            nearestHitMagnitude = record.m_magnitude;
+        }
+    }
 
+    if ( objectHit )
+    {
         const gm::Vec2f normalRange( -1.0, 1.0 );
         const gm::Vec2f colorRange( 0, 1.0 );
-        return gm::LinearMap( surfaceNormal, normalRange, colorRange );
+        return gm::LinearMap( record.m_normal, normalRange, colorRange );
     }
 
     // Compute background color, by interpolating between two colors with the weight as the function of the ray
@@ -70,6 +83,10 @@ int main( int i_argc, char** i_argv )
     // Camera model.
     raytrace::Camera camera( ( float ) imageWidth / imageHeight );
 
+    // Allocate scene objects.
+    SceneObjectPtrs sceneObjectPtrs;
+    sceneObjectPtrs.push_back( std::make_unique< raytrace::Sphere >( gm::Vec3f( 0.0f, 0.0f, -1.0f ), 0.5 ) );
+
     // Compute ray directions.
     std::vector< gm::Vec3f > rayDirections( imageWidth * imageHeight );
     for ( gm::Vec2i pixelCoord : gm::Vec2iRange( imageExtent.Min(), imageExtent.Max() ) )
@@ -96,7 +113,7 @@ int main( int i_argc, char** i_argv )
     for ( gm::Vec2i pixelCoord : gm::Vec2iRange( imageExtent.Min(), imageExtent.Max() ) )
     {
         const gm::Vec3f& rayDirection           = rayDirections[ pixelCoord.X() + pixelCoord.Y() * imageWidth ];
-        image( pixelCoord.X(), pixelCoord.Y() ) = ComputeRayColor( camera.Origin(), rayDirection );
+        image( pixelCoord.X(), pixelCoord.Y() ) = ComputeRayColor( camera.Origin(), rayDirection, sceneObjectPtrs );
     }
 
     // Write to disk.
