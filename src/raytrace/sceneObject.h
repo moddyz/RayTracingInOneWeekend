@@ -19,6 +19,9 @@ RAYTRACE_NS_OPEN
 class SceneObject
 {
 public:
+    /// Virtual de-constructor.
+    virtual ~SceneObject() = default;
+
     /// Check and record if a ray hits the current object.
     ///
     /// \param i_rayOrigin The origin position of the incident ray.

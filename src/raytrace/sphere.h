@@ -38,7 +38,7 @@ public:
         gm::Vec2f intersections;
         if ( gm::RaySphereIntersection( m_origin, m_radius, i_rayOrigin, i_rayDirection, intersections ) == 2 )
         {
-            // TODO Float range?
+            // TODO Added GraphicsMath FloatRange type with min & max.
             if ( intersections[ 0 ] < i_magnitudeRange[ 1 ] && intersections[ 0 ] > i_magnitudeRange[ 0 ] )
             {
                 _Record( i_rayOrigin, i_rayDirection, intersections[ 0 ], o_record );
