@@ -25,12 +25,18 @@
 /// A collection of scene objects.
 using SceneObjectPtrs = std::vector< raytrace::SceneObjectPtr >;
 
-/// Compute the ray color based on origin & direction.
+/// Compute the ray color.
 ///
-/// A hard-coded sphere is placed at the worldspace position \p (0, 0, -1.0).
+/// The ray is tested for intersection against a collection of scene objects.
+/// The color is computed based on the surface outward normal of the nearest intersection.
 ///
-/// When rays intersect the sphere, it will produce a red pixel.
-/// Otherwise, the background color of a blue/white gradient is returned.
+/// In the case where there is no intersection, a background color is interpolated from a top-down gradient.
+///
+/// \param i_rayOrigin The origin of the ray.
+/// \param i_rayDirection The direction of the ray.
+/// \param i_sceneObjectPtrs The collection of scene objects to test for ray intersection.
+///
+/// \return The computed ray color.
 static gm::Vec3f ComputeRayColor( const gm::Vec3f&       i_rayOrigin,
                                   const gm::Vec3f&       i_rayDirection,
                                   const SceneObjectPtrs& i_sceneObjectPtrs )
