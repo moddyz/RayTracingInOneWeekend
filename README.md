@@ -8,6 +8,7 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
   * [0. Output an Image](#0-output-an-image)
   * [1. Rays, a Simple Camera, and Background](#1-rays-a-simple-camera-and-background)
   * [2. Adding a Sphere](#2-adding-a-sphere)
+  * [3. Surface Normals and Multiple Objects](#3-surface-normals-and-multiple-objects)
 - [Library](#library)
 - [Building](#building)
 - [Build Status](#build-status)
@@ -37,6 +38,14 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
 [Source code](./src/2_addingASphere/main.cpp)
 
 [Link to Chapter 5](https://raytracing.github.io/books/RayTracingInOneWeekend.html#addingasphere)
+
+### 3. Surface Normals and Multiple Objects
+
+![Image](./src/3_surfaceNormalsAndMultipleObjects/output.png)
+
+[Source code](./src/3_surfaceNormalsAndMultipleObjects/main.cpp)
+
+[Link to Chapter 6](https://raytracing.github.io/books/RayTracingInOneWeekend.html#surfacenormalsandmultipleobjects)
 
 ## Library
 
