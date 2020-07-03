@@ -15,6 +15,7 @@
 #include <gm/functions/rayPosition.h>
 #include <gm/functions/raySphereIntersection.h>
 
+#include <raytrace/camera.h>
 #include <raytrace/imageBuffer.h>
 #include <raytrace/intRange.h>
 #include <raytrace/ppmImageWriter.h>
@@ -66,28 +67,10 @@ int main( int i_argc, char** i_argv )
     raytrace::RGBImageBuffer image( imageWidth, imageHeight );
     gm::Bounds2i             imageExtent = image.Extent();
 
-    //
-    // Camera & viewport plane.
-    //
+    // Camera model.
+    raytrace::Camera camera( ( float ) imageWidth / imageHeight );
 
-    float     aspectRatio    = ( float ) imageWidth / imageHeight; // The ratio of the width to the height of the image.
-    float     viewportHeight = 2.0f;                               // The fixed height of the virtual viewport.
-    float     viewportWidth  = aspectRatio * viewportHeight;       // The width of the virtual viewport.
-    float     focalLength    = 1.0f;   //  The distance between the camera origin and the viewport plane.
-    gm::Vec3f cameraOrigin( 0, 0, 0 ); // The origin of the camera.
-    gm::Vec3f horizontal = gm::Vec3f( viewportWidth, 0, 0 );  // The 3D vector representation of the viewport width.
-    gm::Vec3f vertical   = gm::Vec3f( 0, viewportHeight, 0 ); // The 3D vector representation of the viewport height.
-
-    // The 3D coordinate of the bottom left corner of the viewport plane.
-    gm::Vec3f viewportBottomLeft = cameraOrigin                      // From the camera origin...
-                                   - ( horizontal * 0.5f )           // Horizontal translate of half the viewport plane.
-                                   - ( vertical * 0.5f )             // Vertical translate of half the viewport plane.
-                                   - gm::Vec3f( 0, 0, focalLength ); // Translate forwards focal length units.
-
-    //
-    // Ray direction computation.
-    //
-
+    // Compute ray directions.
     std::vector< gm::Vec3f > rayDirections( imageWidth * imageHeight );
     for ( gm::Vec2i pixelCoord : gm::Vec2iRange( imageExtent.Min(), imageExtent.Max() ) )
     {
@@ -100,23 +83,20 @@ int main( int i_argc, char** i_argv )
 
         // Compute the direction of the ray, by translation from the bottom-left viewport coordinate
         // to the coordinate in the viewport plane with respect to the image pixel coordinate.
-        rayDirection = viewportBottomLeft   // Starting from the viewport bottom left...
-                       + ( u * horizontal ) // Horizontal offset.
-                       + ( v * vertical )   // Vertical offset.
-                       - cameraOrigin;      // Get difference vector from camera origin.
+        rayDirection = camera.ViewportBottomLeft()           // Starting from the viewport bottom left...
+                       + ( u * camera.ViewportHorizontal() ) // Horizontal offset.
+                       + ( v * camera.ViewportVertical() )   // Vertical offset.
+                       - camera.Origin();                    // Get difference vector from camera origin.
 
         // Normalize the direction of the ray.
         rayDirection = gm::Normalize( rayDirection );
     }
 
-    //
     // Convert rays into colors.
-    //
-
     for ( gm::Vec2i pixelCoord : gm::Vec2iRange( imageExtent.Min(), imageExtent.Max() ) )
     {
         const gm::Vec3f& rayDirection           = rayDirections[ pixelCoord.X() + pixelCoord.Y() * imageWidth ];
-        image( pixelCoord.X(), pixelCoord.Y() ) = ComputeRayColor( cameraOrigin, rayDirection );
+        image( pixelCoord.X(), pixelCoord.Y() ) = ComputeRayColor( camera.Origin(), rayDirection );
     }
 
     // Write to disk.
