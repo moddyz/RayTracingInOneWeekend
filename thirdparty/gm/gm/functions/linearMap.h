@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file functions/linearMap.h
-/// \ingroup GM_group_functions_interpolation
+/// \ingroup gm_functions_interpolation
 ///
 /// Linear mapping.
 ///
@@ -21,6 +21,7 @@
 
 #include <gm/gm.h>
 
+#include <gm/types/floatRange.h>
 #include <gm/types/mat3f.h>
 #include <gm/types/mat4f.h>
 #include <gm/types/vec2f.h>
@@ -30,6 +31,7 @@
 GM_NS_OPEN
 
 /// Linearly maps a source value in range \p i_sourceRange into the range \p i_targetRange.
+/// \ingroup gm_functions_interpolation
 ///
 /// \param i_sourceValue Value to map from the source range.
 /// \param i_sourceRange Source value range to map from.
@@ -39,14 +41,15 @@ GM_NS_OPEN
 ///
 /// \return Linearly mapped target value.
 GM_HOST_DEVICE inline float
-LinearMap( const float& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& i_targetRange )
+LinearMap( const float& i_sourceValue, const FloatRange& i_sourceRange, const FloatRange& i_targetRange )
 {
-    GM_ASSERT( i_sourceRange[ 0 ] != i_sourceRange[ 1 ] );
-    float ratio = ( i_targetRange[ 1 ] - i_targetRange[ 0 ] ) / ( i_sourceRange[ 1 ] - i_sourceRange[ 0 ] );
-    return i_targetRange[ 0 ] + ( ratio * ( i_sourceValue - i_sourceRange[ 0 ] ) );
+    GM_ASSERT( i_sourceRange.Min() != i_sourceRange.Max() );
+    float ratio = ( i_targetRange.Max() - i_targetRange.Min() ) / ( i_sourceRange.Max() - i_sourceRange.Min() );
+    return i_targetRange.Min() + ( ratio * ( i_sourceValue - i_sourceRange.Min() ) );
 }
 
 /// Linearly maps a source value in range \p i_sourceRange into the range \p i_targetRange.
+/// \ingroup gm_functions_interpolation
 ///
 /// \param i_sourceValue Value to map from the source range.
 /// \param i_sourceRange Source value range to map from.
@@ -56,22 +59,23 @@ LinearMap( const float& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& 
 ///
 /// \return Linearly mapped target value.
 GM_HOST_DEVICE inline Mat3f
-LinearMap( const Mat3f& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& i_targetRange )
+LinearMap( const Mat3f& i_sourceValue, const FloatRange& i_sourceRange, const FloatRange& i_targetRange )
 {
-    GM_ASSERT( i_sourceRange[ 0 ] != i_sourceRange[ 1 ] );
-    float ratio = ( i_targetRange[ 1 ] - i_targetRange[ 0 ] ) / ( i_sourceRange[ 1 ] - i_sourceRange[ 0 ] );
-    return Mat3f( i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 0 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 1 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 2 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 3 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 4 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 5 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 6 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 7 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 8 ] - i_sourceRange[ 0 ] ) ) );
+    GM_ASSERT( i_sourceRange.Min() != i_sourceRange.Max() );
+    float ratio = ( i_targetRange.Max() - i_targetRange.Min() ) / ( i_sourceRange.Max() - i_sourceRange.Min() );
+    return Mat3f( i_targetRange.Min() + ( ratio * ( i_sourceValue[ 0 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 1 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 2 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 3 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 4 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 5 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 6 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 7 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 8 ] - i_sourceRange.Min() ) ) );
 }
 
 /// Linearly maps a source value in range \p i_sourceRange into the range \p i_targetRange.
+/// \ingroup gm_functions_interpolation
 ///
 /// \param i_sourceValue Value to map from the source range.
 /// \param i_sourceRange Source value range to map from.
@@ -81,29 +85,30 @@ LinearMap( const Mat3f& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& 
 ///
 /// \return Linearly mapped target value.
 GM_HOST_DEVICE inline Mat4f
-LinearMap( const Mat4f& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& i_targetRange )
+LinearMap( const Mat4f& i_sourceValue, const FloatRange& i_sourceRange, const FloatRange& i_targetRange )
 {
-    GM_ASSERT( i_sourceRange[ 0 ] != i_sourceRange[ 1 ] );
-    float ratio = ( i_targetRange[ 1 ] - i_targetRange[ 0 ] ) / ( i_sourceRange[ 1 ] - i_sourceRange[ 0 ] );
-    return Mat4f( i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 0 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 1 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 2 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 3 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 4 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 5 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 6 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 7 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 8 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 9 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 10 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 11 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 12 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 13 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 14 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 15 ] - i_sourceRange[ 0 ] ) ) );
+    GM_ASSERT( i_sourceRange.Min() != i_sourceRange.Max() );
+    float ratio = ( i_targetRange.Max() - i_targetRange.Min() ) / ( i_sourceRange.Max() - i_sourceRange.Min() );
+    return Mat4f( i_targetRange.Min() + ( ratio * ( i_sourceValue[ 0 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 1 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 2 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 3 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 4 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 5 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 6 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 7 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 8 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 9 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 10 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 11 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 12 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 13 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 14 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 15 ] - i_sourceRange.Min() ) ) );
 }
 
 /// Linearly maps a source value in range \p i_sourceRange into the range \p i_targetRange.
+/// \ingroup gm_functions_interpolation
 ///
 /// \param i_sourceValue Value to map from the source range.
 /// \param i_sourceRange Source value range to map from.
@@ -113,15 +118,16 @@ LinearMap( const Mat4f& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& 
 ///
 /// \return Linearly mapped target value.
 GM_HOST_DEVICE inline Vec2f
-LinearMap( const Vec2f& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& i_targetRange )
+LinearMap( const Vec2f& i_sourceValue, const FloatRange& i_sourceRange, const FloatRange& i_targetRange )
 {
-    GM_ASSERT( i_sourceRange[ 0 ] != i_sourceRange[ 1 ] );
-    float ratio = ( i_targetRange[ 1 ] - i_targetRange[ 0 ] ) / ( i_sourceRange[ 1 ] - i_sourceRange[ 0 ] );
-    return Vec2f( i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 0 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 1 ] - i_sourceRange[ 0 ] ) ) );
+    GM_ASSERT( i_sourceRange.Min() != i_sourceRange.Max() );
+    float ratio = ( i_targetRange.Max() - i_targetRange.Min() ) / ( i_sourceRange.Max() - i_sourceRange.Min() );
+    return Vec2f( i_targetRange.Min() + ( ratio * ( i_sourceValue[ 0 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 1 ] - i_sourceRange.Min() ) ) );
 }
 
 /// Linearly maps a source value in range \p i_sourceRange into the range \p i_targetRange.
+/// \ingroup gm_functions_interpolation
 ///
 /// \param i_sourceValue Value to map from the source range.
 /// \param i_sourceRange Source value range to map from.
@@ -131,16 +137,17 @@ LinearMap( const Vec2f& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& 
 ///
 /// \return Linearly mapped target value.
 GM_HOST_DEVICE inline Vec3f
-LinearMap( const Vec3f& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& i_targetRange )
+LinearMap( const Vec3f& i_sourceValue, const FloatRange& i_sourceRange, const FloatRange& i_targetRange )
 {
-    GM_ASSERT( i_sourceRange[ 0 ] != i_sourceRange[ 1 ] );
-    float ratio = ( i_targetRange[ 1 ] - i_targetRange[ 0 ] ) / ( i_sourceRange[ 1 ] - i_sourceRange[ 0 ] );
-    return Vec3f( i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 0 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 1 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 2 ] - i_sourceRange[ 0 ] ) ) );
+    GM_ASSERT( i_sourceRange.Min() != i_sourceRange.Max() );
+    float ratio = ( i_targetRange.Max() - i_targetRange.Min() ) / ( i_sourceRange.Max() - i_sourceRange.Min() );
+    return Vec3f( i_targetRange.Min() + ( ratio * ( i_sourceValue[ 0 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 1 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 2 ] - i_sourceRange.Min() ) ) );
 }
 
 /// Linearly maps a source value in range \p i_sourceRange into the range \p i_targetRange.
+/// \ingroup gm_functions_interpolation
 ///
 /// \param i_sourceValue Value to map from the source range.
 /// \param i_sourceRange Source value range to map from.
@@ -150,14 +157,14 @@ LinearMap( const Vec3f& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& 
 ///
 /// \return Linearly mapped target value.
 GM_HOST_DEVICE inline Vec4f
-LinearMap( const Vec4f& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& i_targetRange )
+LinearMap( const Vec4f& i_sourceValue, const FloatRange& i_sourceRange, const FloatRange& i_targetRange )
 {
-    GM_ASSERT( i_sourceRange[ 0 ] != i_sourceRange[ 1 ] );
-    float ratio = ( i_targetRange[ 1 ] - i_targetRange[ 0 ] ) / ( i_sourceRange[ 1 ] - i_sourceRange[ 0 ] );
-    return Vec4f( i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 0 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 1 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 2 ] - i_sourceRange[ 0 ] ) ),
-                  i_targetRange[ 0 ] + ( ratio * ( i_sourceValue[ 3 ] - i_sourceRange[ 0 ] ) ) );
+    GM_ASSERT( i_sourceRange.Min() != i_sourceRange.Max() );
+    float ratio = ( i_targetRange.Max() - i_targetRange.Min() ) / ( i_sourceRange.Max() - i_sourceRange.Min() );
+    return Vec4f( i_targetRange.Min() + ( ratio * ( i_sourceValue[ 0 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 1 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 2 ] - i_sourceRange.Min() ) ),
+                  i_targetRange.Min() + ( ratio * ( i_sourceValue[ 3 ] - i_sourceRange.Min() ) ) );
 }
 
 GM_NS_CLOSE

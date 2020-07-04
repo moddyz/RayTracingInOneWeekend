@@ -5,16 +5,18 @@
 #pragma once
 
 /// \file vec4iArray.h
-/// \ingroup GM_group_arrayTypes
+/// \ingroup gm_types_array
 
 #include <vector>
+
+#include <gm/gm.h>
 
 #include <gm/types/vec4i.h>
 
 GM_NS_OPEN
 
 /// \typedef Vec4iArray
-/// \ingroup GM_group_arrayTypes
+/// \ingroup gm_types_array
 ///
 /// Type definition of an array of \ref Vec4i.
 using Vec4iArray = std::vector< Vec4i >;

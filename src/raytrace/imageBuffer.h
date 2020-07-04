@@ -6,7 +6,7 @@
 
 #include <raytrace/raytrace.h>
 
-#include <gm/types/bounds2i.h>
+#include <gm/types/vec2iRange.h>
 #include <gm/types/vec3f.h>
 
 #include <vector>
@@ -112,9 +112,9 @@ public:
     /// of the image plane of which pixel values are valid to read/write from & to.
     ///
     /// \return the extent of the image.
-    inline gm::Bounds2i Extent() const
+    inline gm::Vec2iRange Extent() const
     {
-        return gm::Bounds2i( gm::Vec2i( 0, 0 ), gm::Vec2i( m_width, m_height ) );
+        return gm::Vec2iRange( gm::Vec2i( 0, 0 ), gm::Vec2i( m_width, m_height ) );
     }
 
 private:

@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file functions/raySphereIntersection.h
-/// \ingroup GM_group_functions_rayTracing
+/// \ingroup gm_functions_rayTracing
 ///
 /// Ray sphere intersection test.
 ///
@@ -68,7 +68,7 @@
 
 GM_NS_OPEN
 
-/// \ingroup GM_group_functions_rayTracing
+/// \ingroup gm_functions_rayTracing
 /// Find the intersection(s) between a ray and a sphere.
 ///
 /// The points of intersection can be computed from the intersection magnitudes

@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file functions/max.h
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// Find the minimum of two input values.
 /// If the value type is a vector, the minimum will be performed element-wise.
@@ -26,7 +26,7 @@
 GM_NS_OPEN
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline float Max( const float& i_valueA, const float& i_valueB )
@@ -35,7 +35,7 @@ GM_HOST_DEVICE inline float Max( const float& i_valueA, const float& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline int Max( const int& i_valueA, const int& i_valueB )
@@ -44,7 +44,7 @@ GM_HOST_DEVICE inline int Max( const int& i_valueA, const int& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline bool Max( const bool& i_valueA, const bool& i_valueB )
@@ -53,7 +53,7 @@ GM_HOST_DEVICE inline bool Max( const bool& i_valueA, const bool& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Mat3f Max( const Mat3f& i_valueA, const Mat3f& i_valueB )
@@ -70,7 +70,7 @@ GM_HOST_DEVICE inline Mat3f Max( const Mat3f& i_valueA, const Mat3f& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Mat4f Max( const Mat4f& i_valueA, const Mat4f& i_valueB )
@@ -94,7 +94,7 @@ GM_HOST_DEVICE inline Mat4f Max( const Mat4f& i_valueA, const Mat4f& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Vec2f Max( const Vec2f& i_valueA, const Vec2f& i_valueB )
@@ -103,7 +103,7 @@ GM_HOST_DEVICE inline Vec2f Max( const Vec2f& i_valueA, const Vec2f& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Vec3f Max( const Vec3f& i_valueA, const Vec3f& i_valueB )
@@ -114,7 +114,7 @@ GM_HOST_DEVICE inline Vec3f Max( const Vec3f& i_valueA, const Vec3f& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Vec4f Max( const Vec4f& i_valueA, const Vec4f& i_valueB )
@@ -126,7 +126,7 @@ GM_HOST_DEVICE inline Vec4f Max( const Vec4f& i_valueA, const Vec4f& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Vec2i Max( const Vec2i& i_valueA, const Vec2i& i_valueB )
@@ -135,7 +135,7 @@ GM_HOST_DEVICE inline Vec2i Max( const Vec2i& i_valueA, const Vec2i& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Vec3i Max( const Vec3i& i_valueA, const Vec3i& i_valueB )
@@ -146,7 +146,7 @@ GM_HOST_DEVICE inline Vec3i Max( const Vec3i& i_valueA, const Vec3i& i_valueB )
 }
 
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Vec4i Max( const Vec4i& i_valueA, const Vec4i& i_valueB )

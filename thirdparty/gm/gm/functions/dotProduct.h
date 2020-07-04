@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file functions/dotProduct.h
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// Dot product, or scalar product between two <em>equal-length</em> vectors.
 ///
@@ -24,7 +24,7 @@
 GM_NS_OPEN
 
 /// Compute the dot product of two \ref Vec2f, \p i_lhs and \p i_rhs, and return the result.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return computed dot product.
 GM_HOST_DEVICE inline float DotProduct( const Vec2f& i_lhs, const Vec2f& i_rhs )
@@ -33,7 +33,7 @@ GM_HOST_DEVICE inline float DotProduct( const Vec2f& i_lhs, const Vec2f& i_rhs )
 }
 
 /// Compute the dot product of two \ref Vec3f, \p i_lhs and \p i_rhs, and return the result.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return computed dot product.
 GM_HOST_DEVICE inline float DotProduct( const Vec3f& i_lhs, const Vec3f& i_rhs )
@@ -42,7 +42,7 @@ GM_HOST_DEVICE inline float DotProduct( const Vec3f& i_lhs, const Vec3f& i_rhs )
 }
 
 /// Compute the dot product of two \ref Vec4f, \p i_lhs and \p i_rhs, and return the result.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return computed dot product.
 GM_HOST_DEVICE inline float DotProduct( const Vec4f& i_lhs, const Vec4f& i_rhs )

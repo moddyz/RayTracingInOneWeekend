@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file functions/matrixProduct.h
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// Matrix multiplication.
 ///
@@ -26,7 +26,7 @@ GM_NS_OPEN
 
 /// Multiply input matrices \p i_lhs and \p i_rhs
 /// to produce their matrix product.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return the matrix product.
 GM_HOST_DEVICE inline Mat3f MatrixProduct( const Mat3f& i_lhs, const Mat3f& i_rhs )
@@ -44,7 +44,7 @@ GM_HOST_DEVICE inline Mat3f MatrixProduct( const Mat3f& i_lhs, const Mat3f& i_rh
 
 /// Multiply input matrices \p i_lhs and \p i_rhs
 /// to produce their matrix product.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return the matrix product.
 GM_HOST_DEVICE inline Mat4f MatrixProduct( const Mat4f& i_lhs, const Mat4f& i_rhs )

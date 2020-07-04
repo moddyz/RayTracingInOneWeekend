@@ -8,7 +8,6 @@
 #include <gm/types/vec3f.h>
 
 #include <raytrace/imageBuffer.h>
-#include <raytrace/intRange.h>
 #include <raytrace/ppmImageWriter.h>
 
 int main( int i_argc, char** i_argv )
@@ -27,13 +26,11 @@ int main( int i_argc, char** i_argv )
 
     // Author a gradient image.
     raytrace::RGBImageBuffer image( width, height );
-    for ( int xCoord : raytrace::IntRange( 0, image.Width() ) )
+    for ( const gm::Vec2i& pixelCoord : image.Extent() )
     {
-        for ( int yCoord : raytrace::IntRange( 0, image.Height() ) )
-        {
-            image( xCoord, yCoord ) =
-                gm::Vec3f( double( xCoord ) / ( image.Width() - 1 ), double( yCoord ) / ( image.Height() - 1 ), 0.25f );
-        }
+        image( pixelCoord.X(), pixelCoord.Y() ) = gm::Vec3f( double( pixelCoord.X() ) / ( image.Width() - 1 ),
+                                                             double( pixelCoord.Y() ) / ( image.Height() - 1 ),
+                                                             0.25f );
     }
 
     // Write to disk.

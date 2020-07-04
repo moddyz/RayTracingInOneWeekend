@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file functions/quadraticRoots.h
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// Solve for the roots of a quadratic equation of the form \f$ax^2+bx+c=0\f$
 ///
@@ -26,7 +26,7 @@
 GM_NS_OPEN
 
 /// Solve for the roots of a quadratic equation.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \param i_a The \f$a\f$ co-efficient.
 /// \param i_b The \f$b\f$ co-efficient.

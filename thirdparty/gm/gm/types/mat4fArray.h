@@ -5,16 +5,18 @@
 #pragma once
 
 /// \file mat4fArray.h
-/// \ingroup GM_group_arrayTypes
+/// \ingroup gm_types_array
 
 #include <vector>
+
+#include <gm/gm.h>
 
 #include <gm/types/mat4f.h>
 
 GM_NS_OPEN
 
 /// \typedef Mat4fArray
-/// \ingroup GM_group_arrayTypes
+/// \ingroup gm_types_array
 ///
 /// Type definition of an array of \ref Mat4f.
 using Mat4fArray = std::vector< Mat4f >;

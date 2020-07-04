@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file mat3f.h
-/// \ingroup GM_group_vectorTypes
+/// \ingroup gm_types_vector
 
 #include <cmath>
 #include <cstring>
@@ -18,9 +18,9 @@
 GM_NS_OPEN
 
 /// \class Mat3f
-/// \ingroup GM_group_vectorTypes
+/// \ingroup gm_types_vector
 ///
-/// Class definition of a matrix with 9 elements.
+/// Class definition of a matrix with 9 float elements.
 class Mat3f final
 {
 public:
@@ -28,6 +28,10 @@ public:
     ///
     /// Convenience type definition of \ref Mat3f's elements.
     using ElementType = float;
+
+    // --------------------------------------------------------------------- //
+    /// \name Construction
+    // --------------------------------------------------------------------- //
 
     /// Default constructor, initializing all of the element values to 0.
     GM_HOST_DEVICE constexpr inline Mat3f() = default;
@@ -54,6 +58,10 @@ public:
     {
         GM_ASSERT( !HasNans() );
     }
+
+    // --------------------------------------------------------------------- //
+    /// \name Element access
+    // --------------------------------------------------------------------- //
 
     /// Indexed element write access.
     ///
@@ -83,9 +91,21 @@ public:
         return m_elements[ i_index ];
     }
 
-    //
-    // Arithmetic Operator Overloading.
-    //
+    /// Matrix element read-access.
+    GM_HOST_DEVICE inline const float& operator()( size_t i_row, size_t i_column ) const
+    {
+        return m_elements[ i_row * 3 + i_column ];
+    }
+
+    /// Matrix element write-access.
+    GM_HOST_DEVICE inline float& operator()( size_t i_row, size_t i_column )
+    {
+        return m_elements[ i_row * 3 + i_column ];
+    }
+
+    // --------------------------------------------------------------------- //
+    /// \name Arithmetic operators
+    // --------------------------------------------------------------------- //
 
     /// Element-wise vector addition.
     ///
@@ -217,17 +237,9 @@ public:
                       -m_elements[ 8 ] );
     }
 
-    /// Matrix element read-access.
-    GM_HOST_DEVICE inline const float& operator()( size_t i_row, size_t i_column ) const
-    {
-        return m_elements[ i_row * 3 + i_column ];
-    }
-
-    /// Matrix element write-access.
-    GM_HOST_DEVICE inline float& operator()( size_t i_row, size_t i_column )
-    {
-        return m_elements[ i_row * 3 + i_column ];
-    }
+    // --------------------------------------------------------------------- //
+    /// \name Comparison operators
+    // --------------------------------------------------------------------- //
 
     /// Comparison operator
     GM_HOST_DEVICE inline bool operator==( const Mat3f& i_vector ) const
@@ -249,11 +261,19 @@ public:
         return !( ( *this ) == i_vector );
     }
 
+    // --------------------------------------------------------------------- //
+    /// \name Shape
+    // --------------------------------------------------------------------- //
+
     /// Get the number of elements in this vector.
     GM_HOST_DEVICE inline static size_t GetElementSize()
     {
         return 9;
     }
+
+    // --------------------------------------------------------------------- //
+    /// \name Debug
+    // --------------------------------------------------------------------- //
 
     /// Are any of the element values NaNs?
     GM_HOST_DEVICE inline bool HasNans() const

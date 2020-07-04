@@ -5,11 +5,11 @@
 #pragma once
 
 /// \file functions/setIdentity.h
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// Set the \em identity matrix \f$I\f$, defined as the neutral element with respect to matrix multiplication:
 /// \f[ AI=A\f]
-/// \f[ A=\textnormal{Any matrix}\neq0 \f]
+/// \f[ A=\textnormal{Any matrix} \f]
 /// \f[ I=\textnormal{Identity matrix} \f]
 ///
 /// The identity matrix is square(\f$M\textnormal{x}N\f$) with \f$1\f$s down the main diagonal,
@@ -33,7 +33,7 @@
 GM_NS_OPEN
 
 /// Set the identity matrix onto \p o_matrix.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \param o_matrix the matrix to set to the identity.
 GM_HOST_DEVICE inline void SetIdentity( Mat3f& o_matrix )
@@ -42,7 +42,7 @@ GM_HOST_DEVICE inline void SetIdentity( Mat3f& o_matrix )
 }
 
 /// Set the identity matrix onto \p o_matrix.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \param o_matrix the matrix to set to the identity.
 GM_HOST_DEVICE inline void SetIdentity( Mat4f& o_matrix )

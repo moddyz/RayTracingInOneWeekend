@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file functions/floor.h
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// Floor the input value, by rounding downwards, returning the largest integral number less than the input.
 /// If the value type is a vector, the floor will be performed element-wise.
@@ -23,7 +23,7 @@
 GM_NS_OPEN
 
 /// Floor the input \ref float \p i_value and return it.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the floored input value.
 GM_HOST_DEVICE inline float Floor( const float& i_value )
@@ -32,7 +32,7 @@ GM_HOST_DEVICE inline float Floor( const float& i_value )
 }
 
 /// Floor the input \ref Vec2f \p i_value and return it.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the floored input value.
 GM_HOST_DEVICE inline Vec2f Floor( const Vec2f& i_value )
@@ -41,7 +41,7 @@ GM_HOST_DEVICE inline Vec2f Floor( const Vec2f& i_value )
 }
 
 /// Floor the input \ref Vec3f \p i_value and return it.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the floored input value.
 GM_HOST_DEVICE inline Vec3f Floor( const Vec3f& i_value )
@@ -50,7 +50,7 @@ GM_HOST_DEVICE inline Vec3f Floor( const Vec3f& i_value )
 }
 
 /// Floor the input \ref Vec4f \p i_value and return it.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the floored input value.
 GM_HOST_DEVICE inline Vec4f Floor( const Vec4f& i_value )
@@ -62,7 +62,7 @@ GM_HOST_DEVICE inline Vec4f Floor( const Vec4f& i_value )
 }
 
 /// Floor the input \ref Mat3f \p i_value and return it.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the floored input value.
 GM_HOST_DEVICE inline Mat3f Floor( const Mat3f& i_value )
@@ -79,7 +79,7 @@ GM_HOST_DEVICE inline Mat3f Floor( const Mat3f& i_value )
 }
 
 /// Floor the input \ref Mat4f \p i_value and return it.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the floored input value.
 GM_HOST_DEVICE inline Mat4f Floor( const Mat4f& i_value )

@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file functions/degrees.h
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// Unit conversion from an angle encoded as radians into degrees.
 
@@ -16,7 +16,7 @@
 GM_NS_OPEN
 
 /// Converts angle \p i_angle from radians to degrees.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the angle in units of degrees.
 GM_HOST_DEVICE inline float Degrees( const float& i_angle )

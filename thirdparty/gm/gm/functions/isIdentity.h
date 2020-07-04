@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file functions/isIdentity.h
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// Check if the input matrix is the identity matrix.
 
@@ -17,7 +17,7 @@
 GM_NS_OPEN
 
 /// Check if the matrix \p i_matrix is the identity matrix.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return true if \p i_matrix is the identity matrix.
 GM_HOST_DEVICE inline bool IsIdentity( const Mat3f& i_matrix )
@@ -28,7 +28,7 @@ GM_HOST_DEVICE inline bool IsIdentity( const Mat3f& i_matrix )
 }
 
 /// Check if the matrix \p i_matrix is the identity matrix.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return true if \p i_matrix is the identity matrix.
 GM_HOST_DEVICE inline bool IsIdentity( const Mat4f& i_matrix )

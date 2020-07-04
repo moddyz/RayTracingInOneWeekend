@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file vec4i.h
-/// \ingroup GM_group_vectorTypes
+/// \ingroup gm_types_vector
 
 #include <cmath>
 #include <cstring>
@@ -17,9 +17,9 @@
 GM_NS_OPEN
 
 /// \class Vec4i
-/// \ingroup GM_group_vectorTypes
+/// \ingroup gm_types_vector
 ///
-/// Class definition of a vector with 4 elements.
+/// Class definition of a vector with 4 int elements.
 class Vec4i final
 {
 public:
@@ -27,6 +27,10 @@ public:
     ///
     /// Convenience type definition of \ref Vec4i's elements.
     using ElementType = int;
+
+    // --------------------------------------------------------------------- //
+    /// \name Construction
+    // --------------------------------------------------------------------- //
 
     /// Default constructor, initializing all of the element values to 0.
     GM_HOST_DEVICE constexpr inline Vec4i() = default;
@@ -40,6 +44,10 @@ public:
     {
         GM_ASSERT( !HasNans() );
     }
+
+    // --------------------------------------------------------------------- //
+    /// \name Element access
+    // --------------------------------------------------------------------- //
 
     /// Indexed element write access.
     ///
@@ -69,9 +77,37 @@ public:
         return m_elements[ i_index ];
     }
 
-    //
-    // Arithmetic Operator Overloading.
-    //
+    /// X component accessor for the first element.
+    GM_HOST_DEVICE inline int X() const
+    {
+        GM_ASSERT( !HasNans() );
+        return m_elements[ 0 ];
+    }
+
+    /// Y component accessor for the second element.
+    GM_HOST_DEVICE inline int Y() const
+    {
+        GM_ASSERT( !HasNans() );
+        return m_elements[ 1 ];
+    }
+
+    /// Z component accessor for the third element.
+    GM_HOST_DEVICE inline int Z() const
+    {
+        GM_ASSERT( !HasNans() );
+        return m_elements[ 2 ];
+    }
+
+    /// W component accessor for the fourth element.
+    GM_HOST_DEVICE inline int W() const
+    {
+        GM_ASSERT( !HasNans() );
+        return m_elements[ 3 ];
+    }
+
+    // --------------------------------------------------------------------- //
+    /// \name Arithmetic operators
+    // --------------------------------------------------------------------- //
 
     /// Element-wise vector addition.
     ///
@@ -160,33 +196,9 @@ public:
         return Vec4i( -m_elements[ 0 ], -m_elements[ 1 ], -m_elements[ 2 ], -m_elements[ 3 ] );
     }
 
-    /// X component accessor for the first element.
-    GM_HOST_DEVICE inline int X() const
-    {
-        GM_ASSERT( !HasNans() );
-        return m_elements[ 0 ];
-    }
-
-    /// Y component accessor for the second element.
-    GM_HOST_DEVICE inline int Y() const
-    {
-        GM_ASSERT( !HasNans() );
-        return m_elements[ 1 ];
-    }
-
-    /// Z component accessor for the third element.
-    GM_HOST_DEVICE inline int Z() const
-    {
-        GM_ASSERT( !HasNans() );
-        return m_elements[ 2 ];
-    }
-
-    /// W component accessor for the fourth element.
-    GM_HOST_DEVICE inline int W() const
-    {
-        GM_ASSERT( !HasNans() );
-        return m_elements[ 3 ];
-    }
+    // --------------------------------------------------------------------- //
+    /// \name Comparison operators
+    // --------------------------------------------------------------------- //
 
     /// Comparison operator
     GM_HOST_DEVICE inline bool operator==( const Vec4i& i_vector ) const
@@ -201,11 +213,19 @@ public:
         return !( ( *this ) == i_vector );
     }
 
+    // --------------------------------------------------------------------- //
+    /// \name Shape
+    // --------------------------------------------------------------------- //
+
     /// Get the number of elements in this vector.
     GM_HOST_DEVICE inline static size_t GetElementSize()
     {
         return 4;
     }
+
+    // --------------------------------------------------------------------- //
+    /// \name Debug
+    // --------------------------------------------------------------------- //
 
     /// Are any of the element values NaNs?
     GM_HOST_DEVICE inline bool HasNans() const

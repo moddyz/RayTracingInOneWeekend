@@ -5,16 +5,18 @@
 #pragma once
 
 /// \file vec3fArray.h
-/// \ingroup GM_group_arrayTypes
+/// \ingroup gm_types_array
 
 #include <vector>
+
+#include <gm/gm.h>
 
 #include <gm/types/vec3f.h>
 
 GM_NS_OPEN
 
 /// \typedef Vec3fArray
-/// \ingroup GM_group_arrayTypes
+/// \ingroup gm_types_array
 ///
 /// Type definition of an array of \ref Vec3f.
 using Vec3fArray = std::vector< Vec3f >;

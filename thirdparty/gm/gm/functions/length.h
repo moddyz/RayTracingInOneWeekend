@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file functions/length.h
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// Compute the \b length, or magnitude, of a vector.
 ///
@@ -23,7 +23,7 @@
 GM_NS_OPEN
 
 /// Compute the length of the vector \p i_vector.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return the length of the vector.
 GM_HOST_DEVICE inline float Length( const Vec2f& i_vector )
@@ -32,7 +32,7 @@ GM_HOST_DEVICE inline float Length( const Vec2f& i_vector )
 }
 
 /// Compute the length of the vector \p i_vector.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return the length of the vector.
 GM_HOST_DEVICE inline float Length( const Vec3f& i_vector )
@@ -41,7 +41,7 @@ GM_HOST_DEVICE inline float Length( const Vec3f& i_vector )
 }
 
 /// Compute the length of the vector \p i_vector.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return the length of the vector.
 GM_HOST_DEVICE inline float Length( const Vec4f& i_vector )

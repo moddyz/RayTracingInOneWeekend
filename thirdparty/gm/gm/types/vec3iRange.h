@@ -4,23 +4,23 @@
 
 #pragma once
 
-/// \file vec2iRange.h
+/// \file vec3iRange.h
 /// \ingroup gm_types_range
 
 #include <gm/gm.h>
 
-#include <gm/types/vec2i.h>
+#include <gm/types/vec3i.h>
 
 #include <limits>
 #include <sstream>
 
 GM_NS_OPEN
 
-/// \class Vec2iRange
+/// \class Vec3iRange
 /// \ingroup gm_types_range
 ///
-/// Class definition for a bounded range of Vec2i(s).
-class Vec2iRange final
+/// Class definition for a bounded range of Vec3i(s).
+class Vec3iRange final
 {
 public:
     // --------------------------------------------------------------------- //
@@ -31,13 +31,13 @@ public:
     ///
     /// An empty range has a min value with max numerical limit, conversely
     /// a max value with min numerical limit.
-    GM_HOST_DEVICE constexpr inline Vec2iRange() = default;
+    GM_HOST_DEVICE constexpr inline Vec3iRange() = default;
 
     /// Explicit constructor for initializing a minimum maximum range.
     ///
     /// \param i_min Minimum bounds.
     /// \param i_max Maximum bounds.
-    GM_HOST_DEVICE constexpr explicit inline Vec2iRange( const Vec2i& i_min, const Vec2i& i_max )
+    GM_HOST_DEVICE constexpr explicit inline Vec3iRange( const Vec3i& i_min, const Vec3i& i_max )
         : m_min( i_min )
         , m_max( i_max )
     {
@@ -50,7 +50,7 @@ public:
     /// Read access to the minimum bound of this range.
     ///
     /// \return The minimum bound.
-    GM_HOST_DEVICE inline const Vec2i& Min() const
+    GM_HOST_DEVICE inline const Vec3i& Min() const
     {
         return m_min;
     }
@@ -58,7 +58,7 @@ public:
     /// Write access to the minimum bound of this range.
     ///
     /// \return The minimum bound.
-    GM_HOST_DEVICE inline Vec2i& Min()
+    GM_HOST_DEVICE inline Vec3i& Min()
     {
         return m_min;
     }
@@ -66,7 +66,7 @@ public:
     /// Read access to the maximum bound of this range.
     ///
     /// \return The maximum bound.
-    GM_HOST_DEVICE inline const Vec2i& Max() const
+    GM_HOST_DEVICE inline const Vec3i& Max() const
     {
         return m_max;
     }
@@ -74,7 +74,7 @@ public:
     /// Write access to the maximum bound of this range.
     ///
     /// \return The maximum bound.
-    GM_HOST_DEVICE inline Vec2i& Max()
+    GM_HOST_DEVICE inline Vec3i& Max()
     {
         return m_max;
     }
@@ -85,7 +85,7 @@ public:
 
     /// \class iterator
     ///
-    /// Iterator class for the range Vec2iRange.
+    /// Iterator class for the range Vec3iRange.
     class iterator final
     {
     public:
@@ -94,7 +94,7 @@ public:
         /// \param i_current The position to initialize this iterator to.
         /// \param i_min the minimum bounds of the range.
         /// \param i_max the maximum bounds of the range.
-        inline iterator( const Vec2i& i_current, const Vec2i& i_min, const Vec2i& i_max )
+        inline iterator( const Vec3i& i_current, const Vec3i& i_min, const Vec3i& i_max )
             : m_currentValue( i_current )
             , m_min( i_min )
             , m_max( i_max )
@@ -108,7 +108,7 @@ public:
         }
 
         /// De-reference this iterator, returning the value.
-        inline const Vec2i& operator*() const
+        inline const Vec3i& operator*() const
         {
             return m_currentValue;
         }
@@ -125,6 +125,12 @@ public:
                 m_currentValue[ 0 ] = m_min[ 0 ];
                 m_currentValue[ 1 ] += 1;
             }
+            else if ( m_currentValue[ 2 ] + 1 < m_max[ 2 ] )
+            {
+                m_currentValue[ 0 ] = m_min[ 0 ];
+                m_currentValue[ 1 ] = m_min[ 1 ];
+                m_currentValue[ 2 ] += 1;
+            }
             else
             {
                 m_currentValue = m_max;
@@ -134,9 +140,9 @@ public:
         }
 
     private:
-        Vec2i m_currentValue;
-        Vec2i m_min;
-        Vec2i m_max;
+        Vec3i m_currentValue;
+        Vec3i m_min;
+        Vec3i m_max;
     };
 
     /// Get the iterator with the position at the \em beginning of the range.
@@ -163,7 +169,7 @@ public:
     inline std::string GetString( const std::string& i_classPrefix = std::string() ) const
     {
         std::stringstream ss;
-        ss << i_classPrefix << "Vec2iRange( ";
+        ss << i_classPrefix << "Vec3iRange( ";
         ss << m_min.GetString( i_classPrefix );
         ss << ", ";
         ss << m_max.GetString( i_classPrefix );
@@ -173,10 +179,14 @@ public:
 
 private:
     // Min bound member.
-    Vec2i m_min = Vec2i( std::numeric_limits< int >::max(), std::numeric_limits< int >::max() );
+    Vec3i m_min = Vec3i( std::numeric_limits< int >::max(),
+                         std::numeric_limits< int >::max(),
+                         std::numeric_limits< int >::max() );
 
     // Max bound member.
-    Vec2i m_max = Vec2i( std::numeric_limits< int >::min(), std::numeric_limits< int >::min() );
+    Vec3i m_max = Vec3i( std::numeric_limits< int >::min(),
+                         std::numeric_limits< int >::min(),
+                         std::numeric_limits< int >::min() );
 };
 
 /// Operator overload for << to enable writing the string representation of \p i_value into an output
@@ -186,7 +196,7 @@ private:
 /// \param i_value the source composite value type.
 ///
 /// \return the output stream.
-inline std::ostream& operator<<( std::ostream& o_outputStream, const Vec2iRange& i_value )
+inline std::ostream& operator<<( std::ostream& o_outputStream, const Vec3iRange& i_value )
 {
     o_outputStream << i_value.GetString();
     return o_outputStream;

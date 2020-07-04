@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file vec2i.h
-/// \ingroup GM_group_vectorTypes
+/// \ingroup gm_types_vector
 
 #include <cmath>
 #include <cstring>
@@ -17,9 +17,9 @@
 GM_NS_OPEN
 
 /// \class Vec2i
-/// \ingroup GM_group_vectorTypes
+/// \ingroup gm_types_vector
 ///
-/// Class definition of a vector with 2 elements.
+/// Class definition of a vector with 2 int elements.
 class Vec2i final
 {
 public:
@@ -27,6 +27,10 @@ public:
     ///
     /// Convenience type definition of \ref Vec2i's elements.
     using ElementType = int;
+
+    // --------------------------------------------------------------------- //
+    /// \name Construction
+    // --------------------------------------------------------------------- //
 
     /// Default constructor, initializing all of the element values to 0.
     GM_HOST_DEVICE constexpr inline Vec2i() = default;
@@ -37,6 +41,10 @@ public:
     {
         GM_ASSERT( !HasNans() );
     }
+
+    // --------------------------------------------------------------------- //
+    /// \name Element access
+    // --------------------------------------------------------------------- //
 
     /// Indexed element write access.
     ///
@@ -66,9 +74,23 @@ public:
         return m_elements[ i_index ];
     }
 
-    //
-    // Arithmetic Operator Overloading.
-    //
+    /// X component accessor for the first element.
+    GM_HOST_DEVICE inline int X() const
+    {
+        GM_ASSERT( !HasNans() );
+        return m_elements[ 0 ];
+    }
+
+    /// Y component accessor for the second element.
+    GM_HOST_DEVICE inline int Y() const
+    {
+        GM_ASSERT( !HasNans() );
+        return m_elements[ 1 ];
+    }
+
+    // --------------------------------------------------------------------- //
+    /// \name Arithmetic operators
+    // --------------------------------------------------------------------- //
 
     /// Element-wise vector addition.
     ///
@@ -140,19 +162,9 @@ public:
         return Vec2i( -m_elements[ 0 ], -m_elements[ 1 ] );
     }
 
-    /// X component accessor for the first element.
-    GM_HOST_DEVICE inline int X() const
-    {
-        GM_ASSERT( !HasNans() );
-        return m_elements[ 0 ];
-    }
-
-    /// Y component accessor for the second element.
-    GM_HOST_DEVICE inline int Y() const
-    {
-        GM_ASSERT( !HasNans() );
-        return m_elements[ 1 ];
-    }
+    // --------------------------------------------------------------------- //
+    /// \name Comparison operators
+    // --------------------------------------------------------------------- //
 
     /// Comparison operator
     GM_HOST_DEVICE inline bool operator==( const Vec2i& i_vector ) const
@@ -166,11 +178,19 @@ public:
         return !( ( *this ) == i_vector );
     }
 
+    // --------------------------------------------------------------------- //
+    /// \name Shape
+    // --------------------------------------------------------------------- //
+
     /// Get the number of elements in this vector.
     GM_HOST_DEVICE inline static size_t GetElementSize()
     {
         return 2;
     }
+
+    // --------------------------------------------------------------------- //
+    /// \name Debug
+    // --------------------------------------------------------------------- //
 
     /// Are any of the element values NaNs?
     GM_HOST_DEVICE inline bool HasNans() const

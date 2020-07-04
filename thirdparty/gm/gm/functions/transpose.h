@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file functions/transpose.h
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// Matrix transpose.
 ///
@@ -24,7 +24,7 @@
 GM_NS_OPEN
 
 /// Transpose the input matrix \p i_matrix.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return the transposed matrix.
 GM_HOST_DEVICE inline Mat3f Transpose( const Mat3f& i_matrix )
@@ -41,7 +41,7 @@ GM_HOST_DEVICE inline Mat3f Transpose( const Mat3f& i_matrix )
 }
 
 /// Transpose the input matrix \p i_matrix.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return the transposed matrix.
 GM_HOST_DEVICE inline Mat4f Transpose( const Mat4f& i_matrix )

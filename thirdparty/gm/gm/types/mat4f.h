@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file mat4f.h
-/// \ingroup GM_group_vectorTypes
+/// \ingroup gm_types_vector
 
 #include <cmath>
 #include <cstring>
@@ -18,9 +18,9 @@
 GM_NS_OPEN
 
 /// \class Mat4f
-/// \ingroup GM_group_vectorTypes
+/// \ingroup gm_types_vector
 ///
-/// Class definition of a matrix with 16 elements.
+/// Class definition of a matrix with 16 float elements.
 class Mat4f final
 {
 public:
@@ -28,6 +28,10 @@ public:
     ///
     /// Convenience type definition of \ref Mat4f's elements.
     using ElementType = float;
+
+    // --------------------------------------------------------------------- //
+    /// \name Construction
+    // --------------------------------------------------------------------- //
 
     /// Default constructor, initializing all of the element values to 0.
     GM_HOST_DEVICE constexpr inline Mat4f() = default;
@@ -69,6 +73,10 @@ public:
         GM_ASSERT( !HasNans() );
     }
 
+    // --------------------------------------------------------------------- //
+    /// \name Element access
+    // --------------------------------------------------------------------- //
+
     /// Indexed element write access.
     ///
     /// \param i_index index of the element.
@@ -97,9 +105,21 @@ public:
         return m_elements[ i_index ];
     }
 
-    //
-    // Arithmetic Operator Overloading.
-    //
+    /// Matrix element read-access.
+    GM_HOST_DEVICE inline const float& operator()( size_t i_row, size_t i_column ) const
+    {
+        return m_elements[ i_row * 4 + i_column ];
+    }
+
+    /// Matrix element write-access.
+    GM_HOST_DEVICE inline float& operator()( size_t i_row, size_t i_column )
+    {
+        return m_elements[ i_row * 4 + i_column ];
+    }
+
+    // --------------------------------------------------------------------- //
+    /// \name Arithmetic operators
+    // --------------------------------------------------------------------- //
 
     /// Element-wise vector addition.
     ///
@@ -287,17 +307,9 @@ public:
                       -m_elements[ 15 ] );
     }
 
-    /// Matrix element read-access.
-    GM_HOST_DEVICE inline const float& operator()( size_t i_row, size_t i_column ) const
-    {
-        return m_elements[ i_row * 4 + i_column ];
-    }
-
-    /// Matrix element write-access.
-    GM_HOST_DEVICE inline float& operator()( size_t i_row, size_t i_column )
-    {
-        return m_elements[ i_row * 4 + i_column ];
-    }
+    // --------------------------------------------------------------------- //
+    /// \name Comparison operators
+    // --------------------------------------------------------------------- //
 
     /// Comparison operator
     GM_HOST_DEVICE inline bool operator==( const Mat4f& i_vector ) const
@@ -326,11 +338,19 @@ public:
         return !( ( *this ) == i_vector );
     }
 
+    // --------------------------------------------------------------------- //
+    /// \name Shape
+    // --------------------------------------------------------------------- //
+
     /// Get the number of elements in this vector.
     GM_HOST_DEVICE inline static size_t GetElementSize()
     {
         return 16;
     }
+
+    // --------------------------------------------------------------------- //
+    /// \name Debug
+    // --------------------------------------------------------------------- //
 
     /// Are any of the element values NaNs?
     GM_HOST_DEVICE inline bool HasNans() const

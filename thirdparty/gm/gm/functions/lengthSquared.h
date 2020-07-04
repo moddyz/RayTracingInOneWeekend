@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file functions/lengthSquared.h
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// Compute the length squared of a vector, defined as the <em>sum of the squares</em> of <em>each vector element</em>.
 ///
@@ -22,7 +22,7 @@
 GM_NS_OPEN
 
 /// Compute the length squared of the vector \p i_vector.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return the length squared of the vector.
 GM_HOST_DEVICE inline float LengthSquared( const Vec2f& i_vector )
@@ -31,7 +31,7 @@ GM_HOST_DEVICE inline float LengthSquared( const Vec2f& i_vector )
 }
 
 /// Compute the length squared of the vector \p i_vector.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return the length squared of the vector.
 GM_HOST_DEVICE inline float LengthSquared( const Vec3f& i_vector )
@@ -40,7 +40,7 @@ GM_HOST_DEVICE inline float LengthSquared( const Vec3f& i_vector )
 }
 
 /// Compute the length squared of the vector \p i_vector.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return the length squared of the vector.
 GM_HOST_DEVICE inline float LengthSquared( const Vec4f& i_vector )

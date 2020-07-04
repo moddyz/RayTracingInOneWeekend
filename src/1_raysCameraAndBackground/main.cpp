@@ -15,7 +15,6 @@
 
 #include <raytrace/camera.h>
 #include <raytrace/imageBuffer.h>
-#include <raytrace/intRange.h>
 #include <raytrace/ppmImageWriter.h>
 
 int main( int i_argc, char** i_argv )
@@ -34,14 +33,13 @@ int main( int i_argc, char** i_argv )
 
     // Allocate the image to write into.
     raytrace::RGBImageBuffer image( imageWidth, imageHeight );
-    gm::Bounds2i             imageExtent = image.Extent();
 
     // Camera model.
     raytrace::Camera camera( ( float ) imageWidth / imageHeight );
 
     // Compute ray directions.
     std::vector< gm::Vec3f > rayDirections( imageWidth * imageHeight );
-    for ( gm::Vec2i pixelCoord : gm::Vec2iRange( imageExtent.Min(), imageExtent.Max() ) )
+    for ( const gm::Vec2i& pixelCoord : image.Extent() )
     {
         // Compute normalised viewport coordinates (values between 0 and 1).
         float u = float( pixelCoord.X() ) / imageWidth;
@@ -61,11 +59,8 @@ int main( int i_argc, char** i_argv )
         rayDirection = gm::Normalize( rayDirection );
     }
 
-    //
     // Convert rays into colors.
-    //
-
-    for ( gm::Vec2i pixelCoord : gm::Vec2iRange( imageExtent.Min(), imageExtent.Max() ) )
+    for ( const gm::Vec2i& pixelCoord : image.Extent() )
     {
         const gm::Vec3f& rayDirection = rayDirections[ pixelCoord.X() + pixelCoord.Y() * imageWidth ];
 

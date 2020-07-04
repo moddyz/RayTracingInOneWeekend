@@ -5,14 +5,16 @@
 #pragma once
 
 /// \file floatArray.h
-/// \ingroup GM_group_arrayTypes
+/// \ingroup gm_types_array
 
 #include <vector>
+
+#include <gm/gm.h>
 
 GM_NS_OPEN
 
 /// \typedef FloatArray
-/// \ingroup GM_group_arrayTypes
+/// \ingroup gm_types_array
 ///
 /// Type definition of an array of \ref float.
 using FloatArray = std::vector< float >;

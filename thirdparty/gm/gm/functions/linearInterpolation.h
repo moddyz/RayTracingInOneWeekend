@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file functions/linearInterpolation.h
-/// \ingroup GM_group_functions_interpolation
+/// \ingroup gm_functions_interpolation
 ///
 /// Linear interpolation.
 ///
@@ -28,7 +28,7 @@
 GM_NS_OPEN
 
 /// Linearly interpolate between \p i_source and \p i_target, with weight \p i_weight.
-/// \ingroup GM_group_functions_interpolation
+/// \ingroup gm_functions_interpolation
 ///
 /// \param i_source Source value to interpolate from.
 /// \param i_target Target value to interpolate to.
@@ -44,7 +44,7 @@ GM_HOST_DEVICE inline float LinearInterpolation( const float& i_source, const fl
 }
 
 /// Linearly interpolate between \p i_source and \p i_target, with weight \p i_weight.
-/// \ingroup GM_group_functions_interpolation
+/// \ingroup gm_functions_interpolation
 ///
 /// \param i_source Source value to interpolate from.
 /// \param i_target Target value to interpolate to.
@@ -60,7 +60,7 @@ GM_HOST_DEVICE inline Mat3f LinearInterpolation( const Mat3f& i_source, const Ma
 }
 
 /// Linearly interpolate between \p i_source and \p i_target, with weight \p i_weight.
-/// \ingroup GM_group_functions_interpolation
+/// \ingroup gm_functions_interpolation
 ///
 /// \param i_source Source value to interpolate from.
 /// \param i_target Target value to interpolate to.
@@ -76,7 +76,7 @@ GM_HOST_DEVICE inline Mat4f LinearInterpolation( const Mat4f& i_source, const Ma
 }
 
 /// Linearly interpolate between \p i_source and \p i_target, with weight \p i_weight.
-/// \ingroup GM_group_functions_interpolation
+/// \ingroup gm_functions_interpolation
 ///
 /// \param i_source Source value to interpolate from.
 /// \param i_target Target value to interpolate to.
@@ -92,7 +92,7 @@ GM_HOST_DEVICE inline Vec2f LinearInterpolation( const Vec2f& i_source, const Ve
 }
 
 /// Linearly interpolate between \p i_source and \p i_target, with weight \p i_weight.
-/// \ingroup GM_group_functions_interpolation
+/// \ingroup gm_functions_interpolation
 ///
 /// \param i_source Source value to interpolate from.
 /// \param i_target Target value to interpolate to.
@@ -108,7 +108,7 @@ GM_HOST_DEVICE inline Vec3f LinearInterpolation( const Vec3f& i_source, const Ve
 }
 
 /// Linearly interpolate between \p i_source and \p i_target, with weight \p i_weight.
-/// \ingroup GM_group_functions_interpolation
+/// \ingroup gm_functions_interpolation
 ///
 /// \param i_source Source value to interpolate from.
 /// \param i_target Target value to interpolate to.
