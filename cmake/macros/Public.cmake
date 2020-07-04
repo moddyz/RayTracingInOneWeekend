@@ -8,6 +8,9 @@ include(
 
 # Build doxygen documentation utility.
 #
+# Positional arguments:
+#   DOCUMENTATION_NAME: The name of the documentation (this will also be the target name).
+#
 # Options:
 #   GENERATE_TAGFILE
 #       Boolean option to specify if a tagfile should be generated.
@@ -398,3 +401,27 @@ macro(
         )
     endforeach()
 endmacro()
+
+# Convenience macro for adding the current source directory as a header only library.
+#
+# Positional arguments:
+#   LIBRARY: The target name of this header only library.
+function(
+    add_header_only_library
+    LIBRARY
+)
+    # Add a new library target.
+    add_library(
+        ${LIBRARY}
+        IMPORTED  # TODO: Figure out what this keyword does, precisely.
+        INTERFACE # This library target does not provide source files.  (Header only!)
+        GLOBAL    # Make this library target available in directories above this one.
+    )
+
+    # Any target which links against the library will inherit
+    # the current source directory as an include path.
+    target_include_directories(
+        ${LIBRARY}
+        INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
+    )
+endfunction()
