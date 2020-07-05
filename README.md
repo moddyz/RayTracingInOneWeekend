@@ -10,6 +10,7 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
   * [2. Adding a Sphere](#2-adding-a-sphere)
   * [3. Surface Normals and Multiple Objects](#3-surface-normals-and-multiple-objects)
   * [4. Antialiasing](#4-antialiasing)
+  * [5. Diffuse materials](#5-diffuse-materials)
 - [Library](#library)
 - [Building](#building)
 - [Build Status](#build-status)
@@ -55,6 +56,14 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
 [Source code](./src/4_antialiasing/main.cpp)
 
 [Link to Chapter 7](https://raytracing.github.io/books/RayTracingInOneWeekend.html#antialiasing)
+
+### 5. Diffuse materials
+
+![Image](./src/5_diffuseMaterials/output.png)
+
+[Source code](./src/5_diffuseMaterials/main.cpp)
+
+[Link to Chapter 7](https://raytracing.github.io/books/RayTracingInOneWeekend.html#diffusematerials)
 
 ## Library
 
