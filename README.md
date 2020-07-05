@@ -63,7 +63,7 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
 
 [Source code](./src/5_diffuseMaterials/main.cpp)
 
-[Link to Chapter 7](https://raytracing.github.io/books/RayTracingInOneWeekend.html#diffusematerials)
+[Link to Chapter 8](https://raytracing.github.io/books/RayTracingInOneWeekend.html#diffusematerials)
 
 ## Library
 
