@@ -9,6 +9,7 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
   * [1. Rays, a Simple Camera, and Background](#1-rays-a-simple-camera-and-background)
   * [2. Adding a Sphere](#2-adding-a-sphere)
   * [3. Surface Normals and Multiple Objects](#3-surface-normals-and-multiple-objects)
+  * [4. Antialiasing](#3-antialiasing)
 - [Library](#library)
 - [Building](#building)
 - [Build Status](#build-status)
@@ -46,6 +47,14 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
 [Source code](./src/3_surfaceNormalsAndMultipleObjects/main.cpp)
 
 [Link to Chapter 6](https://raytracing.github.io/books/RayTracingInOneWeekend.html#surfacenormalsandmultipleobjects)
+
+### 4. Antialiasing
+
+![Image](./src/4_antialiasing/output.png)
+
+[Source code](./src/4_antialiasing/main.cpp)
+
+[Link to Chapter 7](https://raytracing.github.io/books/RayTracingInOneWeekend.html#antialiasing)
 
 ## Library
 

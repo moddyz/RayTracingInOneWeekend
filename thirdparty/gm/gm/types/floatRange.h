@@ -21,6 +21,11 @@ GM_NS_OPEN
 class FloatRange final
 {
 public:
+    /// \typedef ValueType
+    ///
+    /// Convenience type definition of \ref FloatRange's elemental value type.
+    using ValueType = float;
+
     // --------------------------------------------------------------------- //
     /// \name Construction
     // --------------------------------------------------------------------- //

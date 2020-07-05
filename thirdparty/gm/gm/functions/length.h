@@ -25,7 +25,9 @@ GM_NS_OPEN
 /// Compute the length of the vector \p i_vector.
 /// \ingroup gm_functions_linearAlgebra
 ///
-/// \return the length of the vector.
+/// \param i_vector The input vector.
+///
+/// \return The length of the vector.
 GM_HOST_DEVICE inline float Length( const Vec2f& i_vector )
 {
     return sqrt( LengthSquared( i_vector ) );
@@ -34,7 +36,9 @@ GM_HOST_DEVICE inline float Length( const Vec2f& i_vector )
 /// Compute the length of the vector \p i_vector.
 /// \ingroup gm_functions_linearAlgebra
 ///
-/// \return the length of the vector.
+/// \param i_vector The input vector.
+///
+/// \return The length of the vector.
 GM_HOST_DEVICE inline float Length( const Vec3f& i_vector )
 {
     return sqrt( LengthSquared( i_vector ) );
@@ -43,7 +47,9 @@ GM_HOST_DEVICE inline float Length( const Vec3f& i_vector )
 /// Compute the length of the vector \p i_vector.
 /// \ingroup gm_functions_linearAlgebra
 ///
-/// \return the length of the vector.
+/// \param i_vector The input vector.
+///
+/// \return The length of the vector.
 GM_HOST_DEVICE inline float Length( const Vec4f& i_vector )
 {
     return sqrt( LengthSquared( i_vector ) );

@@ -23,6 +23,11 @@ GM_NS_OPEN
 class Vec2fRange final
 {
 public:
+    /// \typedef ValueType
+    ///
+    /// Convenience type definition of \ref Vec2fRange's elemental value type.
+    using ValueType = Vec2f;
+
     // --------------------------------------------------------------------- //
     /// \name Construction
     // --------------------------------------------------------------------- //

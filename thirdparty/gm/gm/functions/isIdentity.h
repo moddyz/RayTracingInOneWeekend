@@ -19,7 +19,10 @@ GM_NS_OPEN
 /// Check if the matrix \p i_matrix is the identity matrix.
 /// \ingroup gm_functions_linearAlgebra
 ///
-/// \return true if \p i_matrix is the identity matrix.
+/// \param i_matrix Input matrix.
+///
+/// \retval true If \p i_matrix is the identity matrix.
+/// \retval false If \p i_matrix is not the identity matrix.
 GM_HOST_DEVICE inline bool IsIdentity( const Mat3f& i_matrix )
 {
     return i_matrix( 0, 0 ) == 1.0f && i_matrix( 0, 1 ) == 0.0f && i_matrix( 0, 2 ) == 0.0f &&
@@ -30,7 +33,10 @@ GM_HOST_DEVICE inline bool IsIdentity( const Mat3f& i_matrix )
 /// Check if the matrix \p i_matrix is the identity matrix.
 /// \ingroup gm_functions_linearAlgebra
 ///
-/// \return true if \p i_matrix is the identity matrix.
+/// \param i_matrix Input matrix.
+///
+/// \retval true If \p i_matrix is the identity matrix.
+/// \retval false If \p i_matrix is not the identity matrix.
 GM_HOST_DEVICE inline bool IsIdentity( const Mat4f& i_matrix )
 {
     return i_matrix( 0, 0 ) == 1.0f && i_matrix( 0, 1 ) == 0.0f && i_matrix( 0, 2 ) == 0.0f &&

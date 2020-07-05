@@ -23,6 +23,11 @@ GM_NS_OPEN
 class Vec4fRange final
 {
 public:
+    /// \typedef ValueType
+    ///
+    /// Convenience type definition of \ref Vec4fRange's elemental value type.
+    using ValueType = Vec4f;
+
     // --------------------------------------------------------------------- //
     /// \name Construction
     // --------------------------------------------------------------------- //

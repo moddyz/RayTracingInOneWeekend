@@ -7,9 +7,9 @@
 /// \file mat4fArray.h
 /// \ingroup gm_types_array
 
-#include <vector>
-
 #include <gm/gm.h>
+
+#include <vector>
 
 #include <gm/types/mat4f.h>
 

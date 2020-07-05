@@ -55,11 +55,10 @@
 
 #include <gm/gm.h>
 
-#include <gm/base/assert.h>
-
 #include <gm/types/vec2f.h>
 #include <gm/types/vec3f.h>
 
+#include <gm/base/assert.h>
 #include <gm/functions/dotProduct.h>
 #include <gm/functions/quadraticRoots.h>
 #ifdef GM_DEBUG
@@ -68,8 +67,8 @@
 
 GM_NS_OPEN
 
+/// Compute the intersection(s) between a ray and an implicit sphere.
 /// \ingroup gm_functions_rayTracing
-/// Find the intersection(s) between a ray and a sphere.
 ///
 /// The points of intersection can be computed from the intersection magnitudes
 /// \p o_intersections /// via \ref RayPosition.
@@ -94,6 +93,7 @@ GM_NS_OPEN
 /// \param o_intersections The magnitudes of the intersections with respect to the ray.
 ///
 /// \return The number of times the ray intersections the sphere.
+///
 /// \retval 0 The ray does not intersect the sphere at all.
 /// \retval 1 The ray intersects the surface of the sphere exactly.
 /// \retval 2 the ray intersects through the volume of the sphere.

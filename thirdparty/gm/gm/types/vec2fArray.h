@@ -7,9 +7,9 @@
 /// \file vec2fArray.h
 /// \ingroup gm_types_array
 
-#include <vector>
-
 #include <gm/gm.h>
+
+#include <vector>
 
 #include <gm/types/vec2f.h>
 

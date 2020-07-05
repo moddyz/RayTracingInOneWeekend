@@ -29,8 +29,8 @@
 
 GM_NS_OPEN
 
-/// \ingroup gm_functions_rayTracing
 /// Compute the position along a ray by scalar magnitude \p i_magnitude.
+/// \ingroup gm_functions_rayTracing
 ///
 /// \pre \p i_direction must be a normalized vector.
 ///
@@ -47,8 +47,8 @@ GM_HOST_DEVICE inline Vec2f RayPosition( const Vec2f& i_origin, const Vec2f& i_d
     return i_origin + ( i_direction * i_magnitude );
 }
 
-/// \ingroup gm_functions_rayTracing
 /// Compute the position along a ray by scalar magnitude \p i_magnitude.
+/// \ingroup gm_functions_rayTracing
 ///
 /// \pre \p i_direction must be a normalized vector.
 ///

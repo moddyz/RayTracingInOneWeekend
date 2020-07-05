@@ -28,7 +28,10 @@ GM_NS_OPEN
 /// to produce their matrix product.
 /// \ingroup gm_functions_linearAlgebra
 ///
-/// \return the matrix product.
+/// \param i_lhs Left hand side matrix.
+/// \param i_rhs Right hand side matrix.
+///
+/// \return The matrix product.
 GM_HOST_DEVICE inline Mat3f MatrixProduct( const Mat3f& i_lhs, const Mat3f& i_rhs )
 {
     return Mat3f( i_lhs( 0, 0 ) * i_rhs( 0, 0 ) + i_lhs( 0, 1 ) * i_rhs( 1, 0 ) + i_lhs( 0, 2 ) * i_rhs( 2, 0 ),
@@ -46,7 +49,10 @@ GM_HOST_DEVICE inline Mat3f MatrixProduct( const Mat3f& i_lhs, const Mat3f& i_rh
 /// to produce their matrix product.
 /// \ingroup gm_functions_linearAlgebra
 ///
-/// \return the matrix product.
+/// \param i_lhs Left hand side matrix.
+/// \param i_rhs Right hand side matrix.
+///
+/// \return The matrix product.
 GM_HOST_DEVICE inline Mat4f MatrixProduct( const Mat4f& i_lhs, const Mat4f& i_rhs )
 {
     return Mat4f( i_lhs( 0, 0 ) * i_rhs( 0, 0 ) + i_lhs( 0, 1 ) * i_rhs( 1, 0 ) + i_lhs( 0, 2 ) * i_rhs( 2, 0 ) +

@@ -23,6 +23,11 @@ GM_NS_OPEN
 class Vec2iRange final
 {
 public:
+    /// \typedef ValueType
+    ///
+    /// Convenience type definition of \ref Vec2iRange's elemental value type.
+    using ValueType = Vec2i;
+
     // --------------------------------------------------------------------- //
     /// \name Construction
     // --------------------------------------------------------------------- //

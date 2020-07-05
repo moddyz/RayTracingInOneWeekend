@@ -1,0 +1,148 @@
+/// \page 4_antialiasing Antialiasing
+///
+/// Example program extending from \ref 3_surfaceNormalsAndMultipleObjects which adds:
+/// - Multi-sampling per pixel, to average the final computed color.
+
+#include <cxxopts.hpp>
+
+#include <gm/types/intRange.h>
+#include <gm/types/vec2iRange.h>
+#include <gm/types/vec3f.h>
+
+#include <gm/functions/clamp.h>
+#include <gm/functions/linearInterpolation.h>
+#include <gm/functions/linearMap.h>
+#include <gm/functions/normalize.h>
+#include <gm/functions/randomNumber.h>
+
+#include <raytrace/camera.h>
+#include <raytrace/hitRecord.h>
+#include <raytrace/imageBuffer.h>
+#include <raytrace/ppmImageWriter.h>
+#include <raytrace/sphere.h>
+
+/// \typedef SceneObjectPtrs
+///
+/// A collection of scene objects.
+using SceneObjectPtrs = std::vector< raytrace::SceneObjectPtr >;
+
+/// Compute the ray color.
+///
+/// The ray is tested for intersection against a collection of scene objects.
+/// The color is computed based on the surface outward normal of the nearest intersection.
+///
+/// In the case where there is no intersection, a background color is interpolated from a top-down gradient.
+///
+/// \param i_rayOrigin The origin of the ray.
+/// \param i_rayDirection The direction of the ray.
+/// \param i_sceneObjectPtrs The collection of scene objects to test for ray intersection.
+///
+/// \return The computed ray color.
+static gm::Vec3f ComputeRayColor( const gm::Vec3f&       i_rayOrigin,
+                                  const gm::Vec3f&       i_rayDirection,
+                                  const SceneObjectPtrs& i_sceneObjectPtrs )
+{
+    // Iterate over all scene objects and test for ray hit(s).
+    // We'd like to track the nearest hit and prune out farther objects.
+    raytrace::HitRecord record;
+    bool                objectHit           = false;
+    float               nearestHitMagnitude = std::numeric_limits< float >::max();
+    for ( const raytrace::SceneObjectPtr& sceneObjectPtr : i_sceneObjectPtrs )
+    {
+        if ( sceneObjectPtr->Hit( i_rayOrigin, i_rayDirection, gm::Vec2f( 0, nearestHitMagnitude ), record ) )
+        {
+            objectHit           = true;
+            nearestHitMagnitude = record.m_magnitude;
+        }
+    }
+
+    if ( objectHit )
+    {
+        const gm::FloatRange normalRange( -1.0, 1.0 );
+        const gm::FloatRange colorRange( 0, 1.0 );
+        return gm::LinearMap( record.m_normal, normalRange, colorRange );
+    }
+
+    // Compute background color, by interpolating between two colors with the weight as the function of the ray
+    // direction.
+    float weight = 0.5f * i_rayDirection.Y() + 1.0;
+    return gm::LinearInterpolation( gm::Vec3f( 1.0, 1.0, 1.0 ), gm::Vec3f( 0.5, 0.7, 1.0 ), weight );
+}
+
+int main( int i_argc, char** i_argv )
+{
+    // Parse command line arguments.
+    cxxopts::Options options( "1_sendingRays", "Sending rays into the scene to produce colors." );
+    options.add_options()                                                                       // Command line options.
+        ( "w,width", "Width of the image.", cxxopts::value< int >()->default_value( "384" ) )   // Width
+        ( "h,height", "Height of the image.", cxxopts::value< int >()->default_value( "256" ) ) // Height;
+        ( "o,output", "Output file", cxxopts::value< std::string >()->default_value( "out.ppm" ) ) // Output file.
+        ( "s,samplesPerPixel",
+          "Number of samples per-pixel.",
+          cxxopts::value< int >()->default_value( "100" ) ); // Number of samples.
+
+    auto        args            = options.parse( i_argc, i_argv );
+    int         imageWidth      = args[ "width" ].as< int >();
+    int         imageHeight     = args[ "height" ].as< int >();
+    int         samplesPerPixel = args[ "samplesPerPixel" ].as< int >();
+    std::string filePath        = args[ "output" ].as< std::string >();
+
+    // Allocate the image to write into.
+    raytrace::RGBImageBuffer image( imageWidth, imageHeight );
+
+    // Camera model.
+    raytrace::Camera camera( ( float ) imageWidth / imageHeight );
+
+    // Allocate scene objects.
+    SceneObjectPtrs sceneObjectPtrs;
+    sceneObjectPtrs.push_back( std::make_unique< raytrace::Sphere >( gm::Vec3f( 0.0f, 0.0f, -1.0f ), 0.5 ) );
+    sceneObjectPtrs.push_back( std::make_unique< raytrace::Sphere >( gm::Vec3f( 0.0f, -100.5, -1.0f ), 100 ) );
+
+    // Random number range.
+    constexpr gm::FloatRange normalizedRange( 0.0f, 1.0f );
+
+    // Compute ray and shade.
+    std::vector< gm::Vec3f > rayDirections( imageWidth * imageHeight * samplesPerPixel );
+    for ( const gm::Vec2i& pixelCoord : image.Extent() )
+    {
+        // Compute ray color for multiple samples per pixel, then average the accumulated result.
+        gm::Vec3f pixelColor;
+        for ( int sampleIndex = 0; sampleIndex < samplesPerPixel; ++sampleIndex )
+        {
+            // Compute normalised viewport coordinates (values between 0 and 1).
+            float u = ( float( pixelCoord.X() ) + gm::RandomNumber( normalizedRange ) ) / imageWidth;
+            float v = ( float( pixelCoord.Y() ) + gm::RandomNumber( normalizedRange ) ) / imageHeight;
+
+            // Get the direction of the respective ray.
+            gm::Vec3f& rayDirection = rayDirections[ pixelCoord.X() + pixelCoord.Y() * imageWidth ];
+
+            // Compute the direction of the ray, by translation from the bottom-left viewport coordinate
+            // to the coordinate in the viewport plane with respect to the image pixel coordinate.
+            rayDirection = camera.ViewportBottomLeft()           // Starting from the viewport bottom left...
+                           + ( u * camera.ViewportHorizontal() ) // Horizontal offset.
+                           + ( v * camera.ViewportVertical() )   // Vertical offset.
+                           - camera.Origin();                    // Get difference vector from camera origin.
+
+            // Normalize the direction of the ray.
+            rayDirection = gm::Normalize( rayDirection );
+
+            // Accumulate color.
+            pixelColor += ComputeRayColor( camera.Origin(), rayDirection, sceneObjectPtrs );
+        }
+
+        // Compute averaged color.
+        pixelColor /= ( float ) samplesPerPixel;
+        pixelColor = gm::Clamp( pixelColor, normalizedRange );
+
+        // Assign averaged color.
+        image( pixelCoord.X(), pixelCoord.Y() ) = pixelColor;
+    }
+
+    // Write to disk.
+    if ( !raytrace::WritePPMImage( image, filePath ) )
+    {
+        return -1;
+    }
+
+    return 0;
+}

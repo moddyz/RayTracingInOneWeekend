@@ -7,9 +7,9 @@
 /// \file floatArray.h
 /// \ingroup gm_types_array
 
-#include <vector>
-
 #include <gm/gm.h>
+
+#include <vector>
 
 GM_NS_OPEN
 

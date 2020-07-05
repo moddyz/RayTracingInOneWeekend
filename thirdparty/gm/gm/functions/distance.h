@@ -23,7 +23,7 @@ GM_NS_OPEN
 /// Compute the distance of between points \p i_pointA and \p i_pointB.
 /// \ingroup gm_functions_linearAlgebra
 ///
-/// \return the distance between the two points.
+/// \return The distance between the two points.
 GM_HOST_DEVICE inline float Distance( const Vec2f& i_pointA, const Vec2f& i_pointB )
 {
     return Length( i_pointA - i_pointB );
@@ -32,7 +32,7 @@ GM_HOST_DEVICE inline float Distance( const Vec2f& i_pointA, const Vec2f& i_poin
 /// Compute the distance of between points \p i_pointA and \p i_pointB.
 /// \ingroup gm_functions_linearAlgebra
 ///
-/// \return the distance between the two points.
+/// \return The distance between the two points.
 GM_HOST_DEVICE inline float Distance( const Vec3f& i_pointA, const Vec3f& i_pointB )
 {
     return Length( i_pointA - i_pointB );

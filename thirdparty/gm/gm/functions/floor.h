@@ -25,7 +25,9 @@ GM_NS_OPEN
 /// Floor the input \ref float \p i_value and return it.
 /// \ingroup gm_functions_basic
 ///
-/// \return the floored input value.
+/// \param i_value Value to floor.
+///
+/// \return Floored input value.
 GM_HOST_DEVICE inline float Floor( const float& i_value )
 {
     return std::floor( i_value );
@@ -34,7 +36,9 @@ GM_HOST_DEVICE inline float Floor( const float& i_value )
 /// Floor the input \ref Vec2f \p i_value and return it.
 /// \ingroup gm_functions_basic
 ///
-/// \return the floored input value.
+/// \param i_value Value to floor.
+///
+/// \return Floored input value.
 GM_HOST_DEVICE inline Vec2f Floor( const Vec2f& i_value )
 {
     return Vec2f( std::floor( i_value[ 0 ] ), std::floor( i_value[ 1 ] ) );
@@ -43,7 +47,9 @@ GM_HOST_DEVICE inline Vec2f Floor( const Vec2f& i_value )
 /// Floor the input \ref Vec3f \p i_value and return it.
 /// \ingroup gm_functions_basic
 ///
-/// \return the floored input value.
+/// \param i_value Value to floor.
+///
+/// \return Floored input value.
 GM_HOST_DEVICE inline Vec3f Floor( const Vec3f& i_value )
 {
     return Vec3f( std::floor( i_value[ 0 ] ), std::floor( i_value[ 1 ] ), std::floor( i_value[ 2 ] ) );
@@ -52,7 +58,9 @@ GM_HOST_DEVICE inline Vec3f Floor( const Vec3f& i_value )
 /// Floor the input \ref Vec4f \p i_value and return it.
 /// \ingroup gm_functions_basic
 ///
-/// \return the floored input value.
+/// \param i_value Value to floor.
+///
+/// \return Floored input value.
 GM_HOST_DEVICE inline Vec4f Floor( const Vec4f& i_value )
 {
     return Vec4f( std::floor( i_value[ 0 ] ),
@@ -64,7 +72,9 @@ GM_HOST_DEVICE inline Vec4f Floor( const Vec4f& i_value )
 /// Floor the input \ref Mat3f \p i_value and return it.
 /// \ingroup gm_functions_basic
 ///
-/// \return the floored input value.
+/// \param i_value Value to floor.
+///
+/// \return Floored input value.
 GM_HOST_DEVICE inline Mat3f Floor( const Mat3f& i_value )
 {
     return Mat3f( std::floor( i_value[ 0 ] ),
@@ -81,7 +91,9 @@ GM_HOST_DEVICE inline Mat3f Floor( const Mat3f& i_value )
 /// Floor the input \ref Mat4f \p i_value and return it.
 /// \ingroup gm_functions_basic
 ///
-/// \return the floored input value.
+/// \param i_value Value to floor.
+///
+/// \return Floored input value.
 GM_HOST_DEVICE inline Mat4f Floor( const Mat4f& i_value )
 {
     return Mat4f( std::floor( i_value[ 0 ] ),

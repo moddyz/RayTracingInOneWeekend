@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file functions/linearMap.h
-/// \ingroup gm_functions_interpolation
+/// \ingroup gm_functions_basic
 ///
 /// Linear mapping.
 ///
@@ -31,7 +31,7 @@
 GM_NS_OPEN
 
 /// Linearly maps a source value in range \p i_sourceRange into the range \p i_targetRange.
-/// \ingroup gm_functions_interpolation
+/// \ingroup gm_functions_basic
 ///
 /// \param i_sourceValue Value to map from the source range.
 /// \param i_sourceRange Source value range to map from.
@@ -49,7 +49,7 @@ LinearMap( const float& i_sourceValue, const FloatRange& i_sourceRange, const Fl
 }
 
 /// Linearly maps a source value in range \p i_sourceRange into the range \p i_targetRange.
-/// \ingroup gm_functions_interpolation
+/// \ingroup gm_functions_basic
 ///
 /// \param i_sourceValue Value to map from the source range.
 /// \param i_sourceRange Source value range to map from.
@@ -75,7 +75,7 @@ LinearMap( const Mat3f& i_sourceValue, const FloatRange& i_sourceRange, const Fl
 }
 
 /// Linearly maps a source value in range \p i_sourceRange into the range \p i_targetRange.
-/// \ingroup gm_functions_interpolation
+/// \ingroup gm_functions_basic
 ///
 /// \param i_sourceValue Value to map from the source range.
 /// \param i_sourceRange Source value range to map from.
@@ -108,7 +108,7 @@ LinearMap( const Mat4f& i_sourceValue, const FloatRange& i_sourceRange, const Fl
 }
 
 /// Linearly maps a source value in range \p i_sourceRange into the range \p i_targetRange.
-/// \ingroup gm_functions_interpolation
+/// \ingroup gm_functions_basic
 ///
 /// \param i_sourceValue Value to map from the source range.
 /// \param i_sourceRange Source value range to map from.
@@ -127,7 +127,7 @@ LinearMap( const Vec2f& i_sourceValue, const FloatRange& i_sourceRange, const Fl
 }
 
 /// Linearly maps a source value in range \p i_sourceRange into the range \p i_targetRange.
-/// \ingroup gm_functions_interpolation
+/// \ingroup gm_functions_basic
 ///
 /// \param i_sourceValue Value to map from the source range.
 /// \param i_sourceRange Source value range to map from.
@@ -147,7 +147,7 @@ LinearMap( const Vec3f& i_sourceValue, const FloatRange& i_sourceRange, const Fl
 }
 
 /// Linearly maps a source value in range \p i_sourceRange into the range \p i_targetRange.
-/// \ingroup gm_functions_interpolation
+/// \ingroup gm_functions_basic
 ///
 /// \param i_sourceValue Value to map from the source range.
 /// \param i_sourceRange Source value range to map from.

@@ -7,9 +7,9 @@
 /// \file vec4iArray.h
 /// \ingroup gm_types_array
 
-#include <vector>
-
 #include <gm/gm.h>
+
+#include <vector>
 
 #include <gm/types/vec4i.h>
 

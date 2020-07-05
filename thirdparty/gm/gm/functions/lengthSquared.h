@@ -24,6 +24,8 @@ GM_NS_OPEN
 /// Compute the length squared of the vector \p i_vector.
 /// \ingroup gm_functions_linearAlgebra
 ///
+/// \param i_vector The input vector.
+///
 /// \return the length squared of the vector.
 GM_HOST_DEVICE inline float LengthSquared( const Vec2f& i_vector )
 {
@@ -33,6 +35,8 @@ GM_HOST_DEVICE inline float LengthSquared( const Vec2f& i_vector )
 /// Compute the length squared of the vector \p i_vector.
 /// \ingroup gm_functions_linearAlgebra
 ///
+/// \param i_vector The input vector.
+///
 /// \return the length squared of the vector.
 GM_HOST_DEVICE inline float LengthSquared( const Vec3f& i_vector )
 {
@@ -41,6 +45,8 @@ GM_HOST_DEVICE inline float LengthSquared( const Vec3f& i_vector )
 
 /// Compute the length squared of the vector \p i_vector.
 /// \ingroup gm_functions_linearAlgebra
+///
+/// \param i_vector The input vector.
 ///
 /// \return the length squared of the vector.
 GM_HOST_DEVICE inline float LengthSquared( const Vec4f& i_vector )

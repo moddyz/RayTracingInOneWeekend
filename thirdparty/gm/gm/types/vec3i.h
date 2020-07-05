@@ -7,12 +7,13 @@
 /// \file vec3i.h
 /// \ingroup gm_types_vector
 
+#include <gm/gm.h>
+
 #include <cmath>
 #include <cstring>
 #include <sstream>
 
 #include <gm/base/assert.h>
-#include <gm/gm.h>
 
 GM_NS_OPEN
 

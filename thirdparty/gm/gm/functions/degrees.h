@@ -18,7 +18,7 @@ GM_NS_OPEN
 /// Converts angle \p i_angle from radians to degrees.
 /// \ingroup gm_functions_basic
 ///
-/// \return the angle in units of degrees.
+/// \return The angle in units of degrees.
 GM_HOST_DEVICE inline float Degrees( const float& i_angle )
 {
     constexpr float radiansToDegreesRatio = 180.0f / GM_PI;

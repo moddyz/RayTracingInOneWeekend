@@ -21,6 +21,11 @@ GM_NS_OPEN
 class IntRange final
 {
 public:
+    /// \typedef ValueType
+    ///
+    /// Convenience type definition of \ref IntRange's elemental value type.
+    using ValueType = int;
+
     // --------------------------------------------------------------------- //
     /// \name Construction
     // --------------------------------------------------------------------- //

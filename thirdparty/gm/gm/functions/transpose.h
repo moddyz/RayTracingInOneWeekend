@@ -26,7 +26,9 @@ GM_NS_OPEN
 /// Transpose the input matrix \p i_matrix.
 /// \ingroup gm_functions_linearAlgebra
 ///
-/// \return the transposed matrix.
+/// \param i_matrix The input matrix to transpose.
+///
+/// \return Transposed matrix.
 GM_HOST_DEVICE inline Mat3f Transpose( const Mat3f& i_matrix )
 {
     return Mat3f( i_matrix( 0, 0 ),
@@ -43,7 +45,9 @@ GM_HOST_DEVICE inline Mat3f Transpose( const Mat3f& i_matrix )
 /// Transpose the input matrix \p i_matrix.
 /// \ingroup gm_functions_linearAlgebra
 ///
-/// \return the transposed matrix.
+/// \param i_matrix The input matrix to transpose.
+///
+/// \return Transposed matrix.
 GM_HOST_DEVICE inline Mat4f Transpose( const Mat4f& i_matrix )
 {
     return Mat4f( i_matrix( 0, 0 ),

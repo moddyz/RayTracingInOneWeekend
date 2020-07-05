@@ -19,9 +19,9 @@
 
 #include <gm/gm.h>
 
-#include <gm/base/assert.h>
-
 #include <gm/types/vec2f.h>
+
+#include <gm/base/assert.h>
 
 GM_NS_OPEN
 
