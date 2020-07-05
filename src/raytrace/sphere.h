@@ -30,23 +30,21 @@ public:
     {
     }
 
-    virtual inline bool Hit( const gm::Vec3f& i_rayOrigin,
-                             const gm::Vec3f& i_rayDirection,
-                             const gm::Vec2f& i_magnitudeRange,
-                             HitRecord&       o_record ) const override
+    virtual inline bool
+    Hit( const gm::Ray& i_ray, const gm::Vec2f& i_magnitudeRange, HitRecord& o_record ) const override
     {
         gm::Vec2f intersections;
-        if ( gm::RaySphereIntersection( m_origin, m_radius, i_rayOrigin, i_rayDirection, intersections ) == 2 )
+        if ( gm::RaySphereIntersection( m_origin, m_radius, i_ray.Origin(), i_ray.Direction(), intersections ) == 2 )
         {
             // TODO Added GraphicsMath FloatRange type with min & max.
             if ( intersections[ 0 ] < i_magnitudeRange[ 1 ] && intersections[ 0 ] > i_magnitudeRange[ 0 ] )
             {
-                _Record( i_rayOrigin, i_rayDirection, intersections[ 0 ], o_record );
+                _Record( i_ray, intersections[ 0 ], o_record );
                 return true;
             }
             else if ( intersections[ 1 ] < i_magnitudeRange[ 1 ] && intersections[ 1 ] > i_magnitudeRange[ 0 ] )
             {
-                _Record( i_rayOrigin, i_rayDirection, intersections[ 1 ], o_record );
+                _Record( i_ray, intersections[ 1 ], o_record );
                 return true;
             }
         }
@@ -58,16 +56,12 @@ public:
 private:
     /// Helper method to record a ray hitting the sphere.
     ///
-    /// \param i_rayOrigin The origin position of the incident ray.
-    /// \param i_rayDirection The direction of the incident ray.
+    /// \param i_ray The ray.
     /// \param i_rayMagnitude the magnitude of the ray intersection.
     /// \param o_record the record of a ray hit.
-    inline void _Record( const gm::Vec3f& i_rayOrigin,
-                         const gm::Vec3f& i_rayDirection,
-                         float            i_rayMagnitude,
-                         HitRecord&       o_record ) const
+    inline void _Record( const gm::Ray& i_ray, float i_rayMagnitude, HitRecord& o_record ) const
     {
-        o_record.m_position  = gm::RayPosition( i_rayOrigin, i_rayDirection, i_rayMagnitude );
+        o_record.m_position  = gm::RayPosition( i_ray.Origin(), i_ray.Direction(), i_rayMagnitude );
         o_record.m_normal    = gm::Normalize( o_record.m_position - m_origin );
         o_record.m_magnitude = i_rayMagnitude;
     }

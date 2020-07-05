@@ -7,7 +7,7 @@
 #include <raytrace/raytrace.h>
 
 #include <gm/types/vec2f.h>
-#include <gm/types/vec3f.h>
+#include <gm/types/ray.h>
 
 #include <memory>
 
@@ -22,20 +22,16 @@ public:
     /// Virtual de-constructor.
     virtual ~SceneObject() = default;
 
-    /// Check and record if a ray hits the current object.
+    /// Check and record if ray \p i_ray hits the current object.
     ///
-    /// \param i_rayOrigin The origin position of the incident ray.
-    /// \param i_rayDirection The direction of the incident ray.
+    /// \param i_ray.Origin() The ray to test for hit.
     /// \param i_magnitudeRange The range of \em accepted magnitudes to qualify as a ray hit.
     /// \param o_record the record of a ray hit.
     ///
     /// \retval true If the ray hits this object.
     /// \retval false If the ray does not hit this object, or if the hit is outside the range
     /// of \p i_magnitudeRange.
-    virtual bool Hit( const gm::Vec3f& i_rayOrigin,
-                      const gm::Vec3f& i_rayDirection,
-                      const gm::Vec2f& i_magnitudeRange,
-                      HitRecord&       o_record ) const = 0;
+    virtual bool Hit( const gm::Ray& i_ray, const gm::Vec2f& i_magnitudeRange, HitRecord& o_record ) const = 0;
 };
 
 /// \typedef SceneObjectPtr

@@ -4,6 +4,7 @@
 
 #include <cxxopts.hpp>
 
+#include <gm/types/ray.h>
 #include <gm/types/vec2iRange.h>
 #include <gm/types/vec3f.h>
 
@@ -21,18 +22,19 @@
 ///
 /// When rays intersect the sphere, it will produce a red pixel.
 /// Otherwise, the background color of a blue/white gradient is returned.
-static gm::Vec3f ComputeRayColor( const gm::Vec3f& i_rayOrigin, const gm::Vec3f& i_rayDirection )
+static gm::Vec3f ComputeRayColor( const gm::Ray& i_ray )
 {
     // Test for sphere intersection (hard-coded placement of the sphere)
     gm::Vec2f intersections;
-    if ( gm::RaySphereIntersection( gm::Vec3f( 0, 0, -1.0 ), 0.5, i_rayOrigin, i_rayDirection, intersections ) > 0 )
+    if ( gm::RaySphereIntersection( gm::Vec3f( 0, 0, -1.0 ), 0.5, i_ray.Origin(), i_ray.Direction(), intersections ) >
+         0 )
     {
         return gm::Vec3f( 1, 0, 0 );
     }
 
     // Compute background color, by interpolating between two colors with the weight as the function of the ray
     // direction.
-    float weight = 0.5f * i_rayDirection.Y() + 1.0;
+    float weight = 0.5f * i_ray.Direction().Y() + 1.0;
     return gm::LinearInterpolation( gm::Vec3f( 1.0, 1.0, 1.0 ), gm::Vec3f( 0.5, 0.7, 1.0 ), weight );
 }
 
@@ -56,33 +58,25 @@ int main( int i_argc, char** i_argv )
     // Camera model.
     raytrace::Camera camera( ( float ) imageWidth / imageHeight );
 
-    // Compute ray directions.
-    std::vector< gm::Vec3f > rayDirections( imageWidth * imageHeight );
+    // Cast a ray per pixel to compute the color.
     for ( const gm::Vec2i& pixelCoord : image.Extent() )
     {
         // Compute normalised viewport coordinates (values between 0 and 1).
         float u = float( pixelCoord.X() ) / imageWidth;
         float v = float( pixelCoord.Y() ) / imageHeight;
 
-        // Get the direction of the respective ray.
-        gm::Vec3f& rayDirection = rayDirections[ pixelCoord.X() + pixelCoord.Y() * imageWidth ];
-
-        // Compute the direction of the ray, by translation from the bottom-left viewport coordinate
-        // to the coordinate in the viewport plane with respect to the image pixel coordinate.
-        rayDirection = camera.ViewportBottomLeft()           // Starting from the viewport bottom left...
-                       + ( u * camera.ViewportHorizontal() ) // Horizontal offset.
-                       + ( v * camera.ViewportVertical() )   // Vertical offset.
-                       - camera.Origin();                    // Get difference vector from camera origin.
+        gm::Ray ray( /* origin */ camera.Origin(),               // The origin of the ray is the camera origin.
+                     /* direction */ camera.ViewportBottomLeft() // Starting from the viewport bottom left...
+                         + ( u * camera.ViewportHorizontal() )   // Horizontal offset.
+                         + ( v * camera.ViewportVertical() )     // Vertical offset.
+                         - camera.Origin()                       // Get difference vector from camera origin.
+        );
 
         // Normalize the direction of the ray.
-        rayDirection = gm::Normalize( rayDirection );
-    }
+        ray.Direction() = gm::Normalize( ray.Direction() );
 
-    // Convert rays into colors.
-    for ( const gm::Vec2i& pixelCoord : image.Extent() )
-    {
-        const gm::Vec3f& rayDirection           = rayDirections[ pixelCoord.X() + pixelCoord.Y() * imageWidth ];
-        image( pixelCoord.X(), pixelCoord.Y() ) = ComputeRayColor( camera.Origin(), rayDirection );
+        // Compute pixel color.
+        image( pixelCoord.X(), pixelCoord.Y() ) = ComputeRayColor( ray );
     }
 
     // Write to disk.

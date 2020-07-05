@@ -7,6 +7,7 @@
 
 #include <cxxopts.hpp>
 
+#include <gm/types/ray.h>
 #include <gm/types/vec2iRange.h>
 #include <gm/types/vec3f.h>
 
@@ -37,35 +38,25 @@ int main( int i_argc, char** i_argv )
     // Camera model.
     raytrace::Camera camera( ( float ) imageWidth / imageHeight );
 
-    // Compute ray directions.
-    std::vector< gm::Vec3f > rayDirections( imageWidth * imageHeight );
+    // Cast a ray per pixel to compute the color.
     for ( const gm::Vec2i& pixelCoord : image.Extent() )
     {
         // Compute normalised viewport coordinates (values between 0 and 1).
         float u = float( pixelCoord.X() ) / imageWidth;
         float v = float( pixelCoord.Y() ) / imageHeight;
 
-        // Get the direction of the respective ray.
-        gm::Vec3f& rayDirection = rayDirections[ pixelCoord.X() + pixelCoord.Y() * imageWidth ];
-
-        // Compute the direction of the ray, by translation from the bottom-left viewport coordinate
-        // to the coordinate in the viewport plane with respect to the image pixel coordinate.
-        rayDirection = camera.ViewportBottomLeft()           // Starting from the viewport bottom left...
-                       + ( u * camera.ViewportHorizontal() ) // Horizontal offset.
-                       + ( v * camera.ViewportVertical() )   // Vertical offset.
-                       - camera.Origin();                    // Get difference vector from camera origin.
+        gm::Ray ray( /* origin */ camera.Origin(),               // The origin of the ray is the camera origin.
+                     /* direction */ camera.ViewportBottomLeft() // Starting from the viewport bottom left...
+                         + ( u * camera.ViewportHorizontal() )   // Horizontal offset.
+                         + ( v * camera.ViewportVertical() )     // Vertical offset.
+                         - camera.Origin()                       // Get difference vector from camera origin.
+        );
 
         // Normalize the direction of the ray.
-        rayDirection = gm::Normalize( rayDirection );
-    }
-
-    // Convert rays into colors.
-    for ( const gm::Vec2i& pixelCoord : image.Extent() )
-    {
-        const gm::Vec3f& rayDirection = rayDirections[ pixelCoord.X() + pixelCoord.Y() * imageWidth ];
+        ray.Direction() = gm::Normalize( ray.Direction() );
 
         // Compute the color, by interpolating between two colors with the weight as the function of the ray direction.
-        float     weight = 0.5f * rayDirection.Y() + 1.0;
+        float     weight = 0.5f * ray.Direction().Y() + 1.0;
         gm::Vec3f color  = gm::LinearInterpolation( gm::Vec3f( 1.0, 1.0, 1.0 ), gm::Vec3f( 0.5, 0.7, 1.0 ), weight );
         image( pixelCoord.X(), pixelCoord.Y() ) = color;
     }

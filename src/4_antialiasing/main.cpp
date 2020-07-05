@@ -6,6 +6,7 @@
 #include <cxxopts.hpp>
 
 #include <gm/types/intRange.h>
+#include <gm/types/ray.h>
 #include <gm/types/vec2iRange.h>
 #include <gm/types/vec3f.h>
 
@@ -33,14 +34,11 @@ using SceneObjectPtrs = std::vector< raytrace::SceneObjectPtr >;
 ///
 /// In the case where there is no intersection, a background color is interpolated from a top-down gradient.
 ///
-/// \param i_rayOrigin The origin of the ray.
-/// \param i_rayDirection The direction of the ray.
+/// \param i_ray The ray.
 /// \param i_sceneObjectPtrs The collection of scene objects to test for ray intersection.
 ///
 /// \return The computed ray color.
-static gm::Vec3f ComputeRayColor( const gm::Vec3f&       i_rayOrigin,
-                                  const gm::Vec3f&       i_rayDirection,
-                                  const SceneObjectPtrs& i_sceneObjectPtrs )
+static gm::Vec3f ComputeRayColor( const gm::Ray& i_ray, const SceneObjectPtrs& i_sceneObjectPtrs )
 {
     // Iterate over all scene objects and test for ray hit(s).
     // We'd like to track the nearest hit and prune out farther objects.
@@ -49,7 +47,7 @@ static gm::Vec3f ComputeRayColor( const gm::Vec3f&       i_rayOrigin,
     float               nearestHitMagnitude = std::numeric_limits< float >::max();
     for ( const raytrace::SceneObjectPtr& sceneObjectPtr : i_sceneObjectPtrs )
     {
-        if ( sceneObjectPtr->Hit( i_rayOrigin, i_rayDirection, gm::Vec2f( 0, nearestHitMagnitude ), record ) )
+        if ( sceneObjectPtr->Hit( i_ray, gm::Vec2f( 0, nearestHitMagnitude ), record ) )
         {
             objectHit           = true;
             nearestHitMagnitude = record.m_magnitude;
@@ -65,7 +63,7 @@ static gm::Vec3f ComputeRayColor( const gm::Vec3f&       i_rayOrigin,
 
     // Compute background color, by interpolating between two colors with the weight as the function of the ray
     // direction.
-    float weight = 0.5f * i_rayDirection.Y() + 1.0;
+    float weight = 0.5f * i_ray.Direction().Y() + 1.0;
     return gm::LinearInterpolation( gm::Vec3f( 1.0, 1.0, 1.0 ), gm::Vec3f( 0.5, 0.7, 1.0 ), weight );
 }
 
@@ -112,18 +110,18 @@ int main( int i_argc, char** i_argv )
             float u = ( float( pixelCoord.X() ) + gm::RandomNumber( normalizedRange ) ) / imageWidth;
             float v = ( float( pixelCoord.Y() ) + gm::RandomNumber( normalizedRange ) ) / imageHeight;
 
-            // Compute the direction of the ray, by translation from the bottom-left viewport coordinate
-            // to the coordinate in the viewport plane with respect to the image pixel coordinate.
-            gm::Vec3f rayDirection = camera.ViewportBottomLeft()           // Starting from the viewport bottom left...
-                                     + ( u * camera.ViewportHorizontal() ) // Horizontal offset.
-                                     + ( v * camera.ViewportVertical() )   // Vertical offset.
-                                     - camera.Origin();                    // Get difference vector from camera origin.
+            gm::Ray ray( /* origin */ camera.Origin(),               // The origin of the ray is the camera origin.
+                         /* direction */ camera.ViewportBottomLeft() // Starting from the viewport bottom left...
+                             + ( u * camera.ViewportHorizontal() )   // Horizontal offset.
+                             + ( v * camera.ViewportVertical() )     // Vertical offset.
+                             - camera.Origin()                       // Get difference vector from camera origin.
+            );
 
             // Normalize the direction of the ray.
-            rayDirection = gm::Normalize( rayDirection );
+            ray.Direction() = gm::Normalize( ray.Direction() );
 
             // Accumulate color.
-            pixelColor += ComputeRayColor( camera.Origin(), rayDirection, sceneObjectPtrs );
+            pixelColor += ComputeRayColor( ray, sceneObjectPtrs );
         }
 
         // Compute averaged color.

@@ -54,16 +54,12 @@ gm::Vec3f RandomUnitVector()
 ///
 /// In the case where there is no intersection, a background color is interpolated from a top-down gradient.
 ///
-/// \param i_rayOrigin The origin of the ray.
-/// \param i_rayDirection The direction of the ray.
+/// \param i_ray The ray.
 /// \param i_numRayBounces The number of "bounces" a ray has left before termination.
 /// \param i_sceneObjectPtrs The collection of scene objects to test for ray intersection.
 ///
 /// \return The computed ray color.
-static gm::Vec3f ComputeRayColor( const gm::Vec3f&       i_rayOrigin,
-                                  const gm::Vec3f&       i_rayDirection,
-                                  int                    i_numRayBounces,
-                                  const SceneObjectPtrs& i_sceneObjectPtrs )
+static gm::Vec3f ComputeRayColor( const gm::Ray& i_ray, int i_numRayBounces, const SceneObjectPtrs& i_sceneObjectPtrs )
 {
     if ( i_numRayBounces == 0 )
     {
@@ -80,7 +76,7 @@ static gm::Vec3f ComputeRayColor( const gm::Vec3f&       i_rayOrigin,
     {
         gm::Vec2f hitRange( 0.001f, // Fix for "Shadow acne" by culling hits which are too near.
                             nearestHitMagnitude );
-        if ( sceneObjectPtr->Hit( i_rayOrigin, i_rayDirection, hitRange, record ) )
+        if ( sceneObjectPtr->Hit( i_ray, hitRange, record ) )
         {
             objectHit           = true;
             nearestHitMagnitude = record.m_magnitude;
@@ -89,14 +85,15 @@ static gm::Vec3f ComputeRayColor( const gm::Vec3f&       i_rayOrigin,
 
     if ( objectHit )
     {
-        gm::Vec3f rayTarget    = record.m_position + record.m_normal + RandomUnitVector();
-        gm::Vec3f newDirection = gm::Normalize( rayTarget - record.m_position );
-        return 0.5 * ComputeRayColor( record.m_position, newDirection, i_numRayBounces - 1, i_sceneObjectPtrs );
+        gm::Vec3f rayTarget = record.m_position + record.m_normal + RandomUnitVector();
+        gm::Ray   newRay( /* origin */ record.m_position,
+                        /* direction */ gm::Normalize( rayTarget - record.m_position ) );
+        return 0.5 * ComputeRayColor( newRay, i_numRayBounces - 1, i_sceneObjectPtrs );
     }
 
     // Compute background color, by interpolating between two colors with the weight as the function of the ray
     // direction.
-    float weight = 0.5f * i_rayDirection.Y() + 1.0;
+    float weight = 0.5f * i_ray.Direction().Y() + 1.0;
     return gm::LinearInterpolation( gm::Vec3f( 1.0, 1.0, 1.0 ), gm::Vec3f( 0.5, 0.7, 1.0 ), weight );
 }
 
@@ -144,18 +141,18 @@ int main( int i_argc, char** i_argv )
             float u = ( float( pixelCoord.X() ) + gm::RandomNumber( c_normalizedRange ) ) / imageWidth;
             float v = ( float( pixelCoord.Y() ) + gm::RandomNumber( c_normalizedRange ) ) / imageHeight;
 
-            // Compute the direction of the ray, by translation from the bottom-left viewport coordinate
-            // to the coordinate in the viewport plane with respect to the image pixel coordinate.
-            gm::Vec3f rayDirection = camera.ViewportBottomLeft()           // Starting from the viewport bottom left...
-                                     + ( u * camera.ViewportHorizontal() ) // Horizontal offset.
-                                     + ( v * camera.ViewportVertical() )   // Vertical offset.
-                                     - camera.Origin();                    // Get difference vector from camera origin.
+            gm::Ray ray( /* origin */ camera.Origin(),               // The origin of the ray is the camera origin.
+                         /* direction */ camera.ViewportBottomLeft() // Starting from the viewport bottom left...
+                             + ( u * camera.ViewportHorizontal() )   // Horizontal offset.
+                             + ( v * camera.ViewportVertical() )     // Vertical offset.
+                             - camera.Origin()                       // Get difference vector from camera origin.
+            );
 
             // Normalize the direction of the ray.
-            rayDirection = gm::Normalize( rayDirection );
+            ray.Direction() = gm::Normalize( ray.Direction() );
 
             // Accumulate color.
-            pixelColor += ComputeRayColor( camera.Origin(), rayDirection, rayBounceLimit, sceneObjectPtrs );
+            pixelColor += ComputeRayColor( ray, rayBounceLimit, sceneObjectPtrs );
         }
 
         // Divide by number of samples to produce average color.
