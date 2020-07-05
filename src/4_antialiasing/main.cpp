@@ -5,6 +5,7 @@
 
 #include <cxxopts.hpp>
 
+#include <gm/types/floatRange.h>
 #include <gm/types/intRange.h>
 #include <gm/types/ray.h>
 #include <gm/types/vec2iRange.h>
@@ -47,7 +48,7 @@ static gm::Vec3f ComputeRayColor( const gm::Ray& i_ray, const SceneObjectPtrs& i
     float               nearestHitMagnitude = std::numeric_limits< float >::max();
     for ( const raytrace::SceneObjectPtr& sceneObjectPtr : i_sceneObjectPtrs )
     {
-        if ( sceneObjectPtr->Hit( i_ray, gm::Vec2f( 0, nearestHitMagnitude ), record ) )
+        if ( sceneObjectPtr->Hit( i_ray, gm::FloatRange( 0, nearestHitMagnitude ), record ) )
         {
             objectHit           = true;
             nearestHitMagnitude = record.m_magnitude;

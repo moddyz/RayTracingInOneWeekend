@@ -7,7 +7,9 @@
 
 #include <gm/base/constants.h>
 
+#include <gm/types/floatRange.h>
 #include <gm/types/intRange.h>
+#include <gm/types/ray.h>
 #include <gm/types/vec2iRange.h>
 #include <gm/types/vec3f.h>
 
@@ -74,9 +76,9 @@ static gm::Vec3f ComputeRayColor( const gm::Ray& i_ray, int i_numRayBounces, con
     float               nearestHitMagnitude = std::numeric_limits< float >::max();
     for ( const raytrace::SceneObjectPtr& sceneObjectPtr : i_sceneObjectPtrs )
     {
-        gm::Vec2f hitRange( 0.001f, // Fix for "Shadow acne" by culling hits which are too near.
-                            nearestHitMagnitude );
-        if ( sceneObjectPtr->Hit( i_ray, hitRange, record ) )
+        gm::FloatRange magnitudeRange( 0.001f, // Fix for "Shadow acne" by culling hits which are too near.
+                                       nearestHitMagnitude );
+        if ( sceneObjectPtr->Hit( i_ray, magnitudeRange, record ) )
         {
             objectHit           = true;
             nearestHitMagnitude = record.m_magnitude;
