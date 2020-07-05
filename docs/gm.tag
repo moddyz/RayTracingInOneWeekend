@@ -155,43 +155,43 @@
     <member kind="function">
       <type>GM_NS_OPEN GM_HOST_DEVICE float</type>
       <name>Ceil</name>
-      <anchorfile>ceil_8h.html</anchorfile>
-      <anchor>ad8fbe5e4b3940cac4c85de58284cf08c</anchor>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gad8fbe5e4b3940cac4c85de58284cf08c</anchor>
       <arglist>(const float &amp;i_value)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec2f</type>
       <name>Ceil</name>
-      <anchorfile>ceil_8h.html</anchorfile>
-      <anchor>a269a2604345a5241ab732e23e18b9d3e</anchor>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga269a2604345a5241ab732e23e18b9d3e</anchor>
       <arglist>(const Vec2f &amp;i_value)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec3f</type>
       <name>Ceil</name>
-      <anchorfile>ceil_8h.html</anchorfile>
-      <anchor>ae5623eaf35e1e499a0e672484449bbdb</anchor>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gae5623eaf35e1e499a0e672484449bbdb</anchor>
       <arglist>(const Vec3f &amp;i_value)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec4f</type>
       <name>Ceil</name>
-      <anchorfile>ceil_8h.html</anchorfile>
-      <anchor>aec4169eaca08f6dd95714aeaf5a88b94</anchor>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gaec4169eaca08f6dd95714aeaf5a88b94</anchor>
       <arglist>(const Vec4f &amp;i_value)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Mat3f</type>
       <name>Ceil</name>
-      <anchorfile>ceil_8h.html</anchorfile>
-      <anchor>a585e1dd448234e5be6b3dd5e3a5de4b8</anchor>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga585e1dd448234e5be6b3dd5e3a5de4b8</anchor>
       <arglist>(const Mat3f &amp;i_value)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Mat4f</type>
       <name>Ceil</name>
-      <anchorfile>ceil_8h.html</anchorfile>
-      <anchor>a60dc12236f92d64f2009c8cf37352624</anchor>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga60dc12236f92d64f2009c8cf37352624</anchor>
       <arglist>(const Mat4f &amp;i_value)</arglist>
     </member>
   </compound>
@@ -457,6 +457,7 @@
     <path>/code/GraphicsMath/src/gm/functions/</path>
     <filename>linearMap_8h</filename>
     <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
+    <includes id="floatRange_8h" name="floatRange.h" local="no" imported="no">gm/types/floatRange.h</includes>
     <includes id="mat3f_8h" name="mat3f.h" local="no" imported="no">gm/types/mat3f.h</includes>
     <includes id="mat4f_8h" name="mat4f.h" local="no" imported="no">gm/types/mat4f.h</includes>
     <includes id="vec2f_8h" name="vec2f.h" local="no" imported="no">gm/types/vec2f.h</includes>
@@ -466,43 +467,43 @@
       <type>GM_NS_OPEN GM_HOST_DEVICE float</type>
       <name>LinearMap</name>
       <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>gab2470d51eccd72a08e0f662ffa49e9a3</anchor>
-      <arglist>(const float &amp;i_sourceValue, const Vec2f &amp;i_sourceRange, const Vec2f &amp;i_targetRange)</arglist>
+      <anchor>ga5798f027478c55bade52df30921e7982</anchor>
+      <arglist>(const float &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Mat3f</type>
       <name>LinearMap</name>
       <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>ga4fbf2270d4e97fe9716f65cbc89ceea3</anchor>
-      <arglist>(const Mat3f &amp;i_sourceValue, const Vec2f &amp;i_sourceRange, const Vec2f &amp;i_targetRange)</arglist>
+      <anchor>ga263b14faec42590b79c9279ab3f1ad99</anchor>
+      <arglist>(const Mat3f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Mat4f</type>
       <name>LinearMap</name>
       <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>gaa53da9ab79367770b998b0a77cd89997</anchor>
-      <arglist>(const Mat4f &amp;i_sourceValue, const Vec2f &amp;i_sourceRange, const Vec2f &amp;i_targetRange)</arglist>
+      <anchor>ga1eb7b9b44b3def2bcbc54ca6ec198b2b</anchor>
+      <arglist>(const Mat4f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec2f</type>
       <name>LinearMap</name>
       <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>gab07170efaf6fc2239a66c73018a3afca</anchor>
-      <arglist>(const Vec2f &amp;i_sourceValue, const Vec2f &amp;i_sourceRange, const Vec2f &amp;i_targetRange)</arglist>
+      <anchor>ga5fcee0bde103f8a7f117a6a48c6a94c1</anchor>
+      <arglist>(const Vec2f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec3f</type>
       <name>LinearMap</name>
       <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>gaadff2516d535123b1736c64046f7a293</anchor>
-      <arglist>(const Vec3f &amp;i_sourceValue, const Vec2f &amp;i_sourceRange, const Vec2f &amp;i_targetRange)</arglist>
+      <anchor>gae2b1e291707e7fcf0896da548ca64976</anchor>
+      <arglist>(const Vec3f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec4f</type>
       <name>LinearMap</name>
       <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>gac836ef243cddc353fbe7e6bb98a295fb</anchor>
-      <arglist>(const Vec4f &amp;i_sourceValue, const Vec2f &amp;i_sourceRange, const Vec2f &amp;i_targetRange)</arglist>
+      <anchor>ga8128bd11dd098ac73ed334771d311fd1</anchor>
+      <arglist>(const Vec4f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
   </compound>
   <compound kind="file">
@@ -714,10 +715,10 @@
     <path>/code/GraphicsMath/src/gm/functions/</path>
     <filename>normalize_8h</filename>
     <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
-    <includes id="assert_8h" name="assert.h" local="no" imported="no">gm/base/assert.h</includes>
     <includes id="vec2f_8h" name="vec2f.h" local="no" imported="no">gm/types/vec2f.h</includes>
     <includes id="vec3f_8h" name="vec3f.h" local="no" imported="no">gm/types/vec3f.h</includes>
     <includes id="vec4f_8h" name="vec4f.h" local="no" imported="no">gm/types/vec4f.h</includes>
+    <includes id="assert_8h" name="assert.h" local="no" imported="no">gm/base/assert.h</includes>
     <includes id="length_8h" name="length.h" local="no" imported="no">gm/functions/length.h</includes>
     <member kind="function">
       <type>GM_NS_OPEN GM_HOST_DEVICE Vec2f</type>
@@ -746,8 +747,8 @@
     <path>/code/GraphicsMath/src/gm/functions/</path>
     <filename>quadraticRoots_8h</filename>
     <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
-    <includes id="assert_8h" name="assert.h" local="no" imported="no">gm/base/assert.h</includes>
     <includes id="vec2f_8h" name="vec2f.h" local="no" imported="no">gm/types/vec2f.h</includes>
+    <includes id="assert_8h" name="assert.h" local="no" imported="no">gm/base/assert.h</includes>
     <member kind="function">
       <type>GM_NS_OPEN GM_HOST_DEVICE int</type>
       <name>QuadraticRoots</name>
@@ -768,6 +769,28 @@
       <anchorfile>group__gm__functions__basic.html</anchorfile>
       <anchor>ga126ab9894d7a876e65510ee740f31a30</anchor>
       <arglist>(const float &amp;i_angle)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>randomNumber.h</name>
+    <path>/code/GraphicsMath/src/gm/functions/</path>
+    <filename>randomNumber_8h</filename>
+    <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
+    <includes id="floatRange_8h" name="floatRange.h" local="no" imported="no">gm/types/floatRange.h</includes>
+    <includes id="intRange_8h" name="intRange.h" local="no" imported="no">gm/types/intRange.h</includes>
+    <member kind="function">
+      <type>GM_NS_OPEN GM_HOST_DEVICE float</type>
+      <name>RandomNumber</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gae1aca95f8806f8d9c854e90c5ee1e213</anchor>
+      <arglist>(const FloatRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE int</type>
+      <name>RandomNumber</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gaaa6843bdd825058465b7c0784a73c402</anchor>
+      <arglist>(const IntRange &amp;i_range)</arglist>
     </member>
   </compound>
   <compound kind="file">
@@ -798,9 +821,9 @@
     <path>/code/GraphicsMath/src/gm/functions/</path>
     <filename>raySphereIntersection_8h</filename>
     <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
-    <includes id="assert_8h" name="assert.h" local="no" imported="no">gm/base/assert.h</includes>
     <includes id="vec2f_8h" name="vec2f.h" local="no" imported="no">gm/types/vec2f.h</includes>
     <includes id="vec3f_8h" name="vec3f.h" local="no" imported="no">gm/types/vec3f.h</includes>
+    <includes id="assert_8h" name="assert.h" local="no" imported="no">gm/base/assert.h</includes>
     <includes id="dotProduct_8h" name="dotProduct.h" local="no" imported="no">gm/functions/dotProduct.h</includes>
     <includes id="quadraticRoots_8h" name="quadraticRoots.h" local="no" imported="no">gm/functions/quadraticRoots.h</includes>
     <member kind="function">
@@ -989,9 +1012,9 @@
     <name>mat3f.h</name>
     <path>/code/GraphicsMath/src/gm/types/</path>
     <filename>mat3f_8h</filename>
+    <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
     <includes id="almost_8h" name="almost.h" local="no" imported="no">gm/base/almost.h</includes>
     <includes id="assert_8h" name="assert.h" local="no" imported="no">gm/base/assert.h</includes>
-    <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
     <class kind="class">Mat3f</class>
     <member kind="function">
       <type>GM_HOST_DEVICE Mat3f</type>
@@ -1026,9 +1049,9 @@
     <name>mat4f.h</name>
     <path>/code/GraphicsMath/src/gm/types/</path>
     <filename>mat4f_8h</filename>
+    <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
     <includes id="almost_8h" name="almost.h" local="no" imported="no">gm/base/almost.h</includes>
     <includes id="assert_8h" name="assert.h" local="no" imported="no">gm/base/assert.h</includes>
-    <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
     <class kind="class">Mat4f</class>
     <member kind="function">
       <type>GM_HOST_DEVICE Mat4f</type>
@@ -1063,9 +1086,9 @@
     <name>vec2f.h</name>
     <path>/code/GraphicsMath/src/gm/types/</path>
     <filename>vec2f_8h</filename>
+    <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
     <includes id="almost_8h" name="almost.h" local="no" imported="no">gm/base/almost.h</includes>
     <includes id="assert_8h" name="assert.h" local="no" imported="no">gm/base/assert.h</includes>
-    <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
     <class kind="class">Vec2f</class>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec2f</type>
@@ -1115,8 +1138,8 @@
     <name>vec2i.h</name>
     <path>/code/GraphicsMath/src/gm/types/</path>
     <filename>vec2i_8h</filename>
-    <includes id="assert_8h" name="assert.h" local="no" imported="no">gm/base/assert.h</includes>
     <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
+    <includes id="assert_8h" name="assert.h" local="no" imported="no">gm/base/assert.h</includes>
     <class kind="class">Vec2i</class>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec2i</type>
@@ -1167,9 +1190,9 @@
     <name>vec3f.h</name>
     <path>/code/GraphicsMath/src/gm/types/</path>
     <filename>vec3f_8h</filename>
+    <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
     <includes id="almost_8h" name="almost.h" local="no" imported="no">gm/base/almost.h</includes>
     <includes id="assert_8h" name="assert.h" local="no" imported="no">gm/base/assert.h</includes>
-    <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
     <class kind="class">Vec3f</class>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec3f</type>
@@ -1219,8 +1242,8 @@
     <name>vec3i.h</name>
     <path>/code/GraphicsMath/src/gm/types/</path>
     <filename>vec3i_8h</filename>
-    <includes id="assert_8h" name="assert.h" local="no" imported="no">gm/base/assert.h</includes>
     <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
+    <includes id="assert_8h" name="assert.h" local="no" imported="no">gm/base/assert.h</includes>
     <class kind="class">Vec3i</class>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec3i</type>
@@ -1271,9 +1294,9 @@
     <name>vec4f.h</name>
     <path>/code/GraphicsMath/src/gm/types/</path>
     <filename>vec4f_8h</filename>
+    <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
     <includes id="almost_8h" name="almost.h" local="no" imported="no">gm/base/almost.h</includes>
     <includes id="assert_8h" name="assert.h" local="no" imported="no">gm/base/assert.h</includes>
-    <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
     <class kind="class">Vec4f</class>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec4f</type>
@@ -1323,8 +1346,8 @@
     <name>vec4i.h</name>
     <path>/code/GraphicsMath/src/gm/types/</path>
     <filename>vec4i_8h</filename>
-    <includes id="assert_8h" name="assert.h" local="no" imported="no">gm/base/assert.h</includes>
     <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
+    <includes id="assert_8h" name="assert.h" local="no" imported="no">gm/base/assert.h</includes>
     <class kind="class">Vec4i</class>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec4i</type>
@@ -1374,6 +1397,13 @@
   <compound kind="class">
     <name>FloatRange</name>
     <filename>classFloatRange.html</filename>
+    <member kind="typedef">
+      <type>float</type>
+      <name>ValueType</name>
+      <anchorfile>classFloatRange.html</anchorfile>
+      <anchor>a1a70e96f390c991c1676e7b7ed933153</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="function">
       <type>GM_HOST_DEVICE constexpr</type>
       <name>FloatRange</name>
@@ -1470,6 +1500,13 @@
     <name>IntRange</name>
     <filename>classIntRange.html</filename>
     <class kind="class">IntRange::iterator</class>
+    <member kind="typedef">
+      <type>int</type>
+      <name>ValueType</name>
+      <anchorfile>classIntRange.html</anchorfile>
+      <anchor>ab3e2322254e782a02de1467b179aa5ca</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="function">
       <type>GM_HOST_DEVICE constexpr</type>
       <name>IntRange</name>
@@ -2510,6 +2547,13 @@
   <compound kind="class">
     <name>Vec2fRange</name>
     <filename>classVec2fRange.html</filename>
+    <member kind="typedef">
+      <type>Vec2f</type>
+      <name>ValueType</name>
+      <anchorfile>classVec2fRange.html</anchorfile>
+      <anchor>a085feb30c0ecdc11f3cbba71f3f360b6</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="function">
       <type>GM_HOST_DEVICE constexpr</type>
       <name>Vec2fRange</name>
@@ -2869,6 +2913,13 @@
     <name>Vec2iRange</name>
     <filename>classVec2iRange.html</filename>
     <class kind="class">Vec2iRange::iterator</class>
+    <member kind="typedef">
+      <type>Vec2i</type>
+      <name>ValueType</name>
+      <anchorfile>classVec2iRange.html</anchorfile>
+      <anchor>ab221f378d70655f433ed8cfca2763aed</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="function">
       <type>GM_HOST_DEVICE constexpr</type>
       <name>Vec2iRange</name>
@@ -3269,6 +3320,13 @@
   <compound kind="class">
     <name>Vec3fRange</name>
     <filename>classVec3fRange.html</filename>
+    <member kind="typedef">
+      <type>Vec3f</type>
+      <name>ValueType</name>
+      <anchorfile>classVec3fRange.html</anchorfile>
+      <anchor>acf87a7256efddc73c2a33882eca85a9a</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="function">
       <type>GM_HOST_DEVICE constexpr</type>
       <name>Vec3fRange</name>
@@ -3642,6 +3700,13 @@
     <name>Vec3iRange</name>
     <filename>classVec3iRange.html</filename>
     <class kind="class">Vec3iRange::iterator</class>
+    <member kind="typedef">
+      <type>Vec3i</type>
+      <name>ValueType</name>
+      <anchorfile>classVec3iRange.html</anchorfile>
+      <anchor>a8f0be58e6f31a0b6f675fdf8d5aec40b</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="function">
       <type>GM_HOST_DEVICE constexpr</type>
       <name>Vec3iRange</name>
@@ -4056,6 +4121,13 @@
   <compound kind="class">
     <name>Vec4fRange</name>
     <filename>classVec4fRange.html</filename>
+    <member kind="typedef">
+      <type>Vec4f</type>
+      <name>ValueType</name>
+      <anchorfile>classVec4fRange.html</anchorfile>
+      <anchor>adf4c5322f6ab8a1a2f884967e13ec829</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="function">
       <type>GM_HOST_DEVICE constexpr</type>
       <name>Vec4fRange</name>
@@ -4443,6 +4515,13 @@
     <name>Vec4iRange</name>
     <filename>classVec4iRange.html</filename>
     <class kind="class">Vec4iRange::iterator</class>
+    <member kind="typedef">
+      <type>Vec4i</type>
+      <name>ValueType</name>
+      <anchorfile>classVec4iRange.html</anchorfile>
+      <anchor>a7b3bb6a28e287aa0ddaf5130850f9325</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="function">
       <type>GM_HOST_DEVICE constexpr</type>
       <name>Vec4iRange</name>
@@ -4649,12 +4728,14 @@
     <title>Basic math operators</title>
     <filename>group__gm__functions__basic.html</filename>
     <file>abs.h</file>
+    <file>ceil.h</file>
     <file>degrees.h</file>
     <file>floor.h</file>
     <file>max.h</file>
     <file>min.h</file>
     <file>quadraticRoots.h</file>
     <file>radians.h</file>
+    <file>randomNumber.h</file>
     <member kind="function">
       <type>GM_NS_OPEN GM_HOST_DEVICE float</type>
       <name>Abs</name>
@@ -4695,6 +4776,48 @@
       <name>Abs</name>
       <anchorfile>group__gm__functions__basic.html</anchorfile>
       <anchor>gae719e12185554586385d0da374324c71</anchor>
+      <arglist>(const Mat4f &amp;i_value)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_NS_OPEN GM_HOST_DEVICE float</type>
+      <name>Ceil</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gad8fbe5e4b3940cac4c85de58284cf08c</anchor>
+      <arglist>(const float &amp;i_value)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec2f</type>
+      <name>Ceil</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga269a2604345a5241ab732e23e18b9d3e</anchor>
+      <arglist>(const Vec2f &amp;i_value)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec3f</type>
+      <name>Ceil</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gae5623eaf35e1e499a0e672484449bbdb</anchor>
+      <arglist>(const Vec3f &amp;i_value)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec4f</type>
+      <name>Ceil</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gaec4169eaca08f6dd95714aeaf5a88b94</anchor>
+      <arglist>(const Vec4f &amp;i_value)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Mat3f</type>
+      <name>Ceil</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga585e1dd448234e5be6b3dd5e3a5de4b8</anchor>
+      <arglist>(const Mat3f &amp;i_value)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Mat4f</type>
+      <name>Ceil</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga60dc12236f92d64f2009c8cf37352624</anchor>
       <arglist>(const Mat4f &amp;i_value)</arglist>
     </member>
     <member kind="function">
@@ -4914,6 +5037,20 @@
       <anchor>ga126ab9894d7a876e65510ee740f31a30</anchor>
       <arglist>(const float &amp;i_angle)</arglist>
     </member>
+    <member kind="function">
+      <type>GM_NS_OPEN GM_HOST_DEVICE float</type>
+      <name>RandomNumber</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gae1aca95f8806f8d9c854e90c5ee1e213</anchor>
+      <arglist>(const FloatRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE int</type>
+      <name>RandomNumber</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gaaa6843bdd825058465b7c0784a73c402</anchor>
+      <arglist>(const IntRange &amp;i_range)</arglist>
+    </member>
   </compound>
   <compound kind="group">
     <name>gm_functions_interpolation</name>
@@ -4967,43 +5104,43 @@
       <type>GM_NS_OPEN GM_HOST_DEVICE float</type>
       <name>LinearMap</name>
       <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>gab2470d51eccd72a08e0f662ffa49e9a3</anchor>
-      <arglist>(const float &amp;i_sourceValue, const Vec2f &amp;i_sourceRange, const Vec2f &amp;i_targetRange)</arglist>
+      <anchor>ga5798f027478c55bade52df30921e7982</anchor>
+      <arglist>(const float &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Mat3f</type>
       <name>LinearMap</name>
       <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>ga4fbf2270d4e97fe9716f65cbc89ceea3</anchor>
-      <arglist>(const Mat3f &amp;i_sourceValue, const Vec2f &amp;i_sourceRange, const Vec2f &amp;i_targetRange)</arglist>
+      <anchor>ga263b14faec42590b79c9279ab3f1ad99</anchor>
+      <arglist>(const Mat3f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Mat4f</type>
       <name>LinearMap</name>
       <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>gaa53da9ab79367770b998b0a77cd89997</anchor>
-      <arglist>(const Mat4f &amp;i_sourceValue, const Vec2f &amp;i_sourceRange, const Vec2f &amp;i_targetRange)</arglist>
+      <anchor>ga1eb7b9b44b3def2bcbc54ca6ec198b2b</anchor>
+      <arglist>(const Mat4f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec2f</type>
       <name>LinearMap</name>
       <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>gab07170efaf6fc2239a66c73018a3afca</anchor>
-      <arglist>(const Vec2f &amp;i_sourceValue, const Vec2f &amp;i_sourceRange, const Vec2f &amp;i_targetRange)</arglist>
+      <anchor>ga5fcee0bde103f8a7f117a6a48c6a94c1</anchor>
+      <arglist>(const Vec2f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec3f</type>
       <name>LinearMap</name>
       <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>gaadff2516d535123b1736c64046f7a293</anchor>
-      <arglist>(const Vec3f &amp;i_sourceValue, const Vec2f &amp;i_sourceRange, const Vec2f &amp;i_targetRange)</arglist>
+      <anchor>gae2b1e291707e7fcf0896da548ca64976</anchor>
+      <arglist>(const Vec3f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec4f</type>
       <name>LinearMap</name>
       <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>gac836ef243cddc353fbe7e6bb98a295fb</anchor>
-      <arglist>(const Vec4f &amp;i_sourceValue, const Vec2f &amp;i_sourceRange, const Vec2f &amp;i_targetRange)</arglist>
+      <anchor>ga8128bd11dd098ac73ed334771d311fd1</anchor>
+      <arglist>(const Vec4f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
   </compound>
   <compound kind="group">
