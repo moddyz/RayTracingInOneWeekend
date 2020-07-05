@@ -102,7 +102,6 @@ int main( int i_argc, char** i_argv )
     constexpr gm::FloatRange normalizedRange( 0.0f, 1.0f );
 
     // Compute ray and shade.
-    std::vector< gm::Vec3f > rayDirections( imageWidth * imageHeight * samplesPerPixel );
     for ( const gm::Vec2i& pixelCoord : image.Extent() )
     {
         // Compute ray color for multiple samples per pixel, then average the accumulated result.
@@ -113,15 +112,12 @@ int main( int i_argc, char** i_argv )
             float u = ( float( pixelCoord.X() ) + gm::RandomNumber( normalizedRange ) ) / imageWidth;
             float v = ( float( pixelCoord.Y() ) + gm::RandomNumber( normalizedRange ) ) / imageHeight;
 
-            // Get the direction of the respective ray.
-            gm::Vec3f& rayDirection = rayDirections[ pixelCoord.X() + pixelCoord.Y() * imageWidth ];
-
             // Compute the direction of the ray, by translation from the bottom-left viewport coordinate
             // to the coordinate in the viewport plane with respect to the image pixel coordinate.
-            rayDirection = camera.ViewportBottomLeft()           // Starting from the viewport bottom left...
-                           + ( u * camera.ViewportHorizontal() ) // Horizontal offset.
-                           + ( v * camera.ViewportVertical() )   // Vertical offset.
-                           - camera.Origin();                    // Get difference vector from camera origin.
+            gm::Vec3f rayDirection = camera.ViewportBottomLeft()           // Starting from the viewport bottom left...
+                                     + ( u * camera.ViewportHorizontal() ) // Horizontal offset.
+                                     + ( v * camera.ViewportVertical() )   // Vertical offset.
+                                     - camera.Origin();                    // Get difference vector from camera origin.
 
             // Normalize the direction of the ray.
             rayDirection = gm::Normalize( rayDirection );
