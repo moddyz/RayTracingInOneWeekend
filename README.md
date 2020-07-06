@@ -11,6 +11,7 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
   * [3. Surface Normals and Multiple Objects](#3-surface-normals-and-multiple-objects)
   * [4. Antialiasing](#4-antialiasing)
   * [5. Diffuse materials](#5-diffuse-materials)
+  * [6. Metal](#6-metal)
 - [Library](#library)
 - [Building](#building)
 - [Build Status](#build-status)
@@ -64,6 +65,14 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
 [Source code](./src/5_diffuseMaterials/main.cpp)
 
 [Link to Chapter 8](https://raytracing.github.io/books/RayTracingInOneWeekend.html#diffusematerials)
+
+### 6. Metal
+
+![Image](./src/6_metal/output.png)
+
+[Source code](./src/6_metal/main.cpp)
+
+[Link to Chapter 9](https://raytracing.github.io/books/RayTracingInOneWeekend.html#metal)
 
 ## Library
 

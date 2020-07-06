@@ -18,7 +18,7 @@ RAYTRACE_NS_OPEN
 /// TODO - write a proof for this.
 ///
 /// \return Random unit vector.
-gm::Vec3f RandomUnitVector()
+inline gm::Vec3f RandomUnitVector()
 {
     float angle = gm::RandomNumber( gm::FloatRange( 0.0f, 2.0f * GM_PI ) );
     float z     = gm::RandomNumber( gm::FloatRange( -1.0f, 1.0f ) );
