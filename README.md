@@ -84,7 +84,7 @@ Doxygen documentation based on the latest state of master, [hosted by GitHub Pag
 
 ## Building
 
-A convenience build script is also provided, for building all targets, and optionally installing to a location:
+A convenience build script is provided, for building all targets, and optionally installing to a location:
 ```
 ./build.sh <OPTIONAL_INSTALL_LOCATION>
 ```
