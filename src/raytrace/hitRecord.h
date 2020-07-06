@@ -4,9 +4,10 @@
 ///
 /// Record of a ray hitting a \ref SceneObject.
 
-#include <raytrace/raytrace.h>
-
 #include <gm/types/vec3f.h>
+
+#include <raytrace/raytrace.h>
+#include <raytrace/material.h>
 
 RAYTRACE_NS_OPEN
 
@@ -24,6 +25,9 @@ struct HitRecord
 
     /// The magnitude of the ray at the point of contact.
     float m_magnitude;
+
+    /// Material associated with the geometry that was hit by the ray.
+    MaterialSharedPtr m_material;
 };
 
 RAYTRACE_NS_CLOSE

@@ -24,9 +24,10 @@ public:
     ///
     /// \param i_origin The origin of the sphere.
     /// \param i_radius The radius of the sphere.
-    inline explicit Sphere( const gm::Vec3f& i_origin, float i_radius )
+    inline explicit Sphere( const gm::Vec3f& i_origin, float i_radius, MaterialSharedPtr i_material = nullptr )
         : m_origin( i_origin )
         , m_radius( i_radius )
+        , m_material( i_material )
     {
     }
 
@@ -63,13 +64,17 @@ private:
         o_record.m_position  = gm::RayPosition( i_ray.Origin(), i_ray.Direction(), i_rayMagnitude );
         o_record.m_normal    = gm::Normalize( o_record.m_position - m_origin );
         o_record.m_magnitude = i_rayMagnitude;
+        o_record.m_material  = m_material;
     }
 
-    /// The origin of the sphere.
+    // The origin of the sphere.
     gm::Vec3f m_origin;
 
-    /// The radius of the sphere.
+    // The radius of the sphere.
     float m_radius = 0.0f;
+
+    // Assigned material.
+    MaterialSharedPtr m_material;
 };
 
 RAYTRACE_NS_CLOSE

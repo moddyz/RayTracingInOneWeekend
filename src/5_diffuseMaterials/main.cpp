@@ -14,6 +14,7 @@
 #include <gm/types/vec3f.h>
 
 #include <gm/functions/clamp.h>
+#include <gm/functions/dotProduct.h>
 #include <gm/functions/lengthSquared.h>
 #include <gm/functions/linearInterpolation.h>
 #include <gm/functions/linearMap.h>
@@ -25,6 +26,7 @@
 #include <raytrace/imageBuffer.h>
 #include <raytrace/ppmImageWriter.h>
 #include <raytrace/sphere.h>
+#include <raytrace/lambert.h>
 
 /// \typedef SceneObjectPtrs
 ///
@@ -35,19 +37,6 @@ using SceneObjectPtrs = std::vector< raytrace::SceneObjectPtr >;
 ///
 /// Normalized float range between 0 and 1.
 constexpr gm::FloatRange c_normalizedRange( 0.0f, 1.0f );
-
-/// Compute a random unit vector.
-///
-/// TODO: Prove this.
-///
-/// \return Random unit vector.
-gm::Vec3f RandomUnitVector()
-{
-    float angle = gm::RandomNumber( gm::FloatRange( 0.0f, 2.0f * GM_PI ) );
-    float z     = gm::RandomNumber( gm::FloatRange( -1.0f, 1.0f ) );
-    float r     = sqrt( 1.0f - z * z );
-    return gm::Vec3f( r * cos( angle ), r * sin( angle ), z );
-}
 
 /// Compute the ray color.
 ///
@@ -87,10 +76,23 @@ static gm::Vec3f ComputeRayColor( const gm::Ray& i_ray, int i_numRayBounces, con
 
     if ( objectHit )
     {
-        gm::Vec3f rayTarget = record.m_position + record.m_normal + RandomUnitVector();
-        gm::Ray   newRay( /* origin */ record.m_position,
-                        /* direction */ gm::Normalize( rayTarget - record.m_position ) );
-        return 0.5 * ComputeRayColor( newRay, i_numRayBounces - 1, i_sceneObjectPtrs );
+        gm::Ray   scatteredRay;
+        gm::Vec3f attenuation;
+        if ( record.m_material->Scatter( i_ray, record, attenuation, scatteredRay ) )
+        {
+            // Material produced a new scattered ray.
+            // Continue ray color recursion.
+            // To resolve an aggregate color, we take the vector product.
+            gm::Vec3f descendentColor = ComputeRayColor( scatteredRay, i_numRayBounces - 1, i_sceneObjectPtrs );
+            return gm::Vec3f( attenuation[ 0 ] * descendentColor[ 0 ],
+                              attenuation[ 1 ] * descendentColor[ 1 ],
+                              attenuation[ 2 ] * descendentColor[ 2 ] );
+        }
+        else
+        {
+            // Material has completely absorbed the ray, thus return no color.
+            return gm::Vec3f( 0, 0, 0 );
+        }
     }
 
     // Compute background color, by interpolating between two colors with the weight as the function of the ray
@@ -127,10 +129,13 @@ int main( int i_argc, char** i_argv )
     // Camera model.
     raytrace::Camera camera( ( float ) imageWidth / imageHeight );
 
+    // Allocate materials.
+    raytrace::MaterialSharedPtr lambert = std::make_shared< raytrace::Lambert >( gm::Vec3f( 0.5f, 0.5f, 0.5f ) );
+
     // Allocate scene objects.
     SceneObjectPtrs sceneObjectPtrs;
-    sceneObjectPtrs.push_back( std::make_unique< raytrace::Sphere >( gm::Vec3f( 0.0f, 0.0f, -1.0f ), 0.5 ) );
-    sceneObjectPtrs.push_back( std::make_unique< raytrace::Sphere >( gm::Vec3f( 0.0f, -100.5, -1.0f ), 100 ) );
+    sceneObjectPtrs.push_back( std::make_unique< raytrace::Sphere >( gm::Vec3f( 0.0f, 0.0f, -1.0f ), 0.5, lambert ) );
+    sceneObjectPtrs.push_back( std::make_unique< raytrace::Sphere >( gm::Vec3f( 0.0f, -100.5, -1.0f ), 100, lambert ) );
 
     // Compute ray and shade.
     for ( const gm::Vec2i& pixelCoord : image.Extent() )
