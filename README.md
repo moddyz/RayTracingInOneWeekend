@@ -74,6 +74,14 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
 
 [Link to Chapter 9](https://raytracing.github.io/books/RayTracingInOneWeekend.html#metal)
 
+### 7. Dieletrics
+
+![Image](./src/7_dieletrics/output.png)
+
+[Source code](./src/7_dieletrics/main.cpp)
+
+[Link to Chapter 10](https://raytracing.github.io/books/RayTracingInOneWeekend.html#dielectrics)
+
 ## Library
 
 Common functions and classes are refactored into the [raytrace library](./src/raytrace) and the [GraphicsMath](https://github.com/moddyz/GraphicsMath) project.
