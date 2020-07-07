@@ -158,7 +158,7 @@ int main( int i_argc, char** i_argv )
     sceneObjectPtrs.push_back( std::make_unique< raytrace::Sphere >(
         gm::Vec3f( 1.0f, 0.0f, -1.0f ),
         0.5,
-        std::make_shared< raytrace::Metal >( /* albedo */ gm::Vec3f( 0.8f, 0.6f, 0.2f ), /* fuzziness */ 1.0 ) ) );
+        std::make_shared< raytrace::Metal >( /* albedo */ gm::Vec3f( 0.8f, 0.6f, 0.2f ), /* fuzziness */ 0.02 ) ) );
     sceneObjectPtrs.push_back( std::make_unique< raytrace::Sphere >(
         gm::Vec3f( -1.0f, 0.0f, -1.0f ),
         0.5,

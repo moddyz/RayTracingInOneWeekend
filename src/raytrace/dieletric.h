@@ -8,9 +8,11 @@
 #include <gm/types/vec3f.h>
 
 #include <gm/functions/clamp.h>
+#include <gm/functions/min.h>
 
 #include <raytrace/hitRecord.h>
 #include <raytrace/material.h>
+#include <raytrace/reflect.h>
 #include <raytrace/refract.h>
 
 #include <iostream>
@@ -48,12 +50,14 @@ public:
         // Check if the incident ray is traveling in from the outside towards the surface,
         // or traveling within the surface towards the outside.
         float incidentIndex, refractedIndex;
+        gm::Vec3f incidentNormal;
         if ( gm::DotProduct( i_ray.Direction(), i_hitRecord.m_normal ) < 0 )
         {
             // The incident ray and the normal are opposing, thus the incident ray is outside and
             // heading into the geometric surface.
             incidentIndex  = c_airRefractiveIndex;
             refractedIndex = m_refractiveIndex;
+            incidentNormal = i_hitRecord.m_normal;
         }
         else
         {
@@ -61,11 +65,24 @@ public:
             // surface and heading outwards.
             incidentIndex  = m_refractiveIndex;
             refractedIndex = c_airRefractiveIndex;
+            incidentNormal = -i_hitRecord.m_normal;
         }
 
+        gm::Vec3f normRayDir = gm::Normalize( i_ray.Direction() );
+
+        /*
+        double cosTheta = gm::Min( gm::DotProduct( -normRayDir, incidentNormal ), 1.0f );
+        double sinTheta = sqrt( 1.0 - cosTheta * cosTheta );
+        if ( ( incidentIndex / refractedIndex ) * sinTheta > 1.0 )
+        {
+            gm::Vec3f reflectedDir = Reflect( normRayDir, incidentNormal );
+            o_scatteredRay         = gm::Ray( i_hitRecord.m_position, reflectedDir );
+            return true;
+        }
+        */
+
         // Compute new refracted direction.
-        gm::Vec3f refractedDirection =
-            Refract( gm::Normalize( i_ray.Direction() ), i_hitRecord.m_normal, incidentIndex, refractedIndex );
+        gm::Vec3f refractedDirection = Refract( normRayDir, incidentNormal, incidentIndex, refractedIndex );
 
         // Assemble ray.
         o_scatteredRay = gm::Ray( i_hitRecord.m_position, refractedDirection );
