@@ -1,0 +1,80 @@
+#pragma once
+
+/// \file raytrace/metal.h
+///
+/// Dieletric material representation for glass, diamond, and other material which
+/// refract light.
+
+#include <gm/types/vec3f.h>
+
+#include <gm/functions/clamp.h>
+
+#include <raytrace/hitRecord.h>
+#include <raytrace/material.h>
+#include <raytrace/refract.h>
+
+#include <iostream>
+
+RAYTRACE_NS_OPEN
+
+/// \var c_airRefractiveIndex
+///
+/// The refractive index of air.
+constexpr float c_airRefractiveIndex = 1.0f;
+
+/// \class Dieletric
+///
+/// The dieletric material refracts incoming rays.
+///
+/// Properties:
+/// - "refractiveIndex" which describes the refractive index of the material.
+class Dieletric : public Material
+{
+public:
+    /// Explicit constructor with the refractive index of the material.
+    inline explicit Dieletric( float i_refractiveIndex )
+        : m_refractiveIndex( i_refractiveIndex )
+    {
+    }
+
+    inline virtual bool Scatter( const gm::Ray&   i_ray,
+                                 const HitRecord& i_hitRecord,
+                                 gm::Vec3f&       o_attenuation,
+                                 gm::Ray&         o_scatteredRay ) const override
+    {
+        // Fixed attenuation color
+        o_attenuation = gm::Vec3f( 1.0f, 1.0f, 1.0f );
+
+        // Check if the incident ray is traveling in from the outside towards the surface,
+        // or traveling within the surface towards the outside.
+        float incidentIndex, refractedIndex;
+        if ( gm::DotProduct( i_ray.Direction(), i_hitRecord.m_normal ) < 0 )
+        {
+            // The incident ray and the normal are opposing, thus the incident ray is outside and
+            // heading into the geometric surface.
+            incidentIndex  = c_airRefractiveIndex;
+            refractedIndex = m_refractiveIndex;
+        }
+        else
+        {
+            // The incident ray and the normal acute, thus the incident ray is within the geometric
+            // surface and heading outwards.
+            incidentIndex  = m_refractiveIndex;
+            refractedIndex = c_airRefractiveIndex;
+        }
+
+        // Compute new refracted direction.
+        gm::Vec3f refractedDirection =
+            Refract( gm::Normalize( i_ray.Direction() ), i_hitRecord.m_normal, incidentIndex, refractedIndex );
+
+        // Assemble ray.
+        o_scatteredRay = gm::Ray( i_hitRecord.m_position, refractedDirection );
+
+        return true;
+    }
+
+private:
+    float m_refractiveIndex = 1.0f;
+};
+
+RAYTRACE_NS_CLOSE
