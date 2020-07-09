@@ -6,6 +6,7 @@
 
 #include <raytrace/raytrace.h>
 
+#include <gm/functions/radians.h>
 #include <gm/types/vec3f.h>
 
 RAYTRACE_NS_OPEN
@@ -16,12 +17,22 @@ RAYTRACE_NS_OPEN
 class Camera
 {
 public:
-    /// Construct a camera with an input \p i_aspectRatio
+    /// Construct a camera with an input \p i_aspectRatio and \p i_verticalFov.
     ///
     /// \param i_aspectRatio Ratio of the width against the height of the rendered image.
-    inline explicit Camera( float i_aspectRatio )
+    /// \param i_verticalFov The vertical field of view, in degrees.  This is the angle formed
+    /// from the camera origin towards the viewport height.
+    inline explicit Camera( float i_aspectRatio, float i_verticalFov = 90.0f )
         : m_aspectRatio( i_aspectRatio )
     {
+        // Compute the viewport height from the vertical field of view.
+        float verticalFovRadians = gm::Radians( i_verticalFov );
+
+        // This is the important trig ratio which will allow us to compute the viewport height
+        // from the focal length.
+        float halfViewportHeightOverFocalLength = tan( verticalFovRadians / 2 );
+        m_viewportHeight = 2.0f * halfViewportHeightOverFocalLength * m_focalLength;
+
         // Compute the width of the virtual viewport.
         m_viewportWidth = m_aspectRatio * m_viewportHeight;
     }

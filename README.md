@@ -13,6 +13,7 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
   * [5. Diffuse materials](#5-diffuse-materials)
   * [6. Metal](#6-metal)
   * [7. Dielectrics](#7-dielectrics)
+  * [8. Positionable Camera](#8-positionable-camera)
 - [Library](#library)
 - [Building](#building)
 - [Build Status](#build-status)
@@ -82,6 +83,14 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
 [Source code](./src/7_dielectrics/main.cpp)
 
 [Link to Chapter 10](https://raytracing.github.io/books/RayTracingInOneWeekend.html#dielectrics)
+
+### 8. Positionable Camera
+
+![Image](./src/8_positionableCamera/output.png)
+
+[Source code](./src/8_positionableCamera/main.cpp)
+
+[Link to Chapter 11](https://raytracing.github.io/books/RayTracingInOneWeekend.html#positionablecamera)
 
 ## Library
 
