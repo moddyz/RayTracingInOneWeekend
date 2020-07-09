@@ -14,6 +14,7 @@
 #include <raytrace/material.h>
 #include <raytrace/reflect.h>
 #include <raytrace/refract.h>
+#include <raytrace/shlick.h>
 
 #include <iostream>
 
@@ -49,7 +50,7 @@ public:
 
         // Check if the incident ray is traveling in from the outside towards the surface,
         // or traveling within the surface towards the outside.
-        float incidentIndex, refractedIndex;
+        float     incidentIndex, refractedIndex;
         gm::Vec3f incidentNormal;
         if ( gm::DotProduct( i_ray.Direction(), i_hitRecord.m_normal ) < 0 )
         {
@@ -61,7 +62,7 @@ public:
         }
         else
         {
-            // The incident ray and the normal acute, thus the incident ray is within the geometric
+            // The incident ray and the normal form an acute angle, thus the incident ray is within the geometric
             // surface and heading outwards.
             incidentIndex  = m_refractiveIndex;
             refractedIndex = c_airRefractiveIndex;
@@ -70,12 +71,23 @@ public:
 
         gm::Vec3f normRayDir = gm::Normalize( i_ray.Direction() );
 
+        // Check for total internal reflection (when the ray is inside a material with
+        // higher frefractive index.
         double cosTheta = gm::Min( gm::DotProduct( -normRayDir, incidentNormal ), 1.0f );
         double sinTheta = sqrt( 1.0 - cosTheta * cosTheta );
         if ( ( incidentIndex / refractedIndex ) * sinTheta > 1.0 )
         {
-            gm::Vec3f reflectedDir = Reflect( normRayDir, incidentNormal );
-            o_scatteredRay         = gm::Ray( i_hitRecord.m_position, reflectedDir );
+            gm::Vec3f reflectedDirection = Reflect( normRayDir, incidentNormal );
+            o_scatteredRay               = gm::Ray( i_hitRecord.m_position, reflectedDirection );
+            return true;
+        }
+
+        // Schlick approximation for reflections produced when the ray is at a steep angle to
+        // to the geometric surface normal.
+        if ( gm::RandomNumber( gm::FloatRange( 0.0f, 1.0f ) ) < Schlick( cosTheta, incidentIndex / refractedIndex ) )
+        {
+            gm::Vec3f reflectedDirection = Reflect( normRayDir, incidentNormal );
+            o_scatteredRay               = gm::Ray( i_hitRecord.m_position, reflectedDirection );
             return true;
         }
 
