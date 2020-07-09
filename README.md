@@ -12,7 +12,7 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
   * [4. Antialiasing](#4-antialiasing)
   * [5. Diffuse materials](#5-diffuse-materials)
   * [6. Metal](#6-metal)
-  * [7. Dieletrics](#6-dieletrics)
+  * [7. Dielectrics](#7-dielectrics)
 - [Library](#library)
 - [Building](#building)
 - [Build Status](#build-status)
