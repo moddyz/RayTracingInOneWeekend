@@ -43,7 +43,7 @@ constexpr gm::FloatRange c_normalizedRange( 0.0f, 1.0f );
 /// \var Indentation
 ///
 /// 4 spaces.
-static const char* c_indentation = "    ";
+static const char* c_indent = "    ";
 
 /// Compute the ray color.
 ///
@@ -64,8 +64,8 @@ static gm::Vec3f ComputeRayColor( const gm::Ray&         i_ray,
 {
     if ( i_printDebug )
     {
-        std::cout << c_indentation << c_indentation << i_ray << std::endl;
-        std::cout << c_indentation << c_indentation << "Num bounces: " << i_numRayBounces << std::endl;
+        std::cout << c_indent << c_indent << i_ray << std::endl;
+        std::cout << c_indent << c_indent << "Num bounces: " << i_numRayBounces << std::endl;
     }
 
     if ( i_numRayBounces == 0 )
@@ -81,7 +81,7 @@ static gm::Vec3f ComputeRayColor( const gm::Ray&         i_ray,
     float               nearestHitMagnitude = std::numeric_limits< float >::max();
     for ( const raytrace::SceneObjectPtr& sceneObjectPtr : i_sceneObjectPtrs )
     {
-        gm::FloatRange magnitudeRange( 0.001f, // Fix for "Shadow acne" by culling hits which are too near.
+        gm::FloatRange magnitudeRange( 0.00001f, // Fix for "Shadow acne" by culling hits which are too near.
                                        nearestHitMagnitude );
         if ( sceneObjectPtr->Hit( i_ray, magnitudeRange, record ) )
         {
@@ -94,7 +94,9 @@ static gm::Vec3f ComputeRayColor( const gm::Ray&         i_ray,
     {
         if ( i_printDebug )
         {
-            std::cout << c_indentation << c_indentation << "Hit! " << std::endl;
+            std::cout << c_indent << c_indent << "Hit" << std::endl
+                      << c_indent << c_indent << c_indent << "position: " << record.m_position << std::endl
+                      << c_indent << c_indent << c_indent << "normal: " << record.m_normal << std::endl;
         }
 
         gm::Ray   scatteredRay;
@@ -109,7 +111,7 @@ static gm::Vec3f ComputeRayColor( const gm::Ray&         i_ray,
 
             if ( i_printDebug )
             {
-                std::cout << c_indentation << c_indentation << "Attenuation: " << attenuation << std::endl;
+                std::cout << c_indent << c_indent << "Attenuation: " << attenuation << std::endl;
             }
 
             return gm::Vec3f( attenuation[ 0 ] * descendentColor[ 0 ],
@@ -120,7 +122,7 @@ static gm::Vec3f ComputeRayColor( const gm::Ray&         i_ray,
         {
             if ( i_printDebug )
             {
-                std::cout << c_indentation << c_indentation << "Absorbed!" << std::endl;
+                std::cout << c_indent << c_indent << "Absorbed!" << std::endl;
             }
             // Material has completely absorbed the ray, thus return no color.
             return gm::Vec3f( 0, 0, 0 );
@@ -129,7 +131,7 @@ static gm::Vec3f ComputeRayColor( const gm::Ray&         i_ray,
 
     if ( i_printDebug )
     {
-        std::cout << c_indentation << c_indentation << "Background colour!" << std::endl;
+        std::cout << c_indent << c_indent << "Background colour!" << std::endl;
     }
 
     // Compute background color, by interpolating between two colors with the weight as the function of the ray
@@ -171,7 +173,7 @@ void WritePixel( const gm::Vec2i&          i_pixelCoord,
 
         if ( i_printDebug )
         {
-            std::cout << c_indentation << "Sample: " << sampleIndex << std::endl;
+            std::cout << c_indent << "Sample: " << sampleIndex << std::endl;
         }
 
         // Accumulate color.
@@ -179,7 +181,7 @@ void WritePixel( const gm::Vec2i&          i_pixelCoord,
         pixelColor += sampleColor;
         if ( i_printDebug )
         {
-            std::cout << c_indentation << "Sample color: " << sampleColor << std::endl;
+            std::cout << c_indent << "Sample color: " << sampleColor << std::endl;
         }
     }
 

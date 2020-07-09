@@ -70,7 +70,6 @@ public:
 
         gm::Vec3f normRayDir = gm::Normalize( i_ray.Direction() );
 
-        /*
         double cosTheta = gm::Min( gm::DotProduct( -normRayDir, incidentNormal ), 1.0f );
         double sinTheta = sqrt( 1.0 - cosTheta * cosTheta );
         if ( ( incidentIndex / refractedIndex ) * sinTheta > 1.0 )
@@ -79,7 +78,6 @@ public:
             o_scatteredRay         = gm::Ray( i_hitRecord.m_position, reflectedDir );
             return true;
         }
-        */
 
         // Compute new refracted direction.
         gm::Vec3f refractedDirection = Refract( normRayDir, incidentNormal, incidentIndex, refractedIndex );
