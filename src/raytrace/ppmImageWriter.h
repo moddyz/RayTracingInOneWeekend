@@ -4,8 +4,9 @@
 ///
 /// Serialization of an image into a PPM file on disk.
 
+#include <gm/types/intRange.h>
+
 #include <raytrace/imageBuffer.h>
-#include <raytrace/intRange.h>
 #include <raytrace/raytrace.h>
 
 #include <fstream>
@@ -33,9 +34,9 @@ inline bool WritePPMImage( const RGBImageBuffer& i_image, const std::string& i_f
                << i_image.Width() << ' ' << i_image.Height() << "\n255\n"; // Maximum color channel value.
 
     // PPM body.
-    for ( int yCoord : IntRange( i_image.Height() - 1, -1 ) )
+    for ( int yCoord = i_image.Height() - 1; yCoord >= 0; yCoord-- )
     {
-        for ( int xCoord : IntRange( 0, i_image.Width() ) )
+        for ( int xCoord : gm::IntRange( 0, i_image.Width() ) )
         {
             gm::Vec3f pixel = i_image( xCoord, yCoord );
             int       r     = static_cast< int >( 255.999 * pixel[ 0 ] );
