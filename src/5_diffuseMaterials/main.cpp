@@ -104,7 +104,7 @@ static gm::Vec3f ComputeRayColor( const gm::Ray& i_ray, int i_numRayBounces, con
 int main( int i_argc, char** i_argv )
 {
     // Parse command line arguments.
-    cxxopts::Options options( "1_sendingRays", "Sending rays into the scene to produce colors." );
+    cxxopts::Options options( "5_diffuseMaterials", "Ray tracing with absorbant, diffuse materials." );
     options.add_options()                                                                       // Command line options.
         ( "w,width", "Width of the image.", cxxopts::value< int >()->default_value( "384" ) )   // Width
         ( "h,height", "Height of the image.", cxxopts::value< int >()->default_value( "256" ) ) // Height;
