@@ -1,4 +1,4 @@
-/// \page 7_metal Metal
+/// \page 7_dielectrics Dielectrics
 ///
 /// Example program extending from \ref 6_metal, introducing dielectric materials
 /// which may refract light rays.
