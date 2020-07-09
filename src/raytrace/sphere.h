@@ -31,6 +31,28 @@ public:
     {
     }
 
+    virtual inline bool
+    Hit( const gm::Ray& i_ray, const gm::FloatRange& i_magnitudeRange, HitRecord& o_record ) const override
+    {
+        gm::Vec2f intersections;
+        if ( gm::RaySphereIntersection( m_origin, m_radius, i_ray.Origin(), i_ray.Direction(), intersections ) > 0 )
+        {
+            if ( intersections[ 0 ] < i_magnitudeRange.Max() && intersections[ 0 ] > i_magnitudeRange.Min() )
+            {
+                _Record( i_ray, intersections[ 0 ], o_record );
+                return true;
+            }
+            else if ( intersections[ 1 ] < i_magnitudeRange.Max() && intersections[ 1 ] > i_magnitudeRange.Min() )
+            {
+                _Record( i_ray, intersections[ 1 ], o_record );
+                return true;
+            }
+        }
+
+        // Sorry, missed!
+        return false;
+    }
+
     /* Reference implementation.
     virtual inline bool
     Hit( const gm::Ray& i_ray, const gm::FloatRange& i_magnitudeRange, HitRecord& o_record ) const override
@@ -68,28 +90,6 @@ public:
         return false;
     }
     */
-
-    virtual inline bool
-    Hit( const gm::Ray& i_ray, const gm::FloatRange& i_magnitudeRange, HitRecord& o_record ) const override
-    {
-        gm::Vec2f intersections;
-        if ( gm::RaySphereIntersection( m_origin, m_radius, i_ray.Origin(), i_ray.Direction(), intersections ) > 0 )
-        {
-            if ( intersections[ 0 ] < i_magnitudeRange.Max() && intersections[ 0 ] > i_magnitudeRange.Min() )
-            {
-                _Record( i_ray, intersections[ 0 ], o_record );
-                return true;
-            }
-            else if ( intersections[ 1 ] < i_magnitudeRange.Max() && intersections[ 1 ] > i_magnitudeRange.Min() )
-            {
-                _Record( i_ray, intersections[ 1 ], o_record );
-                return true;
-            }
-        }
-
-        // Sorry, missed!
-        return false;
-    }
 
 private:
     /// Helper method to record a ray hitting the sphere.
