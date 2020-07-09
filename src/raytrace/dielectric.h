@@ -2,7 +2,7 @@
 
 /// \file raytrace/metal.h
 ///
-/// Dieletric material representation for glass, diamond, and other material which
+/// Dielectric material representation for glass, diamond, and other material which
 /// refract light.
 
 #include <gm/types/vec3f.h>
@@ -25,17 +25,17 @@ RAYTRACE_NS_OPEN
 /// The refractive index of air.
 constexpr float c_airRefractiveIndex = 1.0f;
 
-/// \class Dieletric
+/// \class Dielectric
 ///
-/// The dieletric material refracts incoming rays.
+/// The dielectric material refracts incoming rays.
 ///
 /// Properties:
 /// - "refractiveIndex" which describes the refractive index of the material.
-class Dieletric : public Material
+class Dielectric : public Material
 {
 public:
     /// Explicit constructor with the refractive index of the material.
-    inline explicit Dieletric( float i_refractiveIndex )
+    inline explicit Dielectric( float i_refractiveIndex )
         : m_refractiveIndex( i_refractiveIndex )
     {
     }

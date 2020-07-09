@@ -12,6 +12,7 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
   * [4. Antialiasing](#4-antialiasing)
   * [5. Diffuse materials](#5-diffuse-materials)
   * [6. Metal](#6-metal)
+  * [7. Dieletrics](#6-dieletrics)
 - [Library](#library)
 - [Building](#building)
 - [Build Status](#build-status)
@@ -74,11 +75,11 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
 
 [Link to Chapter 9](https://raytracing.github.io/books/RayTracingInOneWeekend.html#metal)
 
-### 7. Dieletrics
+### 7. Dielectrics
 
-![Image](./src/7_dieletrics/output.png)
+![Image](./src/7_dielectrics/output.png)
 
-[Source code](./src/7_dieletrics/main.cpp)
+[Source code](./src/7_dielectrics/main.cpp)
 
 [Link to Chapter 10](https://raytracing.github.io/books/RayTracingInOneWeekend.html#dielectrics)
 

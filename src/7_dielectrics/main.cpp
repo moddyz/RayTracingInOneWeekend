@@ -1,6 +1,6 @@
 /// \page 7_metal Metal
 ///
-/// Example program extending from \ref 6_metal, introducing dieletric materials
+/// Example program extending from \ref 6_metal, introducing dielectric materials
 /// which may refract light rays.
 
 #include <cxxopts.hpp>
@@ -20,7 +20,7 @@
 #include <gm/functions/randomNumber.h>
 
 #include <raytrace/camera.h>
-#include <raytrace/dieletric.h>
+#include <raytrace/dielectric.h>
 #include <raytrace/hitRecord.h>
 #include <raytrace/imageBuffer.h>
 #include <raytrace/lambert.h>
@@ -206,8 +206,8 @@ int main( int i_argc, char** i_argv )
     // Parse command line arguments.
     // ------------------------------------------------------------------------
 
-    cxxopts::Options options( "7_dieletrics",
-                              "Ray tracing with dieletric material (glass, diamonond, refractive mediums)." );
+    cxxopts::Options options( "7_dielectrics",
+                              "Ray tracing with dielectric material (glass, diamonond, refractive mediums)." );
     options.add_options()                                                                       // Command line options.
         ( "w,width", "Width of the image.", cxxopts::value< int >()->default_value( "384" ) )   // Width
         ( "h,height", "Height of the image.", cxxopts::value< int >()->default_value( "256" ) ) // Height;
@@ -269,10 +269,16 @@ int main( int i_argc, char** i_argv )
         gm::Vec3f( 1.0f, 0.0f, -1.0f ),
         0.5,
         std::make_shared< raytrace::Metal >( /* albedo */ gm::Vec3f( 0.8f, 0.6f, 0.2f ), /* fuzziness */ 0.02 ) ) );
+
+    // Refractive dielectric spheres.
     sceneObjects.push_back( std::make_unique< raytrace::Sphere >(
         gm::Vec3f( -1.0f, 0.0f, -1.0f ),
         0.5,
-        std::make_shared< raytrace::Dieletric >( /* refractiveIndex = glass */ 1.5 ) ) );
+        std::make_shared< raytrace::Dielectric >( /* refractiveIndex = glass */ 1.5 ) ) );
+    sceneObjects.push_back( std::make_unique< raytrace::Sphere >(
+        gm::Vec3f( -1.0f, 0.0f, -1.0f ),
+        -0.45,
+        std::make_shared< raytrace::Dielectric >( /* refractiveIndex = glass */ 1.5 ) ) );
 
     // ------------------------------------------------------------------------
     // Compute ray colors.
