@@ -118,7 +118,7 @@ Common functions and classes are refactored into the [raytrace library](./src/ra
 ## Sequel
 
 The sequel, [Ray Tracing: The Next Week](https://raytracing.github.io/books/RayTracingTheNextWeek.html),
-is implemented under [RayTracingTheNextWeek](https://github.com/moddyz/RayTracingTheNextWeek)
+is implemented under [RayTracingTheNextWeek](https://github.com/moddyz/RayTracingTheNextWeek).
 
 ## Documentation
 
