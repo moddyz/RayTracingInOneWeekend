@@ -13,11 +13,12 @@ option(BUILD_DOCUMENTATION "Build doxygen documentation." ON)
 
 # Cross-platform compatibility.
 if(UNIX AND NOT APPLE)
-  set(LINUX TRUE)
+    set(LINUX TRUE)
 endif()
 
 # Discover macros.
-list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake/macros")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
+                      ${CMAKE_CURRENT_SOURCE_DIR}/cmake/macros)
 include(Public)
 
 # Testing.
@@ -28,7 +29,7 @@ endif()
 
 if(BUILD_DOCUMENTATION)
     file(
-        COPY ${CMAKE_SOURCE_DIR}/README.md
+        COPY ${CMAKE_CURRENT_SOURCE_DIR}/README.md
         DESTINATION ${CMAKE_BINARY_DIR}
     )
 
@@ -51,4 +52,4 @@ add_subdirectory(thirdparty)
 add_subdirectory(src)
 
 # Install exported targets.
-#export_project(${CMAKE_SOURCE_DIR}/cmake/Config.cmake.in)
+#export_project(${CMAKE_CURRENT_SOURCE_DIR}/cmake/Config.cmake.in)
