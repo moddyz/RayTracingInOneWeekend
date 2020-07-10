@@ -56,7 +56,12 @@ int main( int i_argc, char** i_argv )
     raytrace::RGBImageBuffer image( imageWidth, imageHeight );
 
     // Camera model.
-    raytrace::Camera camera( ( float ) imageWidth / imageHeight );
+    raytrace::Camera camera(
+        /* origin */ gm::Vec3f( 0, 0, 0 ),
+        /* lookAt */ gm::Vec3f( 0, 0, -1 ),
+        /* viewUp */ gm::Vec3f( 0, 1, 0 ),
+        /* verticalFov */ 90.0f,
+        /* aspectRatio */ ( float ) imageWidth / imageHeight );
 
     // Cast a ray per pixel to compute the color.
     for ( const gm::Vec2i& pixelCoord : image.Extent() )

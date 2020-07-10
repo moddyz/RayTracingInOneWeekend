@@ -69,7 +69,8 @@ static gm::Vec3f ComputeRayColor( const gm::Ray& i_ray, const SceneObjectPtrs& i
 int main( int i_argc, char** i_argv )
 {
     // Parse command line arguments.
-    cxxopts::Options options( "3_surfaceNormalsAndMultipleObjects", "Shading multiple scene objects by their surface normals." );
+    cxxopts::Options options( "3_surfaceNormalsAndMultipleObjects",
+                              "Shading multiple scene objects by their surface normals." );
     options.add_options()                                                                       // Command line options.
         ( "w,width", "Width of the image.", cxxopts::value< int >()->default_value( "384" ) )   // Width
         ( "h,height", "Height of the image.", cxxopts::value< int >()->default_value( "256" ) ) // Height;
@@ -84,7 +85,12 @@ int main( int i_argc, char** i_argv )
     raytrace::RGBImageBuffer image( imageWidth, imageHeight );
 
     // Camera model.
-    raytrace::Camera camera( ( float ) imageWidth / imageHeight );
+    raytrace::Camera camera(
+        /* origin */ gm::Vec3f( 0, 0, 0 ),
+        /* lookAt */ gm::Vec3f( 0, 0, -1 ),
+        /* viewUp */ gm::Vec3f( 0, 1, 0 ),
+        /* verticalFov */ 90.0f,
+        /* aspectRatio */ ( float ) imageWidth / imageHeight );
 
     // Allocate scene objects.
     SceneObjectPtrs sceneObjectPtrs;

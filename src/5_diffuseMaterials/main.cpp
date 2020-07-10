@@ -24,9 +24,9 @@
 #include <raytrace/camera.h>
 #include <raytrace/hitRecord.h>
 #include <raytrace/imageBuffer.h>
+#include <raytrace/lambert.h>
 #include <raytrace/ppmImageWriter.h>
 #include <raytrace/sphere.h>
-#include <raytrace/lambert.h>
 
 /// \typedef SceneObjectPtrs
 ///
@@ -127,7 +127,12 @@ int main( int i_argc, char** i_argv )
     raytrace::RGBImageBuffer image( imageWidth, imageHeight );
 
     // Camera model.
-    raytrace::Camera camera( ( float ) imageWidth / imageHeight );
+    raytrace::Camera camera(
+        /* origin */ gm::Vec3f( 0, 0, 0 ),
+        /* lookAt */ gm::Vec3f( 0, 0, -1 ),
+        /* viewUp */ gm::Vec3f( 0, 1, 0 ),
+        /* verticalFov */ 90.0f,
+        /* aspectRatio */ ( float ) imageWidth / imageHeight );
 
     // Allocate materials.
     raytrace::MaterialSharedPtr lambert = std::make_shared< raytrace::Lambert >( gm::Vec3f( 0.5f, 0.5f, 0.5f ) );

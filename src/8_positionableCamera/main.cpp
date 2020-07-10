@@ -220,7 +220,7 @@ int main( int i_argc, char** i_argv )
           cxxopts::value< int >()->default_value( "50" ) ) // Maximum number of light bounces before termination.
         ( "f,verticalFov",
           "Vertical field of view of the camera, in degrees.",
-          cxxopts::value< float >()->default_value( "120" ) ) // Maximum number of light bounces before termination.
+          cxxopts::value< float >()->default_value( "45" ) ) // Maximum number of light bounces before termination.
         ( "d,debug", "Turn on debug mode.", cxxopts::value< bool >()->default_value( "false" ) ) // Width
         ( "x,debugXCoord",
           "The x-coordinate of the pixel in the image to print debug information for.",
@@ -248,7 +248,12 @@ int main( int i_argc, char** i_argv )
     raytrace::RGBImageBuffer image( imageWidth, imageHeight );
 
     // Camera model.
-    raytrace::Camera camera( ( float ) imageWidth / imageHeight, verticalFov );
+    raytrace::Camera camera(
+        /* origin */ gm::Vec3f( -2, 1.5, 1 ),
+        /* lookAt */ gm::Vec3f( 0, 0, -1 ),
+        /* viewUp */ gm::Vec3f( 0, 1, 0 ),
+        /* verticalFov */ verticalFov,
+        /* aspectRatio */ ( float ) imageWidth / imageHeight );
 
     // ------------------------------------------------------------------------
     // Allocate scene objects.

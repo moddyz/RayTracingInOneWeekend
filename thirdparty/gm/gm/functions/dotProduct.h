@@ -24,7 +24,7 @@
 GM_NS_OPEN
 
 /// Compute the dot product of two \ref Vec2f, \p i_lhs
-/// and \p i_lhs, and return the result.
+/// and \p i_rhs, and return the result.
 /// \ingroup gm_functions_linearAlgebra
 ///
 /// \param i_lhs Left hand side vector.
@@ -37,7 +37,7 @@ GM_HOST_DEVICE inline float DotProduct( const Vec2f& i_lhs, const Vec2f& i_rhs )
 }
 
 /// Compute the dot product of two \ref Vec3f, \p i_lhs
-/// and \p i_lhs, and return the result.
+/// and \p i_rhs, and return the result.
 /// \ingroup gm_functions_linearAlgebra
 ///
 /// \param i_lhs Left hand side vector.
@@ -50,7 +50,7 @@ GM_HOST_DEVICE inline float DotProduct( const Vec3f& i_lhs, const Vec3f& i_rhs )
 }
 
 /// Compute the dot product of two \ref Vec4f, \p i_lhs
-/// and \p i_lhs, and return the result.
+/// and \p i_rhs, and return the result.
 /// \ingroup gm_functions_linearAlgebra
 ///
 /// \param i_lhs Left hand side vector.
