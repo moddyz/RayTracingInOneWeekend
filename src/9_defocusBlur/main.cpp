@@ -1,7 +1,7 @@
-/// \page 9_defocusBlur Positionable Camera
+/// \page 9_defocusBlur De-focus blur
 ///
-/// Example program extending from \ref 7_dielectrics, which introduces the ability
-/// to re-position the camera.
+/// Example program extending from \ref 8_positionableCamera, adding camera aperture
+/// and focal distance parameters to control the depth of field.
 
 #include <cxxopts.hpp>
 

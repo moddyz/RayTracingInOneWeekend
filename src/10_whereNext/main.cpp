@@ -1,7 +1,7 @@
-/// \page 8_positionableCamera Positionable Camera
+/// \page 10_whereNext Where Next?
 ///
-/// Example program extending from \ref 7_dielectrics, which introduces the ability
-/// to re-position the camera.
+/// Final program extending from \ref 9_defocusBlur, which produces a scene
+/// populated with more spheres with different material parameters!
 
 #include <cxxopts.hpp>
 
@@ -26,6 +26,7 @@
 #include <raytrace/lambert.h>
 #include <raytrace/metal.h>
 #include <raytrace/ppmImageWriter.h>
+#include <raytrace/randomPointInUnitDisk.h>
 #include <raytrace/sphere.h>
 
 #include <iostream>
@@ -81,7 +82,7 @@ static gm::Vec3f ComputeRayColor( const gm::Ray&         i_ray,
     float               nearestHitMagnitude = std::numeric_limits< float >::max();
     for ( const raytrace::SceneObjectPtr& sceneObjectPtr : i_sceneObjectPtrs )
     {
-        gm::FloatRange magnitudeRange( 0.00001f, // Fix for "Shadow acne" by culling hits which are too near.
+        gm::FloatRange magnitudeRange( 0.001f, // Fix for "Shadow acne" by culling hits which are too near.
                                        nearestHitMagnitude );
         if ( sceneObjectPtr->Hit( i_ray, magnitudeRange, record ) )
         {
@@ -140,7 +141,7 @@ static gm::Vec3f ComputeRayColor( const gm::Ray&         i_ray,
     return gm::LinearInterpolation( gm::Vec3f( 1.0, 1.0, 1.0 ), gm::Vec3f( 0.5, 0.7, 1.0 ), weight );
 }
 
-void WritePixel( const gm::Vec2i&          i_pixelCoord,
+void ShadePixel( const gm::Vec2i&          i_pixelCoord,
                  int                       i_samplesPerPixel,
                  int                       i_rayBounceLimit,
                  const raytrace::Camera&   i_camera,
@@ -153,6 +154,9 @@ void WritePixel( const gm::Vec2i&          i_pixelCoord,
         std::cout << "Pixel " << i_pixelCoord << std::endl;
     }
 
+    // This could be constant over the entire image.  But I don't want to pass in any more function parameters...
+    const float lensRadius = i_camera.Aperture() * 0.5f;
+
     // Accumulate pixel color over multiple samples.
     gm::Vec3f pixelColor;
     for ( int sampleIndex = 0; sampleIndex < i_samplesPerPixel; ++sampleIndex )
@@ -161,16 +165,22 @@ void WritePixel( const gm::Vec2i&          i_pixelCoord,
         float u = ( float( i_pixelCoord.X() ) + gm::RandomNumber( c_normalizedRange ) ) / o_image.Extent().Max().X();
         float v = ( float( i_pixelCoord.Y() ) + gm::RandomNumber( c_normalizedRange ) ) / o_image.Extent().Max().Y();
 
-        gm::Ray ray( /* origin */ i_camera.Origin(),               // The origin of the ray is the camera origin.
+        gm::Vec3f randomPointInLens = lensRadius * raytrace::RandomPointInUnitDisk();
+        gm::Vec3f lensOffset        = randomPointInLens.X() * i_camera.Right() + randomPointInLens.Y() * i_camera.Up();
+
+        gm::Ray ray( /* origin */ i_camera.Origin() + lensOffset,  // The origin of the ray is the camera origin.
                      /* direction */ i_camera.ViewportBottomLeft() // Starting from the viewport bottom left...
                          + ( u * i_camera.ViewportHorizontal() )   // Horizontal offset.
                          + ( v * i_camera.ViewportVertical() )     // Vertical offset.
                          - i_camera.Origin()                       // Get difference vector from camera origin.
+
+                         - lensOffset // Since the origin was offset, we must apply the inverse offset to
+                                      // the ray direction such that the ray position _at the focal plane_
+                                      // is the same as before!
         );
 
         // Normalize the direction of the ray.
         ray.Direction() = gm::Normalize( ray.Direction() );
-
         if ( i_printDebug )
         {
             std::cout << c_indent << "Sample: " << sampleIndex << std::endl;
@@ -200,14 +210,72 @@ void WritePixel( const gm::Vec2i&          i_pixelCoord,
     o_image( i_pixelCoord.X(), i_pixelCoord.Y() ) = pixelColor;
 }
 
+void PopulateSceneObjects( SceneObjectPtrs& o_sceneObjects )
+{
+    raytrace::MaterialSharedPtr groundMaterial = std::make_shared< raytrace::Lambert >( gm::Vec3f( 0.5, 0.5, 0.5 ) );
+    o_sceneObjects.push_back( std::make_unique< raytrace::Sphere >( gm::Vec3f( 0, -1000, 0 ), 1000, groundMaterial ) );
+
+    for ( int a = -11; a < 11; a++ )
+    {
+        for ( int b = -11; b < 11; b++ )
+        {
+            gm::Vec3f center( a + 0.9 * gm::RandomNumber( c_normalizedRange ),
+                              0.2,
+                              b + 0.9 * gm::RandomNumber( c_normalizedRange ) );
+            if ( gm::Length( center - gm::Vec3f( 4, 0.2, 0 ) ) > 0.9 )
+            {
+                float materialChoice = gm::RandomNumber( c_normalizedRange );
+                if ( materialChoice < 0.8 )
+                {
+                    // Diffuse.
+                    gm::Vec3f albedo( gm::RandomNumber( c_normalizedRange ),
+                                      gm::RandomNumber( c_normalizedRange ),
+                                      gm::RandomNumber( c_normalizedRange ) );
+
+                    raytrace::MaterialSharedPtr sphereMaterial = std::make_shared< raytrace::Lambert >( albedo );
+                    o_sceneObjects.push_back( std::make_unique< raytrace::Sphere >( center, 0.2, sphereMaterial ) );
+                }
+                else if ( materialChoice < 0.95 )
+                {
+                    // Metal.
+                    gm::Vec3f albedo( gm::RandomNumber( gm::FloatRange( 0.5, 1.0 ) ),
+                                      gm::RandomNumber( gm::FloatRange( 0.5, 1.0 ) ),
+                                      gm::RandomNumber( gm::FloatRange( 0.5, 1.0 ) ) );
+                    float     fuzziness = gm::RandomNumber( gm::FloatRange( 0.0, 0.5 ) );
+
+                    raytrace::MaterialSharedPtr sphereMaterial =
+                        std::make_shared< raytrace::Metal >( albedo, fuzziness );
+
+                    o_sceneObjects.push_back( std::make_unique< raytrace::Sphere >( center, 0.2, sphereMaterial ) );
+                }
+                else
+                {
+                    // Glass.
+                    raytrace::MaterialSharedPtr sphereMaterial = std::make_shared< raytrace::Dielectric >( 1.5 );
+                    o_sceneObjects.push_back( std::make_unique< raytrace::Sphere >( center, 0.2, sphereMaterial ) );
+                }
+            }
+        }
+    }
+
+    raytrace::MaterialSharedPtr material1 = std::make_shared< raytrace::Dielectric >( 1.5 );
+    o_sceneObjects.push_back( std::make_unique< raytrace::Sphere >( gm::Vec3f( 0, 1, 0 ), 1.0, material1 ) );
+
+    raytrace::MaterialSharedPtr material2 = std::make_shared< raytrace::Lambert >( gm::Vec3f( 0.4, 0.2, 0.1 ) );
+    o_sceneObjects.push_back( std::make_unique< raytrace::Sphere >( gm::Vec3f( -4, 1, 0 ), 1.0, material2 ) );
+
+    raytrace::MaterialSharedPtr material3 = std::make_shared< raytrace::Metal >( gm::Vec3f( 0.7, 0.6, 0.5 ), 0.0 );
+    o_sceneObjects.push_back( std::make_unique< raytrace::Sphere >( gm::Vec3f( 4, 1, 0 ), 1.0, material3 ) );
+}
+
 int main( int i_argc, char** i_argv )
 {
     // ------------------------------------------------------------------------
     // Parse command line arguments.
     // ------------------------------------------------------------------------
 
-    cxxopts::Options options( "8_positionableCamera",
-                              "Adding a re-positionable camera." );
+    cxxopts::Options options( "10_whereNext",
+                              "A final render with more spheres, before moving on to learn other cool features." );
     options.add_options()                                                                       // Command line options.
         ( "w,width", "Width of the image.", cxxopts::value< int >()->default_value( "384" ) )   // Width
         ( "h,height", "Height of the image.", cxxopts::value< int >()->default_value( "256" ) ) // Height;
@@ -220,8 +288,11 @@ int main( int i_argc, char** i_argv )
           cxxopts::value< int >()->default_value( "50" ) ) // Maximum number of light bounces before termination.
         ( "f,verticalFov",
           "Vertical field of view of the camera, in degrees.",
-          cxxopts::value< float >()->default_value( "45" ) ) // Maximum number of light bounces before termination.
-        ( "d,debug", "Turn on debug mode.", cxxopts::value< bool >()->default_value( "false" ) ) // Width
+          cxxopts::value< float >()->default_value( "20" ) ) // Camera param.
+        ( "a,aperture",
+          "Aperture of the camera (lens diameter).",
+          cxxopts::value< float >()->default_value( "0.2" ) )                                    // Camera param.
+        ( "d,debug", "Turn on debug mode.", cxxopts::value< bool >()->default_value( "false" ) ) // Debug mode.
         ( "x,debugXCoord",
           "The x-coordinate of the pixel in the image to print debug information for.",
           cxxopts::value< int >()->default_value( "0" ) ) // Xcoord.
@@ -235,6 +306,7 @@ int main( int i_argc, char** i_argv )
     int         samplesPerPixel = args[ "samplesPerPixel" ].as< int >();
     int         rayBounceLimit  = args[ "rayBounceLimit" ].as< int >();
     float       verticalFov     = args[ "verticalFov" ].as< float >();
+    float       aperture        = args[ "aperture" ].as< float >();
     std::string filePath        = args[ "output" ].as< std::string >();
     bool        debug           = args[ "debug" ].as< bool >();
     int         debugXCoord     = args[ "debugXCoord" ].as< int >();
@@ -248,46 +320,23 @@ int main( int i_argc, char** i_argv )
     raytrace::RGBImageBuffer image( imageWidth, imageHeight );
 
     // Camera model.
+    gm::Vec3f        origin = gm::Vec3f( 13, 2, 3 );
+    gm::Vec3f        lookAt = gm::Vec3f( 0, 0, 0 );
     raytrace::Camera camera(
-        /* origin */ gm::Vec3f( -2, 1.5, 1 ),
-        /* lookAt */ gm::Vec3f( 0, 0, -1 ),
+        /* origin */ origin,
+        /* lookAt */ lookAt,
         /* viewUp */ gm::Vec3f( 0, 1, 0 ),
         /* verticalFov */ verticalFov,
-        /* aspectRatio */ ( float ) imageWidth / imageHeight );
+        /* aspectRatio */ ( float ) imageWidth / imageHeight,
+        /* aperture */ aperture,
+        /* focalDistance */ 10.0 );
 
     // ------------------------------------------------------------------------
     // Allocate scene objects.
     // ------------------------------------------------------------------------
 
     SceneObjectPtrs sceneObjects;
-
-    // Lambert sphere.
-    sceneObjects.push_back( std::make_unique< raytrace::Sphere >(
-        gm::Vec3f( 0.0f, 0.0f, -1.0f ),
-        0.5,
-        std::make_shared< raytrace::Lambert >( /* albedo */ gm::Vec3f( 0.7f, 0.3f, 0.3f ) ) ) );
-
-    // Ground plane (also lambert).
-    sceneObjects.push_back( std::make_unique< raytrace::Sphere >(
-        gm::Vec3f( 0.0f, -100.5, -1.0f ),
-        100,
-        std::make_shared< raytrace::Lambert >( /* albedo */ gm::Vec3f( 0.8f, 0.8f, 0.0f ) ) ) );
-
-    // Reflective metal spheres, with some fuzziness.
-    sceneObjects.push_back( std::make_unique< raytrace::Sphere >(
-        gm::Vec3f( 1.0f, 0.0f, -1.0f ),
-        0.5,
-        std::make_shared< raytrace::Metal >( /* albedo */ gm::Vec3f( 0.8f, 0.6f, 0.2f ), /* fuzziness */ 0.02 ) ) );
-
-    // Refractive dielectric spheres.
-    sceneObjects.push_back( std::make_unique< raytrace::Sphere >(
-        gm::Vec3f( -1.0f, 0.0f, -1.0f ),
-        0.5,
-        std::make_shared< raytrace::Dielectric >( /* refractiveIndex = glass */ 1.5 ) ) );
-    sceneObjects.push_back( std::make_unique< raytrace::Sphere >(
-        gm::Vec3f( -1.0f, 0.0f, -1.0f ),
-        -0.45,
-        std::make_shared< raytrace::Dielectric >( /* refractiveIndex = glass */ 1.5 ) ) );
+    PopulateSceneObjects( sceneObjects );
 
     // ------------------------------------------------------------------------
     // Compute ray colors.
@@ -295,7 +344,7 @@ int main( int i_argc, char** i_argv )
 
     for ( const gm::Vec2i& pixelCoord : image.Extent() )
     {
-        WritePixel( pixelCoord, samplesPerPixel, rayBounceLimit, camera, sceneObjects, image );
+        ShadePixel( pixelCoord, samplesPerPixel, rayBounceLimit, camera, sceneObjects, image );
     }
 
     // ------------------------------------------------------------------------
@@ -304,7 +353,7 @@ int main( int i_argc, char** i_argv )
 
     if ( debug )
     {
-        WritePixel( gm::Vec2i( debugXCoord, debugYCoord ),
+        ShadePixel( gm::Vec2i( debugXCoord, debugYCoord ),
                     samplesPerPixel,
                     rayBounceLimit,
                     camera,
