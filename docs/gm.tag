@@ -196,6 +196,92 @@
     </member>
   </compound>
   <compound kind="file">
+    <name>clamp.h</name>
+    <path>/code/GraphicsMath/src/gm/functions/</path>
+    <filename>clamp_8h</filename>
+    <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
+    <includes id="floatRange_8h" name="floatRange.h" local="no" imported="no">gm/types/floatRange.h</includes>
+    <includes id="intRange_8h" name="intRange.h" local="no" imported="no">gm/types/intRange.h</includes>
+    <includes id="mat3f_8h" name="mat3f.h" local="no" imported="no">gm/types/mat3f.h</includes>
+    <includes id="mat4f_8h" name="mat4f.h" local="no" imported="no">gm/types/mat4f.h</includes>
+    <includes id="vec2f_8h" name="vec2f.h" local="no" imported="no">gm/types/vec2f.h</includes>
+    <includes id="vec2i_8h" name="vec2i.h" local="no" imported="no">gm/types/vec2i.h</includes>
+    <includes id="vec3f_8h" name="vec3f.h" local="no" imported="no">gm/types/vec3f.h</includes>
+    <includes id="vec3i_8h" name="vec3i.h" local="no" imported="no">gm/types/vec3i.h</includes>
+    <includes id="vec4f_8h" name="vec4f.h" local="no" imported="no">gm/types/vec4f.h</includes>
+    <includes id="vec4i_8h" name="vec4i.h" local="no" imported="no">gm/types/vec4i.h</includes>
+    <member kind="function">
+      <type>GM_NS_OPEN GM_HOST_DEVICE float</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga5c89a065cd7ebd41c0d19ffc3002042e</anchor>
+      <arglist>(const float &amp;i_value, const FloatRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE int</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga064a6c4d3494c2c951963d0468c8a9fa</anchor>
+      <arglist>(const int &amp;i_value, const IntRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Mat3f</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga4daedb8da222e40d8156af73fc6f7951</anchor>
+      <arglist>(const Mat3f &amp;i_value, const FloatRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Mat4f</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga8c764e5134bef4e42ac0c1e92af44ef4</anchor>
+      <arglist>(const Mat4f &amp;i_value, const FloatRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec2f</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga21fe6277b7df1ed38a172bae00595430</anchor>
+      <arglist>(const Vec2f &amp;i_value, const FloatRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec3f</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gaf87cdc923c543b2c3eb22c30241b1411</anchor>
+      <arglist>(const Vec3f &amp;i_value, const FloatRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec4f</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gacb2be337cb312d143496cd79e68da31b</anchor>
+      <arglist>(const Vec4f &amp;i_value, const FloatRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec2i</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga739accba8a493aa8647d2202fa93ff10</anchor>
+      <arglist>(const Vec2i &amp;i_value, const IntRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec3i</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gaf0d52468eb26dbc61c8b2a30a7f3cfb2</anchor>
+      <arglist>(const Vec3i &amp;i_value, const IntRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec4i</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga2346a93e131bd30774d106e9a12124b1</anchor>
+      <arglist>(const Vec4i &amp;i_value, const IntRange &amp;i_range)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
     <name>degrees.h</name>
     <path>/code/GraphicsMath/src/gm/functions/</path>
     <filename>degrees_8h</filename>
@@ -412,42 +498,42 @@
     <member kind="function">
       <type>GM_NS_OPEN GM_HOST_DEVICE float</type>
       <name>LinearInterpolation</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
       <anchor>ga277d2156d5ef3de29f2ba6d14e3d0bf2</anchor>
       <arglist>(const float &amp;i_source, const float &amp;i_target, const float &amp;i_weight)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Mat3f</type>
       <name>LinearInterpolation</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
       <anchor>ga18cff1ac7be5e714cb3bec000a23597e</anchor>
       <arglist>(const Mat3f &amp;i_source, const Mat3f &amp;i_target, const float &amp;i_weight)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Mat4f</type>
       <name>LinearInterpolation</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
       <anchor>ga2a4930dc49ff92002803e09977e7ea79</anchor>
       <arglist>(const Mat4f &amp;i_source, const Mat4f &amp;i_target, const float &amp;i_weight)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec2f</type>
       <name>LinearInterpolation</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
       <anchor>gae16b73ed33599600ce0f63609ea29280</anchor>
       <arglist>(const Vec2f &amp;i_source, const Vec2f &amp;i_target, const float &amp;i_weight)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec3f</type>
       <name>LinearInterpolation</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
       <anchor>gad488515696b51df72e6fcabf184b668e</anchor>
       <arglist>(const Vec3f &amp;i_source, const Vec3f &amp;i_target, const float &amp;i_weight)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec4f</type>
       <name>LinearInterpolation</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
       <anchor>gab7fb01b198f2b3a97ff16317f4137f00</anchor>
       <arglist>(const Vec4f &amp;i_source, const Vec4f &amp;i_target, const float &amp;i_weight)</arglist>
     </member>
@@ -466,42 +552,42 @@
     <member kind="function">
       <type>GM_NS_OPEN GM_HOST_DEVICE float</type>
       <name>LinearMap</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
       <anchor>ga5798f027478c55bade52df30921e7982</anchor>
       <arglist>(const float &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Mat3f</type>
       <name>LinearMap</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
       <anchor>ga263b14faec42590b79c9279ab3f1ad99</anchor>
       <arglist>(const Mat3f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Mat4f</type>
       <name>LinearMap</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
       <anchor>ga1eb7b9b44b3def2bcbc54ca6ec198b2b</anchor>
       <arglist>(const Mat4f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec2f</type>
       <name>LinearMap</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
       <anchor>ga5fcee0bde103f8a7f117a6a48c6a94c1</anchor>
       <arglist>(const Vec2f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec3f</type>
       <name>LinearMap</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
       <anchor>gae2b1e291707e7fcf0896da548ca64976</anchor>
       <arglist>(const Vec3f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
     <member kind="function">
       <type>GM_HOST_DEVICE Vec4f</type>
       <name>LinearMap</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
       <anchor>ga8128bd11dd098ac73ed334771d311fd1</anchor>
       <arglist>(const Vec4f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
@@ -776,6 +862,7 @@
     <path>/code/GraphicsMath/src/gm/functions/</path>
     <filename>randomNumber_8h</filename>
     <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
+    <includes id="assert_8h" name="assert.h" local="no" imported="no">gm/base/assert.h</includes>
     <includes id="floatRange_8h" name="floatRange.h" local="no" imported="no">gm/types/floatRange.h</includes>
     <includes id="intRange_8h" name="intRange.h" local="no" imported="no">gm/types/intRange.h</includes>
     <member kind="function">
@@ -1081,6 +1168,21 @@
     <filename>mat4fArray_8h</filename>
     <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
     <includes id="mat4f_8h" name="mat4f.h" local="no" imported="no">gm/types/mat4f.h</includes>
+  </compound>
+  <compound kind="file">
+    <name>ray.h</name>
+    <path>/code/GraphicsMath/src/gm/types/</path>
+    <filename>ray_8h</filename>
+    <includes id="gm_8h" name="gm.h" local="no" imported="no">gm/gm.h</includes>
+    <includes id="vec3f_8h" name="vec3f.h" local="no" imported="no">gm/types/vec3f.h</includes>
+    <class kind="class">Ray</class>
+    <member kind="function">
+      <type>std::ostream &amp;</type>
+      <name>operator&lt;&lt;</name>
+      <anchorfile>ray_8h.html</anchorfile>
+      <anchor>ad53aaa060b58b2dc818189dd4651e341</anchor>
+      <arglist>(std::ostream &amp;o_outputStream, const Ray &amp;i_composite)</arglist>
+    </member>
   </compound>
   <compound kind="file">
     <name>vec2f.h</name>
@@ -1628,6 +1730,38 @@
     </member>
   </compound>
   <compound kind="class">
+    <name>Vec3iRange::iterator</name>
+    <filename>classVec3iRange_1_1iterator.html</filename>
+    <member kind="function">
+      <type></type>
+      <name>iterator</name>
+      <anchorfile>classVec3iRange_1_1iterator.html</anchorfile>
+      <anchor>a06d15901c762194e9b6bf4e4b91bca79</anchor>
+      <arglist>(const Vec3i &amp;i_current, const Vec3i &amp;i_min, const Vec3i &amp;i_max)</arglist>
+    </member>
+    <member kind="function">
+      <type>bool</type>
+      <name>operator!=</name>
+      <anchorfile>classVec3iRange_1_1iterator.html</anchorfile>
+      <anchor>ab6e33ae618faf06600a990d12b456871</anchor>
+      <arglist>(const iterator &amp;i_other) const</arglist>
+    </member>
+    <member kind="function">
+      <type>const Vec3i &amp;</type>
+      <name>operator*</name>
+      <anchorfile>classVec3iRange_1_1iterator.html</anchorfile>
+      <anchor>ad4d468b3ea599698f77c9010214b9278</anchor>
+      <arglist>() const</arglist>
+    </member>
+    <member kind="function">
+      <type>const iterator &amp;</type>
+      <name>operator++</name>
+      <anchorfile>classVec3iRange_1_1iterator.html</anchorfile>
+      <anchor>a2c750f8aa1d5663232d499d690e3c0d4</anchor>
+      <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
     <name>Vec2iRange::iterator</name>
     <filename>classVec2iRange_1_1iterator.html</filename>
     <member kind="function">
@@ -1720,38 +1854,6 @@
       <name>operator++</name>
       <anchorfile>classIntRange_1_1iterator.html</anchorfile>
       <anchor>a3106ed723f1c7bb6ef7d5dd774281c97</anchor>
-      <arglist>()</arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>Vec3iRange::iterator</name>
-    <filename>classVec3iRange_1_1iterator.html</filename>
-    <member kind="function">
-      <type></type>
-      <name>iterator</name>
-      <anchorfile>classVec3iRange_1_1iterator.html</anchorfile>
-      <anchor>a06d15901c762194e9b6bf4e4b91bca79</anchor>
-      <arglist>(const Vec3i &amp;i_current, const Vec3i &amp;i_min, const Vec3i &amp;i_max)</arglist>
-    </member>
-    <member kind="function">
-      <type>bool</type>
-      <name>operator!=</name>
-      <anchorfile>classVec3iRange_1_1iterator.html</anchorfile>
-      <anchor>ab6e33ae618faf06600a990d12b456871</anchor>
-      <arglist>(const iterator &amp;i_other) const</arglist>
-    </member>
-    <member kind="function">
-      <type>const Vec3i &amp;</type>
-      <name>operator*</name>
-      <anchorfile>classVec3iRange_1_1iterator.html</anchorfile>
-      <anchor>ad4d468b3ea599698f77c9010214b9278</anchor>
-      <arglist>() const</arglist>
-    </member>
-    <member kind="function">
-      <type>const iterator &amp;</type>
-      <name>operator++</name>
-      <anchorfile>classVec3iRange_1_1iterator.html</anchorfile>
-      <anchor>a2c750f8aa1d5663232d499d690e3c0d4</anchor>
       <arglist>()</arglist>
     </member>
   </compound>
@@ -2278,6 +2380,101 @@
       <name>GetString</name>
       <anchorfile>classMat4f.html</anchorfile>
       <anchor>a1080edb5f18195fbf584b8db2e803c89</anchor>
+      <arglist>(const std::string &amp;i_classPrefix=std::string()) const</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>Ray</name>
+    <filename>classRay.html</filename>
+    <member kind="function">
+      <type>GM_HOST_DEVICE constexpr</type>
+      <name>Ray</name>
+      <anchorfile>classRay.html</anchorfile>
+      <anchor>a024b0eb1d575e15c41e0e0db1f21b5a6</anchor>
+      <arglist>()=default</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE constexpr</type>
+      <name>Ray</name>
+      <anchorfile>classRay.html</anchorfile>
+      <anchor>a223fffea66386d444d28bb44ed16202e</anchor>
+      <arglist>(const Vec3f &amp;i_origin, const Vec3f &amp;i_direction)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE const Vec3f &amp;</type>
+      <name>Origin</name>
+      <anchorfile>classRay.html</anchorfile>
+      <anchor>ae00279f3e0c949cff834e0daeda29c9c</anchor>
+      <arglist>() const</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec3f &amp;</type>
+      <name>Origin</name>
+      <anchorfile>classRay.html</anchorfile>
+      <anchor>a364bc29f1936bb6fcaf90f391c3fdec7</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE const Vec3f &amp;</type>
+      <name>Direction</name>
+      <anchorfile>classRay.html</anchorfile>
+      <anchor>a2e69dacb49391dc31c62b7a8a80d1d2d</anchor>
+      <arglist>() const</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec3f &amp;</type>
+      <name>Direction</name>
+      <anchorfile>classRay.html</anchorfile>
+      <anchor>a14ce9c18d32ac13fdb85a898751be8aa</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE constexpr</type>
+      <name>Ray</name>
+      <anchorfile>classRay.html</anchorfile>
+      <anchor>a024b0eb1d575e15c41e0e0db1f21b5a6</anchor>
+      <arglist>()=default</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE constexpr</type>
+      <name>Ray</name>
+      <anchorfile>classRay.html</anchorfile>
+      <anchor>a223fffea66386d444d28bb44ed16202e</anchor>
+      <arglist>(const Vec3f &amp;i_origin, const Vec3f &amp;i_direction)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE const Vec3f &amp;</type>
+      <name>Origin</name>
+      <anchorfile>classRay.html</anchorfile>
+      <anchor>ae00279f3e0c949cff834e0daeda29c9c</anchor>
+      <arglist>() const</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec3f &amp;</type>
+      <name>Origin</name>
+      <anchorfile>classRay.html</anchorfile>
+      <anchor>a364bc29f1936bb6fcaf90f391c3fdec7</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE const Vec3f &amp;</type>
+      <name>Direction</name>
+      <anchorfile>classRay.html</anchorfile>
+      <anchor>a2e69dacb49391dc31c62b7a8a80d1d2d</anchor>
+      <arglist>() const</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec3f &amp;</type>
+      <name>Direction</name>
+      <anchorfile>classRay.html</anchorfile>
+      <anchor>a14ce9c18d32ac13fdb85a898751be8aa</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>std::string</type>
+      <name>GetString</name>
+      <anchorfile>classRay.html</anchorfile>
+      <anchor>a559c2d94a5490b4b7a6d6a4679ac6029</anchor>
       <arglist>(const std::string &amp;i_classPrefix=std::string()) const</arglist>
     </member>
   </compound>
@@ -4713,13 +4910,14 @@
     <name>gm_types_composite</name>
     <title>Composite types</title>
     <filename>group__gm__types__composite.html</filename>
+    <file>ray.h</file>
+    <class kind="class">Ray</class>
   </compound>
   <compound kind="group">
     <name>GM_functions</name>
     <title>Functions</title>
     <filename>group__GM__functions.html</filename>
     <subgroup>gm_functions_basic</subgroup>
-    <subgroup>gm_functions_interpolation</subgroup>
     <subgroup>gm_functions_linearAlgebra</subgroup>
     <subgroup>gm_functions_rayTracing</subgroup>
   </compound>
@@ -4729,8 +4927,11 @@
     <filename>group__gm__functions__basic.html</filename>
     <file>abs.h</file>
     <file>ceil.h</file>
+    <file>clamp.h</file>
     <file>degrees.h</file>
     <file>floor.h</file>
+    <file>linearInterpolation.h</file>
+    <file>linearMap.h</file>
     <file>max.h</file>
     <file>min.h</file>
     <file>quadraticRoots.h</file>
@@ -4822,6 +5023,76 @@
     </member>
     <member kind="function">
       <type>GM_NS_OPEN GM_HOST_DEVICE float</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga5c89a065cd7ebd41c0d19ffc3002042e</anchor>
+      <arglist>(const float &amp;i_value, const FloatRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE int</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga064a6c4d3494c2c951963d0468c8a9fa</anchor>
+      <arglist>(const int &amp;i_value, const IntRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Mat3f</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga4daedb8da222e40d8156af73fc6f7951</anchor>
+      <arglist>(const Mat3f &amp;i_value, const FloatRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Mat4f</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga8c764e5134bef4e42ac0c1e92af44ef4</anchor>
+      <arglist>(const Mat4f &amp;i_value, const FloatRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec2f</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga21fe6277b7df1ed38a172bae00595430</anchor>
+      <arglist>(const Vec2f &amp;i_value, const FloatRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec3f</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gaf87cdc923c543b2c3eb22c30241b1411</anchor>
+      <arglist>(const Vec3f &amp;i_value, const FloatRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec4f</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gacb2be337cb312d143496cd79e68da31b</anchor>
+      <arglist>(const Vec4f &amp;i_value, const FloatRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec2i</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga739accba8a493aa8647d2202fa93ff10</anchor>
+      <arglist>(const Vec2i &amp;i_value, const IntRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec3i</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gaf0d52468eb26dbc61c8b2a30a7f3cfb2</anchor>
+      <arglist>(const Vec3i &amp;i_value, const IntRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec4i</type>
+      <name>Clamp</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga2346a93e131bd30774d106e9a12124b1</anchor>
+      <arglist>(const Vec4i &amp;i_value, const IntRange &amp;i_range)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_NS_OPEN GM_HOST_DEVICE float</type>
       <name>Degrees</name>
       <anchorfile>group__gm__functions__basic.html</anchorfile>
       <anchor>gae87524da220700b948d8eb94a80f8f7b</anchor>
@@ -4868,6 +5139,90 @@
       <anchorfile>group__gm__functions__basic.html</anchorfile>
       <anchor>gaf73e888e47c977c95460b0c058b0c34a</anchor>
       <arglist>(const Mat4f &amp;i_value)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_NS_OPEN GM_HOST_DEVICE float</type>
+      <name>LinearInterpolation</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga277d2156d5ef3de29f2ba6d14e3d0bf2</anchor>
+      <arglist>(const float &amp;i_source, const float &amp;i_target, const float &amp;i_weight)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Mat3f</type>
+      <name>LinearInterpolation</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga18cff1ac7be5e714cb3bec000a23597e</anchor>
+      <arglist>(const Mat3f &amp;i_source, const Mat3f &amp;i_target, const float &amp;i_weight)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Mat4f</type>
+      <name>LinearInterpolation</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga2a4930dc49ff92002803e09977e7ea79</anchor>
+      <arglist>(const Mat4f &amp;i_source, const Mat4f &amp;i_target, const float &amp;i_weight)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec2f</type>
+      <name>LinearInterpolation</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gae16b73ed33599600ce0f63609ea29280</anchor>
+      <arglist>(const Vec2f &amp;i_source, const Vec2f &amp;i_target, const float &amp;i_weight)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec3f</type>
+      <name>LinearInterpolation</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gad488515696b51df72e6fcabf184b668e</anchor>
+      <arglist>(const Vec3f &amp;i_source, const Vec3f &amp;i_target, const float &amp;i_weight)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec4f</type>
+      <name>LinearInterpolation</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gab7fb01b198f2b3a97ff16317f4137f00</anchor>
+      <arglist>(const Vec4f &amp;i_source, const Vec4f &amp;i_target, const float &amp;i_weight)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_NS_OPEN GM_HOST_DEVICE float</type>
+      <name>LinearMap</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga5798f027478c55bade52df30921e7982</anchor>
+      <arglist>(const float &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Mat3f</type>
+      <name>LinearMap</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga263b14faec42590b79c9279ab3f1ad99</anchor>
+      <arglist>(const Mat3f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Mat4f</type>
+      <name>LinearMap</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga1eb7b9b44b3def2bcbc54ca6ec198b2b</anchor>
+      <arglist>(const Mat4f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec2f</type>
+      <name>LinearMap</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga5fcee0bde103f8a7f117a6a48c6a94c1</anchor>
+      <arglist>(const Vec2f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec3f</type>
+      <name>LinearMap</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>gae2b1e291707e7fcf0896da548ca64976</anchor>
+      <arglist>(const Vec3f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
+    </member>
+    <member kind="function">
+      <type>GM_HOST_DEVICE Vec4f</type>
+      <name>LinearMap</name>
+      <anchorfile>group__gm__functions__basic.html</anchorfile>
+      <anchor>ga8128bd11dd098ac73ed334771d311fd1</anchor>
+      <arglist>(const Vec4f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
     <member kind="function">
       <type>GM_NS_OPEN GM_HOST_DEVICE float</type>
@@ -5050,97 +5405,6 @@
       <anchorfile>group__gm__functions__basic.html</anchorfile>
       <anchor>gaaa6843bdd825058465b7c0784a73c402</anchor>
       <arglist>(const IntRange &amp;i_range)</arglist>
-    </member>
-  </compound>
-  <compound kind="group">
-    <name>gm_functions_interpolation</name>
-    <title>Interpolation operators</title>
-    <filename>group__gm__functions__interpolation.html</filename>
-    <file>linearInterpolation.h</file>
-    <file>linearMap.h</file>
-    <member kind="function">
-      <type>GM_NS_OPEN GM_HOST_DEVICE float</type>
-      <name>LinearInterpolation</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>ga277d2156d5ef3de29f2ba6d14e3d0bf2</anchor>
-      <arglist>(const float &amp;i_source, const float &amp;i_target, const float &amp;i_weight)</arglist>
-    </member>
-    <member kind="function">
-      <type>GM_HOST_DEVICE Mat3f</type>
-      <name>LinearInterpolation</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>ga18cff1ac7be5e714cb3bec000a23597e</anchor>
-      <arglist>(const Mat3f &amp;i_source, const Mat3f &amp;i_target, const float &amp;i_weight)</arglist>
-    </member>
-    <member kind="function">
-      <type>GM_HOST_DEVICE Mat4f</type>
-      <name>LinearInterpolation</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>ga2a4930dc49ff92002803e09977e7ea79</anchor>
-      <arglist>(const Mat4f &amp;i_source, const Mat4f &amp;i_target, const float &amp;i_weight)</arglist>
-    </member>
-    <member kind="function">
-      <type>GM_HOST_DEVICE Vec2f</type>
-      <name>LinearInterpolation</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>gae16b73ed33599600ce0f63609ea29280</anchor>
-      <arglist>(const Vec2f &amp;i_source, const Vec2f &amp;i_target, const float &amp;i_weight)</arglist>
-    </member>
-    <member kind="function">
-      <type>GM_HOST_DEVICE Vec3f</type>
-      <name>LinearInterpolation</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>gad488515696b51df72e6fcabf184b668e</anchor>
-      <arglist>(const Vec3f &amp;i_source, const Vec3f &amp;i_target, const float &amp;i_weight)</arglist>
-    </member>
-    <member kind="function">
-      <type>GM_HOST_DEVICE Vec4f</type>
-      <name>LinearInterpolation</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>gab7fb01b198f2b3a97ff16317f4137f00</anchor>
-      <arglist>(const Vec4f &amp;i_source, const Vec4f &amp;i_target, const float &amp;i_weight)</arglist>
-    </member>
-    <member kind="function">
-      <type>GM_NS_OPEN GM_HOST_DEVICE float</type>
-      <name>LinearMap</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>ga5798f027478c55bade52df30921e7982</anchor>
-      <arglist>(const float &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
-    </member>
-    <member kind="function">
-      <type>GM_HOST_DEVICE Mat3f</type>
-      <name>LinearMap</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>ga263b14faec42590b79c9279ab3f1ad99</anchor>
-      <arglist>(const Mat3f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
-    </member>
-    <member kind="function">
-      <type>GM_HOST_DEVICE Mat4f</type>
-      <name>LinearMap</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>ga1eb7b9b44b3def2bcbc54ca6ec198b2b</anchor>
-      <arglist>(const Mat4f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
-    </member>
-    <member kind="function">
-      <type>GM_HOST_DEVICE Vec2f</type>
-      <name>LinearMap</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>ga5fcee0bde103f8a7f117a6a48c6a94c1</anchor>
-      <arglist>(const Vec2f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
-    </member>
-    <member kind="function">
-      <type>GM_HOST_DEVICE Vec3f</type>
-      <name>LinearMap</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>gae2b1e291707e7fcf0896da548ca64976</anchor>
-      <arglist>(const Vec3f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
-    </member>
-    <member kind="function">
-      <type>GM_HOST_DEVICE Vec4f</type>
-      <name>LinearMap</name>
-      <anchorfile>group__gm__functions__interpolation.html</anchorfile>
-      <anchor>ga8128bd11dd098ac73ed334771d311fd1</anchor>
-      <arglist>(const Vec4f &amp;i_sourceValue, const FloatRange &amp;i_sourceRange, const FloatRange &amp;i_targetRange)</arglist>
     </member>
   </compound>
   <compound kind="group">
