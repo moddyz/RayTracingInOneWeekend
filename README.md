@@ -14,6 +14,7 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
   * [6. Metal](#6-metal)
   * [7. Dielectrics](#7-dielectrics)
   * [8. Positionable Camera](#8-positionable-camera)
+  * [9. Defocus Blur](#9-defocus-blur)
 - [Library](#library)
 - [Building](#building)
 - [Build Status](#build-status)
@@ -91,6 +92,14 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
 [Source code](./src/8_positionableCamera/main.cpp)
 
 [Link to Chapter 11](https://raytracing.github.io/books/RayTracingInOneWeekend.html#positionablecamera)
+
+### 9. Defocus Blur
+
+![Image](./src/9_defocusBlur/output.png)
+
+[Source code](./src/9_defocusBlur/main.cpp)
+
+[Link to Chapter 12](https://raytracing.github.io/books/RayTracingInOneWeekend.html#defocusblur)
 
 ## Library
 
