@@ -16,8 +16,8 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
   * [8. Positionable Camera](#8-positionable-camera)
   * [9. Defocus Blur](#9-defocus-blur)
   * [10. Where Next?](#10-where-next)
-- [Library](#library)
 - [Sequel](#sequel)
+- [Library](#library)
 - [Building](#building)
 - [Build Status](#build-status)
 
@@ -111,14 +111,14 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
 
 [Link to Chapter 13](https://raytracing.github.io/books/RayTracingInOneWeekend.html#wherenext?)
 
-## Library
-
-Common functions and classes are refactored into the [raytrace library](./src/raytrace) and the [GraphicsMath](https://github.com/moddyz/GraphicsMath) project.
-
 ## Sequel
 
 The sequel, [Ray Tracing: The Next Week](https://raytracing.github.io/books/RayTracingTheNextWeek.html),
 is implemented under [RayTracingTheNextWeek](https://github.com/moddyz/RayTracingTheNextWeek).
+
+## Library
+
+Common functions and classes are refactored into the [raytrace library](./src/raytrace) and the [GraphicsMath](https://github.com/moddyz/GraphicsMath) project.
 
 ## Documentation
 
