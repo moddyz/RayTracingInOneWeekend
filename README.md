@@ -27,6 +27,11 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
 
 ![Image](./src/0_outputAnImage/output.png)
 
+Getting started with writing a colored gradient into an in-memory image buffer, then saving 
+as a file encoded using the [PPM image format](https://en.wikipedia.org/wiki/Netpbm#PPM_example).
+
+The class [ImageBuffer](https://moddyz.github.io/RayTracingInOneWeekend/classImageBuffer.html) and utility function [WritePPMIMage](https://moddyz.github.io/RayTracingInOneWeekend/ppmImageWriter_8h.html#a13c10c95d78b09e978f74f8688543f34) are introduced to abstract in-memory pixel storage and serialization details.
+
 [Source code](./src/0_outputAnImage/main.cpp)
 
 [Link to Chapter 2](https://raytracing.github.io/books/RayTracingInOneWeekend.html#outputanimage)
