@@ -52,7 +52,7 @@ There are no objects in the scene, so the background color are used to shade eac
 
 ![Image](./src/2_addingASphere/output.png)
 
-Adding a single object into the scene, in the form of a sphere.  
+Adding a single object into the scene, in the form of a [Sphere](https://moddyz.github.io/RayTracingInOneWeekend/classSphere.html).  
 
 Any rays which intersect with the sphere will provide a bright red color back to its associated pixel.  Otherwise, it will produce the background color.
 
@@ -66,7 +66,7 @@ Any rays which intersect with the sphere will provide a bright red color back to
 
 Adding in support for object intersections to compute a color based on the intersection point's surface normal.  Also - adding support for multiple scene objects.  
 
-The green ground plane behind the center sphere is in fact another large sphere, whose green shade happens to be associated with the surface normal near the top of the sphere!
+The green ground plane behind the center sphere is in fact another sphere (much larger!), whose green shade happens to be associated with the surface normal near the top of the sphere!
 
 [Source code](./src/3_surfaceNormalsAndMultipleObjects/main.cpp)
 
@@ -88,7 +88,7 @@ Note that compared to [3. Surface Normals and Multiple Objects](#3-surface-norma
 
 ![Image](./src/5_diffuseMaterials/output.png)
 
-Introduced the concept of materials which can be assigned to scene objects, and more concretely, a Lambert material.
+Introduced the concept of a [Material](https://moddyz.github.io/RayTracingInOneWeekend/classMaterial.html) which can be assigned to scene objects, and more concretely, a [Lambert](https://moddyz.github.io/RayTracingInOneWeekend/classLambert.html) material.
 
 Rays which intersect with an object with the lambert material _scatters_ rays in a random direction based on a spherical distribution above the surface normal.  This produces a smooth, diffuse apperance on the spheres.
 
@@ -100,7 +100,7 @@ Rays which intersect with an object with the lambert material _scatters_ rays in
 
 ![Image](./src/6_metal/output.png)
 
-Introduced Metal as an assignable material.  Metal _reflects_ rays, with a certain degree of randomness tunable by its fuzziness parameter.  
+Introduced [Metal](https://moddyz.github.io/RayTracingInOneWeekend/classMetal.html) as an assignable material.  Metal [reflects](https://moddyz.github.io/RayTracingInOneWeekend/reflect_8h.html#ad109cf7d71820a1077469c16251e3ec9) rays, with a certain degree of randomness tunable by its fuzziness parameter.  
 
 [Source code](./src/6_metal/main.cpp)
 
@@ -110,7 +110,7 @@ Introduced Metal as an assignable material.  Metal _reflects_ rays, with a certa
 
 ![Image](./src/7_dielectrics/output.png)
 
-Introduced Dieletrics as an assignable material for a glass and diamond like apperance.  Dielectric materials have the potential to _refract_ an incident ray, by allowing it to penetrate through the surface but at the same time applying a direction offset.  
+Introduced [Dieletric](https://moddyz.github.io/RayTracingInOneWeekend/classDielectric.html) as an assignable material for a glass and diamond like apperance.  Dielectric materials have the potential to _refract_ an incident ray, by allowing it to penetrate through the surface but at the same time applying a direction offset.  
 
 For rays which come at the surface at too steep of an angle (threshold based on the refractive indices), the dielectric surface will reflect the ray.
 
@@ -122,7 +122,7 @@ For rays which come at the surface at too steep of an angle (threshold based on 
 
 ![Image](./src/8_positionableCamera/output.png)
 
-Adding useful camera parameters such as the field of view (for zooming in/out) and the ability to control the position and the point at which the camera is oriented towards (the "lookAt" point).
+Adding [useful camera parameters](https://moddyz.github.io/RayTracingInOneWeekend/classCamera.html#adb1a32d5db472508d3885ef142c64e02) such as the field of view (for zooming in/out) and the ability to control the position and the point at which the camera is oriented towards (the "lookAt" point).
 
 [Source code](./src/8_positionableCamera/main.cpp)
 
