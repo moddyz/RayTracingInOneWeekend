@@ -14,7 +14,7 @@
 #include <raytrace/material.h>
 #include <raytrace/reflect.h>
 #include <raytrace/refract.h>
-#include <raytrace/shlick.h>
+#include <raytrace/schlick.h>
 
 #include <iostream>
 

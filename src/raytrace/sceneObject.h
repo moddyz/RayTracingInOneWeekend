@@ -24,9 +24,9 @@ public:
 
     /// Check and record if ray \p i_ray hits the current object.
     ///
-    /// \param i_ray.Origin() The ray to test for hit.
+    /// \param i_ray The ray to test for intersection.
     /// \param i_magnitudeRange The range of \em accepted magnitudes to qualify as a ray hit.
-    /// \param o_record the record of a ray hit.
+    /// \param o_record The record of a ray intersection.
     ///
     /// \retval true If the ray hits this object.
     /// \retval false If the ray does not hit this object, or if the hit is outside the range

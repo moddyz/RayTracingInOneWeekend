@@ -24,6 +24,7 @@ public:
     ///
     /// \param i_origin The origin of the sphere.
     /// \param i_radius The radius of the sphere.
+    /// \param i_material Optional material, associated with this sphere.
     inline explicit Sphere( const gm::Vec3f& i_origin, float i_radius, MaterialSharedPtr i_material = nullptr )
         : m_origin( i_origin )
         , m_radius( i_radius )
@@ -52,44 +53,6 @@ public:
         // Sorry, missed!
         return false;
     }
-
-    /* Reference implementation.
-    virtual inline bool
-    Hit( const gm::Ray& i_ray, const gm::FloatRange& i_magnitudeRange, HitRecord& o_record ) const override
-    {
-        gm::Vec3f oc           = i_ray.Origin() - m_origin;
-        auto      a            = gm::LengthSquared( i_ray.Direction() );
-        auto      half_b       = gm::DotProduct( oc, i_ray.Direction() );
-        auto      c            = gm::LengthSquared( oc ) - m_radius * m_radius;
-        auto      discriminant = half_b * half_b - a * c;
-
-        if ( discriminant > 0 )
-        {
-            auto root = sqrt( discriminant );
-
-            auto temp = ( -half_b - root ) / a;
-            if ( temp < i_magnitudeRange.Max() && temp > i_magnitudeRange.Min() )
-            {
-                o_record.m_magnitude = temp;
-                o_record.m_position  = gm::RayPosition( i_ray.Origin(), i_ray.Direction(), o_record.m_magnitude );
-                o_record.m_normal    = ( o_record.m_position - m_origin ) / m_radius;
-                o_record.m_material  = m_material;
-                return true;
-            }
-
-            temp = ( -half_b + root ) / a;
-            if ( temp < i_magnitudeRange.Max() && temp > i_magnitudeRange.Min() )
-            {
-                o_record.m_magnitude = temp;
-                o_record.m_position  = gm::RayPosition( i_ray.Origin(), i_ray.Direction(), o_record.m_magnitude );
-                o_record.m_normal    = ( o_record.m_position - m_origin ) / m_radius;
-                o_record.m_material  = m_material;
-                return true;
-            }
-        }
-        return false;
-    }
-    */
 
 private:
     /// Helper method to record a ray hitting the sphere.
