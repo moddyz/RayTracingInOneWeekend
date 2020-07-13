@@ -1,6 +1,6 @@
 #pragma once
 
-/// \file raytrace/metal.h
+/// \file raytrace/dielectric.h
 ///
 /// Dielectric material representation for glass, diamond, and other material which
 /// refract light.
