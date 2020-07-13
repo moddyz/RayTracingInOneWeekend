@@ -71,7 +71,7 @@ Adding in support for object intersections to compute a color based on the inter
 
 ![Image](./src/4_antialiasing/output.png)
 
-Adding multi-sampling to produce an averaged color per pixel.  Multi-sampling is achieved by casting _multiple_ rays per-pixel, with a random factor applied to the ray direction.  A color value is accumulated by multiple rays, then averaged before pixel finalization.
+Adding multi-sampling to produce an averaged color per pixel.  Multi-sampling is achieved by casting _multiple_ rays per-pixel, with a random factor applied to the ray direction.  A color value is accumulated by multiple rays, then averaged before pixel finalization.  Note that compared to [3. Surface Normals and Multiple Objects](#3-surface-normals-and-multiple-objects), this image has much smoother edges, especially noticeable where the background color meets the green ground plane.
 
 [Source code](./src/4_antialiasing/main.cpp)
 
@@ -81,6 +81,9 @@ Adding multi-sampling to produce an averaged color per pixel.  Multi-sampling is
 
 ![Image](./src/5_diffuseMaterials/output.png)
 
+Introduced the concept of materials which can be assigned to scene objects, and more concretely, a Lambert material.Rays which intersect with an object with the lambert material _scatters_ rays in a random direction 
+based on a spherical distribution above the surface normal.  This produces a smooth, diffuse apperance on the spheres.
+
 [Source code](./src/5_diffuseMaterials/main.cpp)
 
 [Link to Chapter 8](https://raytracing.github.io/books/RayTracingInOneWeekend.html#diffusematerials)
@@ -88,6 +91,8 @@ Adding multi-sampling to produce an averaged color per pixel.  Multi-sampling is
 ### 6. Metal
 
 ![Image](./src/6_metal/output.png)
+
+Introduced Metal as an assignable material.  Metal _reflects_ rays, with a certain degree of randomness tunable by its fuzziness parameter.  
 
 [Source code](./src/6_metal/main.cpp)
 
@@ -97,6 +102,8 @@ Adding multi-sampling to produce an averaged color per pixel.  Multi-sampling is
 
 ![Image](./src/7_dielectrics/output.png)
 
+Introduced Dieletrics as an assignable material for a glass and diamond like apperance.  Dielectric materials have the potential to _refract_ an incident ray, by allowing it to penetrate through the surface but at the same time applying a direction offset.  For rays which come at the surface at too steep of an angle (based on the refractive indices), the dielectric surface will reflect the ray.
+
 [Source code](./src/7_dielectrics/main.cpp)
 
 [Link to Chapter 10](https://raytracing.github.io/books/RayTracingInOneWeekend.html#dielectrics)
@@ -104,6 +111,8 @@ Adding multi-sampling to produce an averaged color per pixel.  Multi-sampling is
 ### 8. Positionable Camera
 
 ![Image](./src/8_positionableCamera/output.png)
+
+Adding useful camera parameters such as the field of view (for zooming in/out) and the ability to control the position and the point at which the camera is oriented towards (the "lookAt" point).
 
 [Source code](./src/8_positionableCamera/main.cpp)
 
@@ -113,6 +122,8 @@ Adding multi-sampling to produce an averaged color per pixel.  Multi-sampling is
 
 ![Image](./src/9_defocusBlur/output.png)
 
+Adding a few more camera parameters to enable the depth of field (DOF) effect.  The camera is outfitted with a virtual lens (with an adjustable aperature), and distance to _focus_ on (the focal distance).  Both the rays origins and directions have an random applied offset which result in objects beyond the focal distance to appear blurry, taking on color values of neighbouring pixels.
+
 [Source code](./src/9_defocusBlur/main.cpp)
 
 [Link to Chapter 12](https://raytracing.github.io/books/RayTracingInOneWeekend.html#defocusblur)
@@ -120,6 +131,8 @@ Adding multi-sampling to produce an averaged color per pixel.  Multi-sampling is
 ### 10. Where Next?
 
 ![Image](./src/10_whereNext/output.png)
+
+A final render, with many more spheres!
 
 [Source code](./src/10_whereNext/main.cpp)
 
