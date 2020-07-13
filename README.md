@@ -40,6 +40,8 @@ The [ImageBuffer](https://moddyz.github.io/RayTracingInOneWeekend/classImageBuff
 
 ![Image](./src/1_raysCameraAndBackground/output.png)
 
+Setting up a basic camera model to cast the first rays into the scene.  A single ray is cast per image pixel.  There are no objects in the scene, so the background color are used to shade each pixel, varying based on the associated ray's direction.
+
 [Source code](./src/1_raysCameraAndBackground/main.cpp)
 
 [Link to Chapter 4](https://raytracing.github.io/books/RayTracingInOneWeekend.html#rays,asimplecamera,andbackground)
@@ -47,6 +49,9 @@ The [ImageBuffer](https://moddyz.github.io/RayTracingInOneWeekend/classImageBuff
 ### 2. Adding a Sphere
 
 ![Image](./src/2_addingASphere/output.png)
+
+Adding a single object into the scene, in the form of a sphere.  Any rays which intersect with the sphere
+will provide a bright red color back to its associated pixel.  Otherwise, it will produce the background color.
 
 [Source code](./src/2_addingASphere/main.cpp)
 
@@ -56,6 +61,8 @@ The [ImageBuffer](https://moddyz.github.io/RayTracingInOneWeekend/classImageBuff
 
 ![Image](./src/3_surfaceNormalsAndMultipleObjects/output.png)
 
+Adding in support for object intersections to compute a color based on the intersection point's surface normal.  Also - adding support for multiple scene objects.  The green ground plane behind the center sphere is in fact another large sphere, whose green shade happens to be associated with the surface normal near the top of the sphere!
+
 [Source code](./src/3_surfaceNormalsAndMultipleObjects/main.cpp)
 
 [Link to Chapter 6](https://raytracing.github.io/books/RayTracingInOneWeekend.html#surfacenormalsandmultipleobjects)
@@ -63,6 +70,8 @@ The [ImageBuffer](https://moddyz.github.io/RayTracingInOneWeekend/classImageBuff
 ### 4. Antialiasing
 
 ![Image](./src/4_antialiasing/output.png)
+
+Adding multi-sampling to produce an averaged color per pixel.  Multi-sampling is achieved by casting _multiple_ rays per-pixel, with a random factor applied to the ray direction.  A color value is accumulated by multiple rays, then averaged before pixel finalization.
 
 [Source code](./src/4_antialiasing/main.cpp)
 
