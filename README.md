@@ -40,7 +40,9 @@ The [ImageBuffer](https://moddyz.github.io/RayTracingInOneWeekend/classImageBuff
 
 ![Image](./src/1_raysCameraAndBackground/output.png)
 
-Setting up a basic camera model to cast the first rays into the scene.  A single ray is cast per image pixel.  There are no objects in the scene, so the background color are used to shade each pixel, varying based on the associated ray's direction.
+Setting up a basic camera model to cast the first rays into the scene.  A single ray is cast per image pixel.  
+
+There are no objects in the scene, so the background color are used to shade each pixel, varying based on the associated ray's direction.
 
 [Source code](./src/1_raysCameraAndBackground/main.cpp)
 
@@ -50,8 +52,9 @@ Setting up a basic camera model to cast the first rays into the scene.  A single
 
 ![Image](./src/2_addingASphere/output.png)
 
-Adding a single object into the scene, in the form of a sphere.  Any rays which intersect with the sphere
-will provide a bright red color back to its associated pixel.  Otherwise, it will produce the background color.
+Adding a single object into the scene, in the form of a sphere.  
+
+Any rays which intersect with the sphere will provide a bright red color back to its associated pixel.  Otherwise, it will produce the background color.
 
 [Source code](./src/2_addingASphere/main.cpp)
 
@@ -61,7 +64,9 @@ will provide a bright red color back to its associated pixel.  Otherwise, it wil
 
 ![Image](./src/3_surfaceNormalsAndMultipleObjects/output.png)
 
-Adding in support for object intersections to compute a color based on the intersection point's surface normal.  Also - adding support for multiple scene objects.  The green ground plane behind the center sphere is in fact another large sphere, whose green shade happens to be associated with the surface normal near the top of the sphere!
+Adding in support for object intersections to compute a color based on the intersection point's surface normal.  Also - adding support for multiple scene objects.  
+
+The green ground plane behind the center sphere is in fact another large sphere, whose green shade happens to be associated with the surface normal near the top of the sphere!
 
 [Source code](./src/3_surfaceNormalsAndMultipleObjects/main.cpp)
 
@@ -71,7 +76,9 @@ Adding in support for object intersections to compute a color based on the inter
 
 ![Image](./src/4_antialiasing/output.png)
 
-Adding multi-sampling to produce an averaged color per pixel.  Multi-sampling is achieved by casting _multiple_ rays per-pixel, with a random factor applied to the ray direction.  A color value is accumulated by multiple rays, then averaged before pixel finalization.  Note that compared to [3. Surface Normals and Multiple Objects](#3-surface-normals-and-multiple-objects), this image has much smoother edges, especially noticeable where the background color meets the green ground plane.
+Adding multi-sampling to produce an averaged color per pixel.  Multi-sampling is achieved by casting _multiple_ rays per-pixel, with a random factor applied to the ray direction.  A color value is accumulated by multiple rays, then averaged before pixel finalization.  
+
+Note that compared to [3. Surface Normals and Multiple Objects](#3-surface-normals-and-multiple-objects), this image has much smoother edges, especially noticeable where the background color meets the green ground plane.
 
 [Source code](./src/4_antialiasing/main.cpp)
 
@@ -81,8 +88,9 @@ Adding multi-sampling to produce an averaged color per pixel.  Multi-sampling is
 
 ![Image](./src/5_diffuseMaterials/output.png)
 
-Introduced the concept of materials which can be assigned to scene objects, and more concretely, a Lambert material.Rays which intersect with an object with the lambert material _scatters_ rays in a random direction 
-based on a spherical distribution above the surface normal.  This produces a smooth, diffuse apperance on the spheres.
+Introduced the concept of materials which can be assigned to scene objects, and more concretely, a Lambert material.
+
+Rays which intersect with an object with the lambert material _scatters_ rays in a random direction based on a spherical distribution above the surface normal.  This produces a smooth, diffuse apperance on the spheres.
 
 [Source code](./src/5_diffuseMaterials/main.cpp)
 
@@ -102,7 +110,9 @@ Introduced Metal as an assignable material.  Metal _reflects_ rays, with a certa
 
 ![Image](./src/7_dielectrics/output.png)
 
-Introduced Dieletrics as an assignable material for a glass and diamond like apperance.  Dielectric materials have the potential to _refract_ an incident ray, by allowing it to penetrate through the surface but at the same time applying a direction offset.  For rays which come at the surface at too steep of an angle (based on the refractive indices), the dielectric surface will reflect the ray.
+Introduced Dieletrics as an assignable material for a glass and diamond like apperance.  Dielectric materials have the potential to _refract_ an incident ray, by allowing it to penetrate through the surface but at the same time applying a direction offset.  
+
+For rays which come at the surface at too steep of an angle (threshold based on the refractive indices), the dielectric surface will reflect the ray.
 
 [Source code](./src/7_dielectrics/main.cpp)
 
@@ -122,7 +132,9 @@ Adding useful camera parameters such as the field of view (for zooming in/out) a
 
 ![Image](./src/9_defocusBlur/output.png)
 
-Adding a few more camera parameters to enable the depth of field (DOF) effect.  The camera is outfitted with a virtual lens (with an adjustable aperature), and distance to _focus_ on (the focal distance).  Both the rays origins and directions have an random applied offset which result in objects beyond the focal distance to appear blurry, taking on color values of neighbouring pixels.
+Adding a few more camera parameters to enable the depth of field (DOF) effect.  The camera is outfitted with a virtual lens (with an adjustable aperature), and distance to _focus_ on (the focal distance).  
+
+Both the rays origins and directions have an random applied offset which result in objects beyond the focal distance to appear blurry, taking on color values of neighbouring pixels.
 
 [Source code](./src/9_defocusBlur/main.cpp)
 
