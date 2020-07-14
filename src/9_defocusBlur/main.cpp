@@ -233,7 +233,7 @@ int main( int i_argc, char** i_argv )
           cxxopts::value< float >()->default_value( "20" ) ) // Camera param.
         ( "a,aperture",
           "Aperture of the camera (lens diameter).",
-          cxxopts::value< float >()->default_value( "2" ) ) // Camera param.
+          cxxopts::value< float >()->default_value( "2" ) )                                      // Camera param.
         ( "d,debug", "Turn on debug mode.", cxxopts::value< bool >()->default_value( "false" ) ) // Width
         ( "x,debugXCoord",
           "The x-coordinate of the pixel in the image to print debug information for.",
