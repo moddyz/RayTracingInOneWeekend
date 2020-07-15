@@ -18,6 +18,7 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
   * [10. Where Next?](#10-where-next)
 - [Sequel](#sequel)
 - [Library](#library)
+- [Documentation](#documentation)
 - [Building](#building)
 - [Build Status](#build-status)
 
