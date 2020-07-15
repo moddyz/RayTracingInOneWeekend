@@ -1,8 +1,3 @@
-/// \page 4_antialiasing Antialiasing
-///
-/// Example program extending from \ref 3_surfaceNormalsAndMultipleObjects which adds:
-/// - Multi-sampling per pixel, to average the final computed color.
-
 #include <cxxopts.hpp>
 
 #include <gm/types/floatRange.h>
@@ -71,7 +66,8 @@ static gm::Vec3f ComputeRayColor( const gm::Ray& i_ray, const SceneObjectPtrs& i
 int main( int i_argc, char** i_argv )
 {
     // Parse command line arguments.
-    cxxopts::Options options( "4_antialiasing", "Multi-sampling for smoother transitions." );
+    cxxopts::Options options( "4_antialiasing",
+                              "Multi-sampling for smoother, averaged color transitions between shapes." );
     options.add_options()                                                                       // Command line options.
         ( "w,width", "Width of the image.", cxxopts::value< int >()->default_value( "384" ) )   // Width
         ( "h,height", "Height of the image.", cxxopts::value< int >()->default_value( "256" ) ) // Height;

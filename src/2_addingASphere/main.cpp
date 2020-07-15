@@ -1,7 +1,3 @@
-/// \file 2_addingASphere/main.cpp
-///
-/// Example program which uses ray sphere intersection to draw a red sphere, with a background.
-
 #include <cxxopts.hpp>
 
 #include <gm/types/ray.h>
@@ -41,7 +37,7 @@ static gm::Vec3f ComputeRayColor( const gm::Ray& i_ray )
 int main( int i_argc, char** i_argv )
 {
     // Parse command line arguments.
-    cxxopts::Options options( "2_addingASphere", "Constant colored sphere." );
+    cxxopts::Options options( "2_addingASphere", "Program which uses ray sphere intersection to draw a red sphere, with a background." );
     options.add_options()                                                                       // Command line options.
         ( "w,width", "Width of the image.", cxxopts::value< int >()->default_value( "384" ) )   // Width
         ( "h,height", "Height of the image.", cxxopts::value< int >()->default_value( "256" ) ) // Height;

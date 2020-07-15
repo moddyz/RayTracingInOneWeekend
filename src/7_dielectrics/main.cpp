@@ -1,8 +1,3 @@
-/// \page 7_dielectrics Dielectrics
-///
-/// Example program extending from \ref 6_metal, introducing dielectric materials
-/// which may refract light rays.
-
 #include <cxxopts.hpp>
 
 #include <gm/base/constants.h>
@@ -207,7 +202,8 @@ int main( int i_argc, char** i_argv )
     // ------------------------------------------------------------------------
 
     cxxopts::Options options( "7_dielectrics",
-                              "Ray tracing with dielectric material (glass, diamonond, refractive mediums)." );
+                              "Ray tracing program exhibiting spheres with  dielectric material (glass, diamond, or "
+                              "generally refractive mediums)." );
     options.add_options()                                                                       // Command line options.
         ( "w,width", "Width of the image.", cxxopts::value< int >()->default_value( "384" ) )   // Width
         ( "h,height", "Height of the image.", cxxopts::value< int >()->default_value( "256" ) ) // Height;

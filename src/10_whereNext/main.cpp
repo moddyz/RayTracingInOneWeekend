@@ -1,8 +1,3 @@
-/// \page 10_whereNext Where Next?
-///
-/// Final program extending from \ref 9_defocusBlur, which produces a scene
-/// populated with more spheres with different material parameters!
-
 #include <cxxopts.hpp>
 
 #include <gm/base/constants.h>
@@ -275,7 +270,7 @@ int main( int i_argc, char** i_argv )
     // ------------------------------------------------------------------------
 
     cxxopts::Options options( "10_whereNext",
-                              "A final render with more spheres, before moving on to learn other cool features." );
+                              "A final render with more spheres, before moving on to other cool features." );
     options.add_options()                                                                       // Command line options.
         ( "w,width", "Width of the image.", cxxopts::value< int >()->default_value( "384" ) )   // Width
         ( "h,height", "Height of the image.", cxxopts::value< int >()->default_value( "256" ) ) // Height;

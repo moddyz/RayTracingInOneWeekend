@@ -1,8 +1,3 @@
-/// \page 9_defocusBlur De-focus blur
-///
-/// Example program extending from \ref 8_positionableCamera, adding camera aperture
-/// and focal distance parameters to control the depth of field.
-
 #include <cxxopts.hpp>
 
 #include <gm/base/constants.h>
@@ -217,7 +212,8 @@ int main( int i_argc, char** i_argv )
     // ------------------------------------------------------------------------
 
     cxxopts::Options options( "9_defocusBlur",
-                              "Camera lens aperture and focal distance parameter add depth of field blur." );
+                              "Ray tracing program exhibiting adjustable camera lens aperture and focal distance "
+                              "to add depth of field blur." );
     options.add_options()                                                                       // Command line options.
         ( "w,width", "Width of the image.", cxxopts::value< int >()->default_value( "384" ) )   // Width
         ( "h,height", "Height of the image.", cxxopts::value< int >()->default_value( "256" ) ) // Height;

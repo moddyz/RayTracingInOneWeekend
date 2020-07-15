@@ -1,8 +1,3 @@
-/// \page 5_diffuseMaterials Diffuse materials
-///
-/// Example program extending from \ref 4_antialiasing and introduces recursive ray tracing,
-/// bouncing off scene geometry.  This builds up to produce lambert shading.
-
 #include <cxxopts.hpp>
 
 #include <gm/base/constants.h>
@@ -104,7 +99,8 @@ static gm::Vec3f ComputeRayColor( const gm::Ray& i_ray, int i_numRayBounces, con
 int main( int i_argc, char** i_argv )
 {
     // Parse command line arguments.
-    cxxopts::Options options( "5_diffuseMaterials", "Ray tracing with absorbant, diffuse materials." );
+    cxxopts::Options options( "5_diffuseMaterials",
+                              "Ray tracing program exhibiting spheres with absorbant, diffuse materials." );
     options.add_options()                                                                       // Command line options.
         ( "w,width", "Width of the image.", cxxopts::value< int >()->default_value( "384" ) )   // Width
         ( "h,height", "Height of the image.", cxxopts::value< int >()->default_value( "256" ) ) // Height;

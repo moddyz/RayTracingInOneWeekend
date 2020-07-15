@@ -1,9 +1,3 @@
-/// \page 3_surfaceNormalsAndMultipleObjects Surface Normals and Multiple Objects
-///
-/// Example program extending from \ref 2_addingASphere which adds:
-/// - shading to the sphere based on the sphere's surface normals
-/// - multiple, ray-tracable objects into the scene.
-
 #include <cxxopts.hpp>
 
 #include <gm/types/floatRange.h>
@@ -70,7 +64,7 @@ int main( int i_argc, char** i_argv )
 {
     // Parse command line arguments.
     cxxopts::Options options( "3_surfaceNormalsAndMultipleObjects",
-                              "Shading multiple scene objects by their surface normals." );
+                              "Shading multiple scene objects via their surface normals." );
     options.add_options()                                                                       // Command line options.
         ( "w,width", "Width of the image.", cxxopts::value< int >()->default_value( "384" ) )   // Width
         ( "h,height", "Height of the image.", cxxopts::value< int >()->default_value( "256" ) ) // Height;
