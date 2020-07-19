@@ -16,7 +16,7 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
   * [8. Positionable Camera](#8-positionable-camera)
   * [9. Defocus Blur](#9-defocus-blur)
   * [10. Where Next?](#10-where-next)
-- [Sequel](#sequel)
+- [Sequels](#sequels)
 - [Library](#library)
 - [Documentation](#documentation)
 - [Building](#building)
@@ -151,10 +151,11 @@ A final render, with many more spheres!
 
 [Link to Chapter 13](https://raytracing.github.io/books/RayTracingInOneWeekend.html#wherenext?)
 
-## Sequel
+## Sequels
 
-The sequel, [Ray Tracing: The Next Week](https://raytracing.github.io/books/RayTracingTheNextWeek.html),
-is implemented under [RayTracingTheNextWeek](https://github.com/moddyz/RayTracingTheNextWeek).
+The implementations to the sequels are available:
+- [RayTracingTheNextWeek](https://github.com/moddyz/RayTracingTheNextWeek)
+- [RayTracingTheRestOfYourLife](https://github.com/moddyz/RayTracingTheRestOfYourLife)
 
 ## Library
 
