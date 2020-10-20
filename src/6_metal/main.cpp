@@ -103,8 +103,7 @@ int main( int i_argc, char** i_argv )
     // Parse command line arguments.
     // ------------------------------------------------------------------------
 
-    cxxopts::Options options( "6_metal",
-                              "Ray tracing program exhibiting spheres with reflective metallic material." );
+    cxxopts::Options options( "6_metal", "Ray tracing program exhibiting spheres with reflective metallic material." );
     options.add_options()                                                                       // Command line options.
         ( "w,width", "Width of the image.", cxxopts::value< int >()->default_value( "384" ) )   // Width
         ( "h,height", "Height of the image.", cxxopts::value< int >()->default_value( "256" ) ) // Height;
