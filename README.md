@@ -1,9 +1,17 @@
+<a href="https://github.com/moddyz/RayTraincInOneWeekend/actions?query=workflow%3A%22Build+and+test%22"><img src="https://github.com/moddyz/RayTraincInOneWeekend/workflows/Build%20and%20test/badge.svg"/></a>
+
 # RayTracingInOneWeekend
 
 An implementation of the book [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html).  
 
+The implementations to the sequels are available:
+- [RayTracingTheNextWeek](https://github.com/moddyz/RayTracingTheNextWeek)
+- [RayTracingTheRestOfYourLife](https://github.com/moddyz/RayTracingTheRestOfYourLife)
+
 ## Table of Contents
 
+- [Dependencies](#dependencies)
+- [Building](#building)
 - [Programs](#programs)
   * [0. Output an Image](#0-output-an-image)
   * [1. Rays, a Simple Camera, and Background](#1-rays-a-simple-camera-and-background)
@@ -16,11 +24,30 @@ An implementation of the book [Ray Tracing in One Weekend](https://raytracing.gi
   * [8. Positionable Camera](#8-positionable-camera)
   * [9. Defocus Blur](#9-defocus-blur)
   * [10. Where Next?](#10-where-next)
-- [Sequels](#sequels)
-- [Library](#library)
-- [Documentation](#documentation)
-- [Building](#building)
-- [Build Status](#build-status)
+
+### Dependencies
+
+The following dependencies are mandatory:
+- C++ compiler
+- [CMake](https://cmake.org/documentation/) (3.12 or greater)
+
+The following dependencies are optional:
+- [Doxygen](https://www.doxygen.nl/index.html) and [graphviz](https://graphviz.org/) for documentation.
+
+## Building
+
+Example snippet for building this project:
+```
+mkdir build && cd build
+cmake -DCMAKE_INSTALL_PREFIX="/apps/CXXTemplate/" ..
+cmake --build  . -- VERBOSE=1 -j8 all test install
+```
+CMake options for configuring this project:
+
+| CMake Variable name     | Description                                                            | Default |
+| ----------------------- | ---------------------------------------------------------------------- | ------- |
+| `BUILD_TESTING`         | Enable automated testing.                                              | `OFF`   |
+| `BUILD_DOCUMENTATION`   | Build documentation.                                                   | `OFF`   |
 
 ## Programs
 
@@ -150,36 +177,3 @@ A final render, with many more spheres!
 [Source code](./src/10_whereNext/main.cpp)
 
 [Link to Chapter 13](https://raytracing.github.io/books/RayTracingInOneWeekend.html#wherenext?)
-
-## Sequels
-
-The implementations to the sequels are available:
-- [RayTracingTheNextWeek](https://github.com/moddyz/RayTracingTheNextWeek)
-- [RayTracingTheRestOfYourLife](https://github.com/moddyz/RayTracingTheRestOfYourLife)
-
-## Library
-
-Common functions and classes are refactored into the [raytrace library](./src/raytrace) and the [GraphicsMath](https://github.com/moddyz/GraphicsMath) project.
-
-## Documentation
-
-Doxygen documentation based on the latest state of master, [hosted by GitHub Pages](https://moddyz.github.io/RayTracingInOneWeekend/).
-
-## Building
-
-A convenience build script is provided, for building all targets, and optionally installing to a location:
-```
-./build.sh <OPTIONAL_INSTALL_LOCATION>
-```
-
-### Requirements
-
-- `>= CMake-3.17`
-- `C++17`
-- `doxygen` and `graphviz` (optional for documentation)
-
-## Build Status
-
-|       | master | 
-| ----- | ------ | 
-| macOS-10.14 | [![Build Status](https://travis-ci.com/moddyz/RayTracingInOneWeekend.svg?branch=master)](https://travis-ci.com/moddyz/RayTracingInOneWeekend) |
