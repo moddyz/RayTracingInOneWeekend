@@ -1,5 +1,7 @@
 #include <cxxopts.hpp>
 
+#include <memory>
+
 #include <gm/base/constants.h>
 
 #include <gm/types/floatRange.h>
