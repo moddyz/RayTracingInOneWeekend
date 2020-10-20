@@ -1,13 +1,13 @@
 name: Build and test
 
-# Run the jobs for pushes and pull requests targetting main branch.
+# Run the jobs for pushes and pull requests targetting master branch.
 on: 
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
 
