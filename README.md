@@ -4,10 +4,6 @@
 
 An implementation of the book [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html).  
 
-The implementations to the sequels are available:
-- [RayTracingTheNextWeek](https://github.com/moddyz/RayTracingTheNextWeek)
-- [RayTracingTheRestOfYourLife](https://github.com/moddyz/RayTracingTheRestOfYourLife)
-
 ## Table of Contents
 
 - [Dependencies](#dependencies)
@@ -24,6 +20,7 @@ The implementations to the sequels are available:
   * [8. Positionable Camera](#8-positionable-camera)
   * [9. Defocus Blur](#9-defocus-blur)
   * [10. Where Next?](#10-where-next)
+- [Sequels](#sequels)
 
 ### Dependencies
 
@@ -177,3 +174,10 @@ A final render, with many more spheres!
 [Source code](./src/10_whereNext/main.cpp)
 
 [Link to Chapter 13](https://raytracing.github.io/books/RayTracingInOneWeekend.html#wherenext?)
+
+## Sequels
+
+The implementations to the sequels are available:
+- [RayTracingTheNextWeek](https://github.com/moddyz/RayTracingTheNextWeek)
+- [RayTracingTheRestOfYourLife](https://github.com/moddyz/RayTracingTheRestOfYourLife)
+

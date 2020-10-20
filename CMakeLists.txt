@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 3.12)
 
 # Project Name
 project(
-    CXXTemplate
+    RayTracingInOneWeekend
     VERSION 0.0
-    DESCRIPTION "A starting point for a new CMake-based C++ project."
+    DESCRIPTION "An implementation of the book Ray Tracing in One Weekend."
     LANGUAGES CXX
 )
 
@@ -24,6 +24,3 @@ include(Defaults)
 # Add targets.
 add_subdirectory(thirdparty)
 add_subdirectory(src)
-
-# Install exported targets.
-export_project(${CMAKE_CURRENT_SOURCE_DIR}/cmake/Config.cmake.in)
