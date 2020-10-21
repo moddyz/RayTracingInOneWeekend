@@ -1,8 +1,8 @@
 #include <cxxopts.hpp>
 
-#include <gm/types/ray.h>
 #include <gm/types/vec2iRange.h>
 #include <gm/types/vec3f.h>
+#include <raytrace/ray.h>
 
 #include <gm/functions/linearInterpolation.h>
 #include <gm/functions/normalize.h>
@@ -43,11 +43,11 @@ int main( int i_argc, char** i_argv )
         float u = float( pixelCoord.X() ) / imageWidth;
         float v = float( pixelCoord.Y() ) / imageHeight;
 
-        gm::Ray ray( /* origin */ camera.Origin(),               // The origin of the ray is the camera origin.
-                     /* direction */ camera.ViewportBottomLeft() // Starting from the viewport bottom left...
-                         + ( u * camera.ViewportHorizontal() )   // Horizontal offset.
-                         + ( v * camera.ViewportVertical() )     // Vertical offset.
-                         - camera.Origin()                       // Get difference vector from camera origin.
+        raytrace::Ray ray( /* origin */ camera.Origin(),               // The origin of the ray is the camera origin.
+                           /* direction */ camera.ViewportBottomLeft() // Starting from the viewport bottom left...
+                               + ( u * camera.ViewportHorizontal() )   // Horizontal offset.
+                               + ( v * camera.ViewportVertical() )     // Vertical offset.
+                               - camera.Origin()                       // Get difference vector from camera origin.
         );
 
         // Normalize the direction of the ray.

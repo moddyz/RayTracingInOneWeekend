@@ -32,17 +32,17 @@ public:
     {
     }
 
-    inline virtual bool Scatter( const gm::Ray&   i_ray,
+    inline virtual bool Scatter( const Ray&       i_ray,
                                  const HitRecord& i_hitRecord,
                                  gm::Vec3f&       o_attenuation,
-                                 gm::Ray&         o_scatteredRay ) const override
+                                 Ray&             o_scatteredRay ) const override
     {
         gm::Vec3f reflectedDirection = Reflect( i_ray.Direction(), i_hitRecord.m_normal );
         reflectedDirection += m_fuzziness * RandomUnitVector();
 
         // Produce reflected ray.
-        o_scatteredRay = gm::Ray( /* origin */ i_hitRecord.m_position,
-                                  /* direction */ gm::Normalize( reflectedDirection ) );
+        o_scatteredRay = Ray( /* origin */ i_hitRecord.m_position,
+                              /* direction */ gm::Normalize( reflectedDirection ) );
 
         // Apply albedo.
         o_attenuation = m_albedo;

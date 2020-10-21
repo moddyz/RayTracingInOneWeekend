@@ -1,8 +1,8 @@
 #include <cxxopts.hpp>
 
-#include <gm/types/ray.h>
 #include <gm/types/vec2iRange.h>
 #include <gm/types/vec3f.h>
+#include <raytrace/ray.h>
 
 #include <gm/functions/linearInterpolation.h>
 #include <gm/functions/normalize.h>
@@ -18,10 +18,10 @@
 ///
 /// When rays intersect the sphere, it will produce a red pixel.
 /// Otherwise, the background color of a blue/white gradient is returned.
-static gm::Vec3f ComputeRayColor( const gm::Ray& i_ray )
+static gm::Vec3f ComputeRayColor( const raytrace::Ray& i_ray )
 {
     // Test for sphere intersection (hard-coded placement of the sphere)
-    gm::Vec2f intersections;
+    gm::FloatRange intersections;
     if ( gm::RaySphereIntersection( gm::Vec3f( 0, 0, -1.0 ), 0.5, i_ray.Origin(), i_ray.Direction(), intersections ) >
          0 )
     {
@@ -37,7 +37,8 @@ static gm::Vec3f ComputeRayColor( const gm::Ray& i_ray )
 int main( int i_argc, char** i_argv )
 {
     // Parse command line arguments.
-    cxxopts::Options options( "2_addingASphere", "Program which uses ray sphere intersection to draw a red sphere, with a background." );
+    cxxopts::Options options( "2_addingASphere",
+                              "Program which uses ray sphere intersection to draw a red sphere, with a background." );
     options.add_options()                                                                       // Command line options.
         ( "w,width", "Width of the image.", cxxopts::value< int >()->default_value( "384" ) )   // Width
         ( "h,height", "Height of the image.", cxxopts::value< int >()->default_value( "256" ) ) // Height;
@@ -66,11 +67,11 @@ int main( int i_argc, char** i_argv )
         float u = float( pixelCoord.X() ) / imageWidth;
         float v = float( pixelCoord.Y() ) / imageHeight;
 
-        gm::Ray ray( /* origin */ camera.Origin(),               // The origin of the ray is the camera origin.
-                     /* direction */ camera.ViewportBottomLeft() // Starting from the viewport bottom left...
-                         + ( u * camera.ViewportHorizontal() )   // Horizontal offset.
-                         + ( v * camera.ViewportVertical() )     // Vertical offset.
-                         - camera.Origin()                       // Get difference vector from camera origin.
+        raytrace::Ray ray( /* origin */ camera.Origin(),               // The origin of the ray is the camera origin.
+                           /* direction */ camera.ViewportBottomLeft() // Starting from the viewport bottom left...
+                               + ( u * camera.ViewportHorizontal() )   // Horizontal offset.
+                               + ( v * camera.ViewportVertical() )     // Vertical offset.
+                               - camera.Origin()                       // Get difference vector from camera origin.
         );
 
         // Normalize the direction of the ray.

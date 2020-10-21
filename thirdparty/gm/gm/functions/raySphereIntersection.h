@@ -55,15 +55,13 @@
 
 #include <gm/gm.h>
 
-#include <gm/types/vec2f.h>
+#include <gm/types/floatRange.h>
 #include <gm/types/vec3f.h>
 
-#include <gm/base/assert.h>
+#include <gm/base/diagnostic.h>
 #include <gm/functions/dotProduct.h>
-#include <gm/functions/quadraticRoots.h>
-#ifdef GM_DEBUG
 #include <gm/functions/length.h>
-#endif
+#include <gm/functions/quadraticRoots.h>
 
 GM_NS_OPEN
 
@@ -81,7 +79,7 @@ GM_NS_OPEN
 ///                                 rayDirection,
 ///                                 intersections ) == 2 )
 /// {
-///     gm::Vec3f firstIntersectionPoint = gm::RayPosition( rayOrigin, rayDirection, intersections[ 0 ] );
+///     gm::Vec3f firstIntersectionPoint = gm::RayPosition( rayOrigin, rayDirection, intersections.Min() );
 ///     // ...
 /// }
 /// \endcode
@@ -90,7 +88,7 @@ GM_NS_OPEN
 /// \param i_sphereRadius The radius of the sphere.
 /// \param i_rayOrigin The origin of the ray.
 /// \param i_rayDirection The direction of the ray.
-/// \param o_intersections The magnitudes of the intersections with respect to the ray.
+/// \param o_intersections The ray magnitudes of the intersections.
 ///
 /// \return The number of times the ray intersections the sphere.
 ///
@@ -101,9 +99,9 @@ GM_HOST_DEVICE inline int RaySphereIntersection( const Vec3f& i_sphereOrigin,
                                                  const float& i_sphereRadius,
                                                  const Vec3f& i_rayOrigin,
                                                  const Vec3f& i_rayDirection,
-                                                 Vec2f&       o_intersections )
+                                                 FloatRange&  o_intersections )
 {
-    GM_ASSERT_MSG( Length( i_rayDirection ) == 1.0f, "Direction i_rayDirection is not normalised!" );
+    GM_ASSERT_MSG( AlmostEqual( Length( i_rayDirection ), 1.0f ), "Direction i_rayDirection is not normalised!" );
 
     // Compute quadratic co-efficients
     Vec3f originDiff = i_rayOrigin - i_sphereOrigin;
@@ -112,7 +110,10 @@ GM_HOST_DEVICE inline int RaySphereIntersection( const Vec3f& i_sphereOrigin,
     float c          = DotProduct( originDiff, originDiff ) - i_sphereRadius * i_sphereRadius;
 
     // Solve for quadratic roots.
-    int numRoots = QuadraticRoots( a, b, c, o_intersections );
+    Vec2f roots;
+    int   numRoots        = QuadraticRoots( a, b, c, roots );
+    o_intersections.Min() = roots[ 0 ];
+    o_intersections.Max() = roots[ 1 ];
 
     // Check for number of roots (number of intersections).
     // The conditionals are ordered in terms of likeliness to occur.
@@ -126,22 +127,28 @@ GM_HOST_DEVICE inline int RaySphereIntersection( const Vec3f& i_sphereOrigin,
         // Two intersections.
 
         // Store the intersection farther from the ray origin in the second root.
-        if ( o_intersections[ 0 ] > o_intersections[ 1 ] )
+        if ( o_intersections.Min() > o_intersections.Max() )
         {
-            std::swap( o_intersections[ 0 ], o_intersections[ 1 ] );
+            std::swap( o_intersections.Max(), o_intersections.Max() );
         }
 
         // Root negative check, as to not intersect with objects behind the ray direction.
-        if ( o_intersections[ 0 ] < 0 )
+        if ( o_intersections.Min() < 0 )
         {
-            o_intersections[ 0 ] = o_intersections[ 1 ];
-            if ( o_intersections[ 0 ] < 0 )
+            if ( o_intersections.Max() < 0 )
             {
                 // Both roots are negative, count it as no intersection.
                 return 0;
             }
+            else if ( Length( i_rayOrigin - i_sphereOrigin ) < i_sphereRadius )
+            {
+                // The ray origin is INSIDE the sphere.
+                o_intersections.Min() = 0.0f;
+                return 2;
+            }
             else
             {
+                o_intersections.Min() = o_intersections.Max();
                 return 1;
             }
         }
@@ -154,7 +161,7 @@ GM_HOST_DEVICE inline int RaySphereIntersection( const Vec3f& i_sphereOrigin,
     {
         // A single intersection.
 
-        if ( o_intersections[ 0 ] < 0 )
+        if ( o_intersections.Min() < 0 )
         {
             // Do not intersect with spheres opposite of the ray direction.
             return 0;

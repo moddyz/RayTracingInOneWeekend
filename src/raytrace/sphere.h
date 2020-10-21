@@ -33,19 +33,19 @@ public:
     }
 
     virtual inline bool
-    Hit( const gm::Ray& i_ray, const gm::FloatRange& i_magnitudeRange, HitRecord& o_record ) const override
+    Hit( const Ray& i_ray, const gm::FloatRange& i_magnitudeRange, HitRecord& o_record ) const override
     {
-        gm::Vec2f intersections;
-        if ( gm::RaySphereIntersection( m_origin, m_radius, i_ray.Origin(), i_ray.Direction(), intersections ) > 0 )
+        gm::FloatRange intersections;
+        if ( RaySphereIntersection( m_origin, m_radius, i_ray.Origin(), i_ray.Direction(), intersections ) > 0 )
         {
-            if ( intersections[ 0 ] < i_magnitudeRange.Max() && intersections[ 0 ] > i_magnitudeRange.Min() )
+            if ( intersections.Min() < i_magnitudeRange.Max() && intersections.Min() > i_magnitudeRange.Min() )
             {
-                _Record( i_ray, intersections[ 0 ], o_record );
+                _Record( i_ray, intersections.Min(), o_record );
                 return true;
             }
-            else if ( intersections[ 1 ] < i_magnitudeRange.Max() && intersections[ 1 ] > i_magnitudeRange.Min() )
+            else if ( intersections.Max() < i_magnitudeRange.Max() && intersections.Max() > i_magnitudeRange.Min() )
             {
-                _Record( i_ray, intersections[ 1 ], o_record );
+                _Record( i_ray, intersections.Max(), o_record );
                 return true;
             }
         }
@@ -60,9 +60,9 @@ private:
     /// \param i_ray The ray.
     /// \param i_rayMagnitude the magnitude of the ray intersection.
     /// \param o_record the record of a ray hit.
-    inline void _Record( const gm::Ray& i_ray, float i_rayMagnitude, HitRecord& o_record ) const
+    inline void _Record( const Ray& i_ray, float i_rayMagnitude, HitRecord& o_record ) const
     {
-        o_record.m_position  = gm::RayPosition( i_ray.Origin(), i_ray.Direction(), i_rayMagnitude );
+        o_record.m_position  = RayPosition( i_ray.Origin(), i_ray.Direction(), i_rayMagnitude );
         o_record.m_normal    = ( o_record.m_position - m_origin ) / m_radius;
         o_record.m_magnitude = i_rayMagnitude;
         o_record.m_material  = m_material;

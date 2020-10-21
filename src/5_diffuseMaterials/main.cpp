@@ -4,9 +4,9 @@
 
 #include <gm/types/floatRange.h>
 #include <gm/types/intRange.h>
-#include <gm/types/ray.h>
 #include <gm/types/vec2iRange.h>
 #include <gm/types/vec3f.h>
+#include <raytrace/ray.h>
 
 #include <gm/functions/clamp.h>
 #include <gm/functions/dotProduct.h>
@@ -45,7 +45,8 @@ constexpr gm::FloatRange c_normalizedRange( 0.0f, 1.0f );
 /// \param i_sceneObjectPtrs The collection of scene objects to test for ray intersection.
 ///
 /// \return The computed ray color.
-static gm::Vec3f ComputeRayColor( const gm::Ray& i_ray, int i_numRayBounces, const SceneObjectPtrs& i_sceneObjectPtrs )
+static gm::Vec3f
+ComputeRayColor( const raytrace::Ray& i_ray, int i_numRayBounces, const SceneObjectPtrs& i_sceneObjectPtrs )
 {
     if ( i_numRayBounces == 0 )
     {
@@ -71,8 +72,8 @@ static gm::Vec3f ComputeRayColor( const gm::Ray& i_ray, int i_numRayBounces, con
 
     if ( objectHit )
     {
-        gm::Ray   scatteredRay;
-        gm::Vec3f attenuation;
+        raytrace::Ray scatteredRay;
+        gm::Vec3f     attenuation;
         if ( record.m_material->Scatter( i_ray, record, attenuation, scatteredRay ) )
         {
             // Material produced a new scattered ray.
@@ -149,11 +150,11 @@ int main( int i_argc, char** i_argv )
             float u = ( float( pixelCoord.X() ) + gm::RandomNumber( c_normalizedRange ) ) / imageWidth;
             float v = ( float( pixelCoord.Y() ) + gm::RandomNumber( c_normalizedRange ) ) / imageHeight;
 
-            gm::Ray ray( /* origin */ camera.Origin(),               // The origin of the ray is the camera origin.
-                         /* direction */ camera.ViewportBottomLeft() // Starting from the viewport bottom left...
-                             + ( u * camera.ViewportHorizontal() )   // Horizontal offset.
-                             + ( v * camera.ViewportVertical() )     // Vertical offset.
-                             - camera.Origin()                       // Get difference vector from camera origin.
+            raytrace::Ray ray( /* origin */ camera.Origin(), // The origin of the ray is the camera origin.
+                               /* direction */ camera.ViewportBottomLeft() // Starting from the viewport bottom left...
+                                   + ( u * camera.ViewportHorizontal() )   // Horizontal offset.
+                                   + ( v * camera.ViewportVertical() )     // Vertical offset.
+                                   - camera.Origin()                       // Get difference vector from camera origin.
             );
 
             // Normalize the direction of the ray.
