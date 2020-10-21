@@ -176,7 +176,6 @@ A final render, with many more spheres!
 
 ## Sequels
 
-The implementations to the sequels are available:
+The implementations to the sequels are also available:
 - [RayTracingTheNextWeek](https://github.com/moddyz/RayTracingTheNextWeek)
 - [RayTracingTheRestOfYourLife](https://github.com/moddyz/RayTracingTheRestOfYourLife)
-
