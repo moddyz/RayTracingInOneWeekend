@@ -9,6 +9,7 @@
 
 #include <gm/gm.h>
 
+#include <cmath>
 #include <limits>
 #include <sstream>
 
@@ -38,8 +39,8 @@ public:
 
     /// Explicit constructor for initializing a minimum maximum range.
     ///
-    /// \param i_min Minimum bounds.
-    /// \param i_max Maximum bounds.
+    /// \param i_min Minimum.
+    /// \param i_max Maximum.
     GM_HOST_DEVICE constexpr explicit inline IntRange( const int& i_min, const int& i_max )
         : m_min( i_min )
         , m_max( i_max )
@@ -80,6 +81,44 @@ public:
     GM_HOST_DEVICE inline int& Max()
     {
         return m_max;
+    }
+
+    // --------------------------------------------------------------------- //
+    /// \name Comparison
+    // --------------------------------------------------------------------- //
+
+    /// Equality comparison against \p i_range.
+    ///
+    /// \param i_range The range to compare against.
+    ///
+    /// \retval true If this range is equal to \p i_range.
+    /// \retval false If this range is not equal to \p i_range.
+    GM_HOST_DEVICE inline bool operator==( const IntRange& i_range ) const
+    {
+        return Min() == i_range.Min() && Max() == i_range.Max();
+    }
+
+    /// Non-equality comparison against \p i_range.
+    ///
+    /// \param i_range The range to compare against.
+    ///
+    /// \retval true If this range is not equal to \p i_range.
+    /// \retval false If this range is equal to \p i_range.
+    GM_HOST_DEVICE inline bool operator!=( const IntRange& i_range ) const
+    {
+        return !( ( *this ) == i_range );
+    }
+
+    /// Check if this range is empty.
+    ///
+    /// A range is empty if any of the components in the minimum is greater
+    /// than the maximum.
+    ///
+    /// \retval true If this range is empty.
+    /// \retval false If this range is non-empty.
+    GM_HOST_DEVICE inline bool IsEmpty() const
+    {
+        return Min() > Max();
     }
 
     // --------------------------------------------------------------------- //
