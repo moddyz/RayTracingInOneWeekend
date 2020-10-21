@@ -37,13 +37,12 @@ Example snippet for building this project:
 ```
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX="/apps/CXXTemplate/" ..
-cmake --build  . -- VERBOSE=1 -j8 all test install
+cmake --build  . -- VERBOSE=1 -j8 all install
 ```
 CMake options for configuring this project:
 
 | CMake Variable name     | Description                                                            | Default |
 | ----------------------- | ---------------------------------------------------------------------- | ------- |
-| `BUILD_TESTING`         | Enable automated testing.                                              | `OFF`   |
 | `BUILD_DOCUMENTATION`   | Build documentation.                                                   | `OFF`   |
 
 ## Programs

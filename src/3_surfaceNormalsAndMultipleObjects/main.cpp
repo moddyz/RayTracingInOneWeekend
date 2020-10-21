@@ -1,9 +1,9 @@
 #include <cxxopts.hpp>
 
 #include <gm/types/floatRange.h>
-#include <gm/types/ray.h>
 #include <gm/types/vec2iRange.h>
 #include <gm/types/vec3f.h>
+#include <raytrace/ray.h>
 
 #include <gm/functions/linearInterpolation.h>
 #include <gm/functions/linearMap.h>
@@ -31,7 +31,7 @@ using SceneObjectPtrs = std::vector< raytrace::SceneObjectPtr >;
 /// \param i_sceneObjectPtrs The collection of scene objects to test for ray intersection.
 ///
 /// \return The computed ray color.
-static gm::Vec3f ComputeRayColor( const gm::Ray& i_ray, const SceneObjectPtrs& i_sceneObjectPtrs )
+static gm::Vec3f ComputeRayColor( const raytrace::Ray& i_ray, const SceneObjectPtrs& i_sceneObjectPtrs )
 {
     // Iterate over all scene objects and test for ray hit(s).
     // We'd like to track the nearest hit and prune out farther objects.
@@ -98,11 +98,11 @@ int main( int i_argc, char** i_argv )
         float u = float( pixelCoord.X() ) / imageWidth;
         float v = float( pixelCoord.Y() ) / imageHeight;
 
-        gm::Ray ray( /* origin */ camera.Origin(),               // The origin of the ray is the camera origin.
-                     /* direction */ camera.ViewportBottomLeft() // Starting from the viewport bottom left...
-                         + ( u * camera.ViewportHorizontal() )   // Horizontal offset.
-                         + ( v * camera.ViewportVertical() )     // Vertical offset.
-                         - camera.Origin()                       // Get difference vector from camera origin.
+        raytrace::Ray ray( /* origin */ camera.Origin(),               // The origin of the ray is the camera origin.
+                           /* direction */ camera.ViewportBottomLeft() // Starting from the viewport bottom left...
+                               + ( u * camera.ViewportHorizontal() )   // Horizontal offset.
+                               + ( v * camera.ViewportVertical() )     // Vertical offset.
+                               - camera.Origin()                       // Get difference vector from camera origin.
         );
 
         // Normalize the direction of the ray.
