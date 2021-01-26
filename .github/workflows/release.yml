@@ -17,34 +17,17 @@ jobs:
             build-type: Release
             build-tests: 'ON'
             build-docs: 'OFF'
-    name: 'Release ubuntu-{{ matrix.ubuntu-version }}
+    name: 'Release ubuntu-${{ matrix.ubuntu-version }}
       <type=${{ matrix.build-type }},
        tests=${{ matrix.build-tests }},
        docs=${{ matrix.build-docs }}>'
     runs-on: ubuntu-${{ matrix.ubuntu-version }}
     env:
-      RELEASE_NAME: ${{ github.event.repository.name }}-${{ github.ref }}
+      RELEASE_NAME: ${{ github.event.repository.name }}-${{ github.event.release.tag_name }}
     steps:
       - name: Install dependencies (Linux)
         run: sudo apt-get install cmake
       - uses: actions/checkout@v2
-      - name: Create build directories
-        run: |
-          mkdir _build
-          mkdir _install
-      - name: Configure
-        run: |
-          cmake -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
-                -DCMAKE_INSTALL_PREFIX=../_install \
-                ..
-        working-directory: _build
-      - name: Build
-        run: |
-          cmake --build . \
-                --verbose \
-                --target install \
-                --config ${{ matrix.build-type }}
-        working-directory: _build
       - name: Package source code
         run: zip -r $RELEASE_NAME README.md LICENSE CMakeLists.txt cmake src thirdparty
       - name: Create Release
