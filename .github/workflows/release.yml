@@ -7,7 +7,6 @@ on:
 
 jobs:
   build:
-    name: Create release
     strategy:
       matrix:
         build:
