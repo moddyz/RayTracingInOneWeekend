@@ -23,8 +23,8 @@ jobs:
        tests=${{ matrix.build-tests }},
        docs=${{ matrix.build-docs }}>'
     runs-on: ubuntu-${{ matrix.ubuntu-version }}
-		env:
-			RELEASE_NAME: ${{ github.event.repository.name }}-${{ github.ref }}
+    env:
+      RELEASE_NAME: ${{ github.event.repository.name }}-${{ github.ref }}
     steps:
       - name: Install dependencies (Linux)
         run: sudo apt-get install cmake
@@ -58,7 +58,7 @@ jobs:
           release_name: Release ${{ env.RELEASE_NAME }}
           draft: false
           prerelease: false
-			- name: Upload Release Source Code
+      - name: Upload Release Source Code
         id: upload_release_source_code
         uses: actions/upload-release-asset@v1
         env:
