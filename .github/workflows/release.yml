@@ -1,0 +1,70 @@
+name: Create release
+
+on:
+  push:
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+jobs:
+  build:
+    name: Create release
+    strategy:
+      matrix:
+        build:
+          - 1
+        include:
+          - build: 1
+            ubuntu-version: 18.04
+            build-type: Release
+            build-tests: 'ON'
+            build-docs: 'OFF'
+    name: 'Release ubuntu-{{ matrix.ubuntu-version }}
+      <type=${{ matrix.build-type }},
+       tests=${{ matrix.build-tests }},
+       docs=${{ matrix.build-docs }}>'
+    runs-on: ubuntu-${{ matrix.ubuntu-version }}
+		env:
+			RELEASE_NAME: ${{ github.event.repository.name }}-${{ github.ref }}
+    steps:
+      - name: Install dependencies (Linux)
+        run: sudo apt-get install cmake
+      - uses: actions/checkout@v2
+      - name: Create build directories
+        run: |
+          mkdir _build
+          mkdir _install
+      - name: Configure
+        run: |
+          cmake -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
+                -DCMAKE_INSTALL_PREFIX=../_install \
+                ..
+        working-directory: _build
+      - name: Build
+        run: |
+          cmake --build . \
+                --verbose \
+                --target install \
+                --config ${{ matrix.build-type }}
+        working-directory: _build
+      - name: Package source code
+        run: zip -r $RELEASE_NAME README.md LICENSE CMakeLists.txt cmake src thirdparty
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ env.RELEASE_NAME }}
+          draft: false
+          prerelease: false
+			- name: Upload Release Source Code
+        id: upload_release_source_code
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./${{ env.RELEASE_NAME }}.zip
+          asset_name: ${{ env.RELEASE_NAME }}.zip
+          asset_content_type: application/zip
