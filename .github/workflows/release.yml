@@ -22,14 +22,11 @@ jobs:
        tests=${{ matrix.build-tests }},
        docs=${{ matrix.build-docs }}>'
     runs-on: ubuntu-${{ matrix.ubuntu-version }}
-    env:
-      RELEASE_NAME: ${{ github.event.repository.name }}-${{ github.event.release.tag_name }}
     steps:
-      - name: Install dependencies (Linux)
-        run: sudo apt-get install cmake
       - uses: actions/checkout@v2
-      - name: Package source code
-        run: zip -r $RELEASE_NAME README.md LICENSE CMakeLists.txt cmake src thirdparty
+      - name: Set tag name
+        id: set_tag_name
+        run: echo ::set-output name=tag_name::${GITHUB_REF#refs/*/}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -37,16 +34,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: Release ${{ env.RELEASE_NAME }}
+          release_name: Version ${{ steps.set_tag_name.outputs.tag_name }}
           draft: false
           prerelease: false
-      - name: Upload Release Source Code
-        id: upload_release_source_code
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./${{ env.RELEASE_NAME }}.zip
-          asset_name: ${{ env.RELEASE_NAME }}.zip
-          asset_content_type: application/zip
